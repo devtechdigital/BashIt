@@ -8,8 +8,14 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="app">
-    <nav class="stepper" aria-label="Lesson progress">
+  <div class="app" id="app">
+    <aside class="sidebar">
+      <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Toggle lesson menu" aria-expanded="true" title="Toggle lesson menu"></button>
+      <div class="theme-toggle-wrap" aria-label="Theme">
+        <span class="theme-toggle-label">Theme</span>
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false" title="Use dark style">Dark</button>
+      </div>
+      <nav class="stepper" aria-label="Lesson progress">
       <a href="#" class="stepper-item" data-page="landing">Home</a>
       <a href="#lesson-01" class="stepper-item" data-page="lesson-01">Lesson 1</a>
       <a href="#lesson-02" class="stepper-item" data-page="lesson-02">Lesson 2</a>
@@ -23,7 +29,8 @@
       <a href="#lesson-10" class="stepper-item" data-page="lesson-10">Lesson 10</a>
       <a href="#lesson-11" class="stepper-item" data-page="lesson-11">Lesson 11</a>
       <a href="#lesson-12" class="stepper-item" data-page="lesson-12">Lesson 12</a>
-    </nav>
+      </nav>
+    </aside>
     <main class="content">
       <div id="landing" class="content-panel"><h1 id="bashing-through-bash">Bashing through Bash</h1>
 <p><strong>A 12-Lesson Journey from Zero to Confident Shell User</strong></p>

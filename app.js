@@ -73,8 +73,53 @@
     onHashChange();
   }
 
+  function initMenuToggle() {
+    var app = document.getElementById('app');
+    var toggle = document.getElementById('menu-toggle');
+    if (!app || !toggle) return;
+    var STORAGE_KEY_MENU = 'bash-lessons-menu-open';
+    try {
+      var menuOpen = localStorage.getItem(STORAGE_KEY_MENU);
+      if (menuOpen === '0') app.classList.add('menu-closed');
+    } catch (e) {}
+    toggle.addEventListener('click', function () {
+      var closed = app.classList.toggle('menu-closed');
+      toggle.setAttribute('aria-expanded', closed ? 'false' : 'true');
+      try {
+        localStorage.setItem(STORAGE_KEY_MENU, closed ? '0' : '1');
+      } catch (e) {}
+    });
+  }
+
+  function initThemeToggle() {
+    var themeBtn = document.getElementById('theme-toggle');
+    if (!themeBtn) return;
+    var STORAGE_KEY_THEME = 'bash-lessons-theme';
+    function applyDark(dark) {
+      document.body.classList.toggle('dark', dark);
+      themeBtn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+      themeBtn.textContent = dark ? 'Light' : 'Dark';
+      themeBtn.title = dark ? 'Use light style' : 'Use dark style';
+    }
+    try {
+      var saved = localStorage.getItem(STORAGE_KEY_THEME);
+      if (saved === 'dark') applyDark(true);
+    } catch (e) {}
+    themeBtn.addEventListener('click', function () {
+      var dark = document.body.classList.toggle('dark');
+      applyDark(dark);
+      try {
+        localStorage.setItem(STORAGE_KEY_THEME, dark ? 'dark' : 'light');
+      } catch (e) {}
+    });
+  }
+
   window.addEventListener('hashchange', onHashChange);
-  window.addEventListener('load', onLoad);
+  window.addEventListener('load', function () {
+    onLoad();
+    initMenuToggle();
+    initThemeToggle();
+  });
 
   window.bashLessons = {
     markComplete: markCurrentComplete

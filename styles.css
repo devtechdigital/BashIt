@@ -21,16 +21,114 @@ body {
 
 .app {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* Stepper sidebar */
-.stepper {
+/* Sidebar: toggle + stepper (does not scroll with content) */
+.sidebar {
+  display: flex;
+  flex-direction: column;
   flex-shrink: 0;
   width: 14rem;
-  padding: 2rem 0 2rem 1.5rem;
   background: #f8f8f8;
   border-right: 1px solid #e8e8e8;
+  transition: width 0.2s ease;
+  overflow: hidden;
+}
+
+.app.menu-closed .sidebar {
+  width: 2.5rem;
+}
+
+.menu-toggle {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0.5rem 0 0 0.25rem;
+  padding: 0;
+  border: none;
+  border-radius: 0.35rem;
+  background: #e8e8e8;
+  color: #333;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.menu-toggle:hover {
+  background: #ddd;
+  color: #000;
+}
+
+.menu-toggle:focus {
+  outline: 2px solid #1565c0;
+  outline-offset: 2px;
+}
+
+/* Closed: show chevron right to open; open: show chevron left to close */
+.app.menu-closed .menu-toggle::before {
+  content: "›";
+}
+
+.app:not(.menu-closed) .menu-toggle::before {
+  content: "‹";
+}
+
+/* Theme toggle at top of lesson menu */
+.theme-toggle-wrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem 0.75rem;
+  margin: 0 0.25rem 0 0;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.app.menu-closed .theme-toggle-wrap {
+  display: none;
+}
+
+.theme-toggle-label {
+  font-size: 0.8rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.theme-toggle {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.8rem;
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: 0.35rem;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.theme-toggle:hover {
+  background: #f0f0f0;
+  border-color: #999;
+}
+
+.theme-toggle:focus {
+  outline: 2px solid #1565c0;
+  outline-offset: 2px;
+}
+
+/* Stepper (lesson list) */
+.stepper {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.5rem 0 2rem 1rem;
+}
+
+.app.menu-closed .stepper {
+  display: none;
 }
 
 .stepper-item {
@@ -450,3 +548,243 @@ body {
 .chat-widget__settings label { font-size: 0.9rem; color: #555; }
 .chat-widget__settings input { padding: 0.4rem; font-family: inherit; }
 .chat-widget__settings-btn { background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 0.25rem; }
+
+/* ========== Dark theme ========== */
+body.dark {
+  background: #1a1a1a;
+  color: #e0e0e0;
+}
+
+body.dark .sidebar {
+  background: #252525;
+  border-right-color: #333;
+}
+
+body.dark .menu-toggle {
+  background: #333;
+  color: #ccc;
+}
+
+body.dark .menu-toggle:hover {
+  background: #404040;
+  color: #fff;
+}
+
+body.dark .theme-toggle-wrap {
+  border-bottom-color: #333;
+}
+
+body.dark .theme-toggle-label {
+  color: #999;
+}
+
+body.dark .theme-toggle {
+  background: #333;
+  color: #ccc;
+  border-color: #555;
+}
+
+body.dark .theme-toggle:hover {
+  background: #404040;
+  color: #fff;
+  border-color: #666;
+}
+
+body.dark .stepper-item {
+  color: #ccc;
+}
+
+body.dark .stepper-item:hover {
+  background: #333;
+  color: #fff;
+}
+
+body.dark .stepper-item--active {
+  background: #e0e0e0;
+  color: #1a1a1a;
+}
+
+body.dark .stepper-item--active:hover {
+  background: #d0d0d0;
+  color: #1a1a1a;
+}
+
+body.dark .stepper-item--done::after {
+  background: #4caf50;
+}
+
+body.dark .stepper-item--done.stepper-item--active::after {
+  background: #2e7d32;
+}
+
+body.dark .content {
+  background: #1a1a1a;
+}
+
+body.dark .content-panel h1 {
+  color: #f5f5f5;
+}
+
+body.dark .content-panel h2 {
+  color: #eee;
+  border-bottom-color: #404040;
+}
+
+body.dark .content-panel h3 {
+  color: #e0e0e0;
+}
+
+body.dark .content-panel hr {
+  border-top-color: #404040;
+}
+
+body.dark .content-panel a {
+  color: #64b5f6;
+}
+
+body.dark .content-panel a:hover {
+  color: #90caf9;
+}
+
+body.dark .content-panel code {
+  background: #333;
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+body.dark .content-panel pre {
+  background: #0d0d0d;
+  border-color: #333;
+}
+
+body.dark .content-panel pre code {
+  color: #e0e0e0;
+}
+
+body.dark .content-panel th,
+body.dark .content-panel td {
+  border-color: #404040;
+}
+
+body.dark .content-panel th {
+  background: #252525;
+  color: #e0e0e0;
+}
+
+body.dark .content-panel tbody tr:hover {
+  background: #252525;
+}
+
+body.dark .content-panel table a {
+  color: #64b5f6;
+}
+
+body.dark .content-panel blockquote {
+  border-left-color: #555;
+  color: #b0b0b0;
+  background: #252525;
+}
+
+body.dark .lesson-complete-wrap {
+  border-top-color: #404040;
+}
+
+body.dark .lesson-complete-btn {
+  color: #64b5f6;
+  border-color: #64b5f6;
+}
+
+body.dark .lesson-complete-btn:hover {
+  background: #64b5f6;
+  color: #1a1a1a;
+}
+
+/* Chat widget dark */
+body.dark .chat-widget__toggle {
+  background: #252525;
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+body.dark .chat-widget__toggle:hover {
+  background: #333;
+}
+
+body.dark .chat-widget__panel {
+  background: #252525;
+  border-color: #444;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+body.dark .chat-widget__resize-handle {
+  color: #666;
+}
+
+body.dark .chat-widget__header {
+  border-bottom-color: #404040;
+  color: #e0e0e0;
+}
+
+body.dark .chat-widget__close {
+  color: #999;
+}
+
+body.dark .chat-widget__close:hover {
+  color: #fff;
+}
+
+body.dark .chat-widget__msg--assistant {
+  background: #333;
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+body.dark .chat-widget__msg--assistant code {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+body.dark .chat-widget__msg--assistant a {
+  color: #64b5f6;
+}
+
+body.dark .chat-widget__footer {
+  border-top-color: #404040;
+}
+
+body.dark .chat-widget__input {
+  background: #1a1a1a;
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+body.dark .chat-widget__input::placeholder {
+  color: #888;
+}
+
+body.dark .chat-widget__send {
+  background: #404040;
+  color: #fff;
+}
+
+body.dark .chat-widget__send:hover {
+  background: #505050;
+}
+
+body.dark .chat-widget__send:disabled {
+  background: #333;
+  color: #666;
+}
+
+body.dark .chat-widget__settings {
+  border-top-color: #404040;
+}
+
+body.dark .chat-widget__settings label {
+  color: #999;
+}
+
+body.dark .chat-widget__settings input {
+  background: #1a1a1a;
+  border: 1px solid #444;
+  color: #e0e0e0;
+}
