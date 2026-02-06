@@ -1,0 +1,3462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bashing through Bash — Learn Bash in 12 Lessons</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <nav class="stepper" aria-label="Lesson progress">
+      <a href="#" class="stepper-item" data-page="landing">Home</a>
+      <a href="#lesson-01" class="stepper-item" data-page="lesson-01">Lesson 1</a>
+      <a href="#lesson-02" class="stepper-item" data-page="lesson-02">Lesson 2</a>
+      <a href="#lesson-03" class="stepper-item" data-page="lesson-03">Lesson 3</a>
+      <a href="#lesson-04" class="stepper-item" data-page="lesson-04">Lesson 4</a>
+      <a href="#lesson-05" class="stepper-item" data-page="lesson-05">Lesson 5</a>
+      <a href="#lesson-06" class="stepper-item" data-page="lesson-06">Lesson 6</a>
+      <a href="#lesson-07" class="stepper-item" data-page="lesson-07">Lesson 7</a>
+      <a href="#lesson-08" class="stepper-item" data-page="lesson-08">Lesson 8</a>
+      <a href="#lesson-09" class="stepper-item" data-page="lesson-09">Lesson 9</a>
+      <a href="#lesson-10" class="stepper-item" data-page="lesson-10">Lesson 10</a>
+      <a href="#lesson-11" class="stepper-item" data-page="lesson-11">Lesson 11</a>
+      <a href="#lesson-12" class="stepper-item" data-page="lesson-12">Lesson 12</a>
+    </nav>
+    <main class="content">
+      <div id="landing" class="content-panel"><h1 id="bashing-through-bash">Bashing through Bash</h1>
+<p><strong>A 12-Lesson Journey from Zero to Confident Shell User</strong></p>
+<hr>
+<h2 id="who-this-is-for">Who This Is For</h2>
+<p>You use a computer every day. You&#39;ve probably opened a terminal before. Maybe you&#39;ve copied and pasted a few commands from Stack Overflow. But you&#39;ve never really <em>learned</em> bash — not properly, not from the ground up.</p>
+<p>This course fixes that. In 12 lessons of roughly 30 minutes each, you&#39;ll go from &quot;what does <code>ls</code> do?&quot; to writing real scripts that automate your work and make you genuinely faster.</p>
+<p>No prior terminal experience required. Just curiosity and a willingness to type things and see what happens.</p>
+<hr>
+<h2 id="how-to-use-these-lessons">How to Use These Lessons</h2>
+<p>Each lesson is designed to be completed in a single sitting of about 30 minutes. Every lesson follows the same structure:</p>
+<ul>
+<li><strong>Concepts</strong> — what you&#39;re learning and why it matters</li>
+<li><strong>Commands &amp; Syntax</strong> — the actual tools, with clear explanations</li>
+<li><strong>Try It Yourself</strong> — hands-on exercises to cement what you&#39;ve learned</li>
+<li><strong>Key Takeaways</strong> — a quick summary before you move on</li>
+</ul>
+<p>The most important thing: <strong>type everything out yourself.</strong> Don&#39;t copy and paste. The muscle memory matters more than you think.</p>
+<hr>
+<h2 id="lesson-index">Lesson Index</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Lesson</th>
+<th>What You&#39;ll Learn</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>01</td>
+<td><a href="#lesson-01">Welcome to the Terminal</a></td>
+<td>What bash is, how to open a terminal, navigating the filesystem</td>
+</tr>
+<tr>
+<td>02</td>
+<td><a href="#lesson-02">Files and Directories</a></td>
+<td>Creating, copying, moving, renaming, and deleting files and folders</td>
+</tr>
+<tr>
+<td>03</td>
+<td><a href="#lesson-03">Reading and Searching Files</a></td>
+<td>Viewing file contents with cat, less, head, tail, and searching with grep</td>
+</tr>
+<tr>
+<td>04</td>
+<td><a href="#lesson-04">Pipes and Redirection</a></td>
+<td>Chaining commands together, redirecting output to files, building data pipelines</td>
+</tr>
+<tr>
+<td>05</td>
+<td><a href="#lesson-05">Permissions and Ownership</a></td>
+<td>Understanding rwx, chmod, chown, and why &quot;permission denied&quot; happens</td>
+</tr>
+<tr>
+<td>06</td>
+<td><a href="#lesson-06">Your First Bash Script</a></td>
+<td>Writing and running scripts, variables, user input, and making scripts executable</td>
+</tr>
+<tr>
+<td>07</td>
+<td><a href="#lesson-07">Conditionals and Logic</a></td>
+<td>If/else, test expressions, comparison operators, and case statements</td>
+</tr>
+<tr>
+<td>08</td>
+<td><a href="#lesson-08">Loops and Iteration</a></td>
+<td>For loops, while loops, loop control, and processing multiple files</td>
+</tr>
+<tr>
+<td>09</td>
+<td><a href="#lesson-09">Functions and Script Organisation</a></td>
+<td>Writing functions, passing arguments, return values, and structuring scripts</td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="#lesson-10">Text Processing Power Tools</a></td>
+<td>sed, awk, cut, sort, uniq — transforming and analysing text like a pro</td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="#lesson-11">Process Management and Job Control</a></td>
+<td>Running processes, background jobs, signals, and scheduling with cron</td>
+</tr>
+<tr>
+<td>12</td>
+<td><a href="#lesson-12">Real-World Scripting</a></td>
+<td>Error handling, debugging, best practices, and building a complete project</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="what-you39ll-need">What You&#39;ll Need</h2>
+<ul>
+<li>A terminal application (Terminal on macOS, any terminal emulator on Linux)</li>
+<li>A text editor you&#39;re comfortable with (VS Code, nano, vim — anything works)</li>
+<li>About 30 minutes per lesson</li>
+<li>A folder to practice in (we&#39;ll set this up in Lesson 01)</li>
+</ul>
+<hr>
+<h2 id="a-note-on-macos-vs-linux">A Note on macOS vs Linux</h2>
+<p>These lessons work on both macOS and Linux. The vast majority of commands are identical. Where differences exist, they&#39;re noted. If you&#39;re on Windows, use WSL (Windows Subsystem for Linux) to follow along.</p>
+<hr>
+<p><em>Let&#39;s get started. Open your terminal and head to <a href="#lesson-01">Lesson 01</a>.</em></p></div>
+      <div id="lesson-01" class="content-panel"><h1 id="lesson-01-welcome-to-the-terminal">Lesson 01: Welcome to the Terminal</h1>
+<p><strong>Time: ~30 minutes</strong></p>
+<hr>
+<h2 id="what-is-bash">What Is Bash?</h2>
+<p>Bash stands for &quot;Bourne Again Shell.&quot; It&#39;s a program that takes commands you type and tells your computer what to do. That&#39;s it. Every time you open a terminal window, you&#39;re starting a bash session (or a similar shell like zsh — more on that shortly).</p>
+<p>The terminal might look intimidating with its blinking cursor and blank screen, but here&#39;s the thing: it&#39;s just a different way to do what you already do with your mouse. Instead of clicking on a folder to open it, you type a command. Instead of dragging a file to the trash, you type a command. The difference is that typing commands is <em>faster</em>, <em>repeatable</em>, and <em>automatable</em> in ways that clicking around never will be.</p>
+<h3 id="bash-vs-shell-vs-terminal-clearing-up-the-confusio">Bash vs Shell vs Terminal — Clearing Up the Confusion</h3>
+<p>These terms get used interchangeably, but they mean different things:</p>
+<ul>
+<li><strong>Terminal</strong> (or terminal emulator) — the application window you type into. It&#39;s just a container.</li>
+<li><strong>Shell</strong> — the program running <em>inside</em> the terminal that interprets your commands. Bash is one shell. Zsh is another. Fish is another.</li>
+<li><strong>Bash</strong> — a specific shell, and the one we&#39;re learning. It&#39;s the default on most Linux systems and was the default on macOS until Catalina (which switched to zsh).</li>
+</ul>
+<p>If you&#39;re on macOS and using zsh, don&#39;t worry. Everything in this course works in zsh too. The differences are minor and won&#39;t matter until you&#39;re much more advanced.</p>
+<hr>
+<h2 id="opening-your-terminal">Opening Your Terminal</h2>
+<p><strong>macOS:</strong> Press <code>Cmd + Space</code>, type &quot;Terminal&quot;, hit Enter. Or find it in Applications → Utilities → Terminal.</p>
+<p><strong>Linux:</strong> Press <code>Ctrl + Alt + T</code> on most distributions. Or find your terminal application in your app menu.</p>
+<p>You should see something like this:</p>
+<pre><code>kevin@macbook ~ %
+</code></pre>
+<p>or</p>
+<pre><code>kevin@ubuntu:~$
+</code></pre>
+<p>This is your <strong>prompt</strong>. It&#39;s telling you the shell is ready and waiting for you to type something. The <code>~</code> means you&#39;re in your home directory (we&#39;ll cover that next). The <code>$</code> or <code>%</code> is just the prompt character — it&#39;s not something you type.</p>
+<hr>
+<h2 id="your-first-commands">Your First Commands</h2>
+<p>Type each of these and press Enter. Watch what happens.</p>
+<h3><code>pwd</code> — Print Working Directory</h3>
+<pre><code class="language-bash">pwd
+</code></pre>
+<p>This tells you where you are in the filesystem right now. You should see something like <code>/Users/kevin</code> (macOS) or <code>/home/kevin</code> (Linux). This is your <strong>home directory</strong> — your personal space on the computer.</p>
+<h3><code>ls</code> — List</h3>
+<pre><code class="language-bash">ls
+</code></pre>
+<p>This shows you what&#39;s in the current directory. You should recognise these — they&#39;re the same folders you see in Finder or your file manager: Desktop, Documents, Downloads, etc.</p>
+<h3><code>echo</code> — Print Text</h3>
+<pre><code class="language-bash">echo &quot;Hello from the terminal&quot;
+</code></pre>
+<p>This just prints whatever you give it. Simple, but you&#39;ll use it constantly — for debugging, for displaying information, for writing to files.</p>
+<hr>
+<h2 id="navigating-the-filesystem">Navigating the Filesystem</h2>
+<p>Your computer&#39;s filesystem is a tree. At the top is the <strong>root</strong>, written as <code>/</code>. Everything lives below it. Your home directory is a branch on that tree.</p>
+<p>Here&#39;s a simplified view:</p>
+<pre><code>/                       ← root
+├── Users/              ← (macOS) or /home/ (Linux)
+│   └── kevin/          ← your home directory (~)
+│       ├── Desktop/
+│       ├── Documents/
+│       └── Downloads/
+├── usr/
+│   ├── bin/            ← where many commands live
+│   └── local/
+├── etc/                ← system configuration files
+├── tmp/                ← temporary files
+└── var/                ← variable data (logs, etc.)
+</code></pre>
+<h3><code>cd</code> — Change Directory</h3>
+<p>This is how you move around.</p>
+<pre><code class="language-bash">cd Documents
+</code></pre>
+<p>You just moved into your Documents folder. Run <code>pwd</code> to confirm — it should show <code>/Users/kevin/Documents</code> or similar.</p>
+<p>Now go back:</p>
+<pre><code class="language-bash">cd ..
+</code></pre>
+<p>The <code>..</code> means &quot;one level up&quot; — the parent directory. You&#39;re back in your home directory.</p>
+<p>Some important shortcuts:</p>
+<pre><code class="language-bash">cd ~          # go to your home directory (from anywhere)
+cd            # same thing — cd with no argument goes home
+cd -          # go back to the previous directory you were in
+cd /          # go to the root of the filesystem
+cd ../..      # go up two levels
+</code></pre>
+<h3 id="path-types-absolute-vs-relative">Path Types: Absolute vs Relative</h3>
+<p>There are two ways to specify a location:</p>
+<p><strong>Absolute paths</strong> start from the root <code>/</code> and spell out the full location:</p>
+<pre><code class="language-bash">cd /Users/kevin/Documents/Projects
+</code></pre>
+<p><strong>Relative paths</strong> start from where you are now:</p>
+<pre><code class="language-bash">cd Documents/Projects
+</code></pre>
+<p>Both get you to the same place. Use whichever makes sense. If you&#39;re already close to where you want to be, a relative path is shorter. If you want to be unambiguous, use absolute.</p>
+<hr>
+<h2 id="getting-help">Getting Help</h2>
+<p>Almost every command has built-in documentation. There are two ways to access it:</p>
+<h3><code>man</code> — Manual Pages</h3>
+<pre><code class="language-bash">man ls
+</code></pre>
+<p>This opens the full manual for <code>ls</code>. It tells you every option, every flag, every behaviour. Use arrow keys to scroll, press <code>q</code> to quit.</p>
+<p>Manual pages can be dense. That&#39;s OK. You don&#39;t need to read the whole thing — just scan for what you need.</p>
+<h3><code>--help</code> Flag</h3>
+<p>Most commands support a shorter help summary:</p>
+<pre><code class="language-bash">ls --help
+</code></pre>
+<p>(On macOS, some built-in commands don&#39;t support <code>--help</code>. Use <code>man</code> instead.)</p>
+<h3><code>type</code> and <code>which</code> — Finding Commands</h3>
+<p>Want to know where a command lives or what it is?</p>
+<pre><code class="language-bash">type ls        # tells you what kind of command ls is
+which python   # tells you the full path to the python executable
+</code></pre>
+<hr>
+<h2>Useful <code>ls</code> Options</h2>
+<p>Plain <code>ls</code> gives you the basics. These flags give you more:</p>
+<pre><code class="language-bash">ls -l          # long format — shows permissions, size, date
+ls -a          # show hidden files (files starting with .)
+ls -la         # combine both — this is the one you&#39;ll use most
+ls -lh         # human-readable file sizes (KB, MB instead of bytes)
+ls -lt         # sort by modification time (newest first)
+ls -lS         # sort by file size (largest first)
+</code></pre>
+<p>Hidden files are files whose names start with a dot, like <code>.bashrc</code> or <code>.gitconfig</code>. They&#39;re hidden by default to reduce clutter, but they&#39;re often important configuration files. The <code>-a</code> flag reveals them.</p>
+<hr>
+<h2 id="setting-up-your-practice-space">Setting Up Your Practice Space</h2>
+<p>Let&#39;s create a folder for these lessons. We&#39;ll learn <code>mkdir</code> properly in the next lesson, but for now, just type:</p>
+<pre><code class="language-bash">cd ~
+mkdir -p bash-lessons
+cd bash-lessons
+pwd
+</code></pre>
+<p>You should see something like <code>/Users/kevin/bash-lessons</code>. This is where you&#39;ll do all your practice work for the rest of the course.</p>
+<hr>
+<h2 id="tab-completion-your-new-best-friend">Tab Completion — Your New Best Friend</h2>
+<p>This is possibly the most useful thing you&#39;ll learn today. Start typing a command or filename and press <code>Tab</code>:</p>
+<pre><code class="language-bash">cd Docu&lt;Tab&gt;
+</code></pre>
+<p>Bash will auto-complete to <code>cd Documents/</code> (assuming that&#39;s the only match). If there are multiple matches, press <code>Tab</code> twice to see all options.</p>
+<p>This saves you an enormous amount of typing and prevents typos. Use it constantly. If you take one habit away from this lesson, let it be this.</p>
+<hr>
+<h2 id="command-history">Command History</h2>
+<p>Bash remembers everything you type.</p>
+<ul>
+<li>Press the <strong>Up arrow</strong> to cycle through previous commands</li>
+<li>Press the <strong>Down arrow</strong> to go forward</li>
+<li>Type <code>history</code> to see a numbered list of recent commands</li>
+<li>Press <code>Ctrl + R</code> and start typing to <strong>search</strong> your history — this is incredibly useful</li>
+</ul>
+<pre><code class="language-bash">history          # see your command history
+history | tail   # see just the last 10 commands
+</code></pre>
+<hr>
+<h2 id="try-it-yourself">Try It Yourself</h2>
+<p>Complete these exercises in your terminal. Don&#39;t copy and paste — type them out.</p>
+<ol>
+<li>Open your terminal and run <code>pwd</code>. Note your home directory path.</li>
+<li>Run <code>ls -la</code> in your home directory. Find three hidden files (starting with <code>.</code>).</li>
+<li>Navigate to <code>/tmp</code> using an absolute path. Run <code>pwd</code> to confirm. Navigate back home with <code>cd ~</code>.</li>
+<li>Navigate to your Documents folder. Then use <code>cd -</code> to jump back. Use <code>cd -</code> again. Notice how it toggles between two locations.</li>
+<li>Use <code>ls -lt</code> in your home directory to find the most recently modified file or folder.</li>
+<li>Navigate to your <code>bash-lessons</code> folder. Run <code>ls -la</code>. It should be empty (except for <code>.</code> and <code>..</code>).</li>
+<li>Use <code>man ls</code> to find out what the <code>-R</code> flag does. Try it out.</li>
+<li>Use <code>Ctrl + R</code> and search your history for &quot;pwd&quot;. Press Enter to re-run it.</li>
+</ol>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ul>
+<li>The terminal is just a text-based way to interact with your computer. Nothing magical, nothing scary.</li>
+<li><code>pwd</code> tells you where you are. <code>ls</code> shows what&#39;s here. <code>cd</code> moves you around.</li>
+<li>Absolute paths start with <code>/</code>. Relative paths start from your current location.</li>
+<li><code>..</code> means the parent directory. <code>~</code> means your home directory.</li>
+<li>Use <code>Tab</code> for auto-completion. Use <code>Up arrow</code> and <code>Ctrl + R</code> for history. These save you enormous time.</li>
+<li>Use <code>man</code> or <code>--help</code> when you&#39;re not sure what a command does.</li>
+</ul>
+<hr>
+<p><em>Next up: <a href="02-files-and-directories.md">Lesson 02 — Files and Directories</a></em></p>
+<div class="lesson-complete-wrap">
+  <button type="button" class="lesson-complete-btn" onclick="window.bashLessons.markComplete()">Mark lesson complete</button>
+</div>
+</div>
+      <div id="lesson-02" class="content-panel"><h1 id="lesson-02-files-and-directories">Lesson 02: Files and Directories</h1>
+<p><strong>Time: ~30 minutes</strong></p>
+<hr>
+<h2 id="the-building-blocks">The Building Blocks</h2>
+<p>Everything on your computer is either a file or a directory (folder). That sounds obvious, but in the terminal, understanding this deeply matters. Directories are just special files that contain references to other files. There&#39;s no magic — just a tree of names pointing to data on disk.</p>
+<p>In this lesson, you&#39;ll learn to create, copy, move, rename, and delete files and directories — all from the command line. Once you&#39;re comfortable with these commands, you&#39;ll rarely need a graphical file manager again.</p>
+<hr>
+<h2>Creating Directories with <code>mkdir</code></h2>
+<pre><code class="language-bash">cd ~/bash-lessons
+mkdir projects
+</code></pre>
+<p>That creates a directory called <code>projects</code> inside your current location. Verify with <code>ls</code>.</p>
+<h3 id="creating-nested-directories">Creating Nested Directories</h3>
+<p>What if you want to create a directory several levels deep?</p>
+<pre><code class="language-bash">mkdir projects/web/frontend
+</code></pre>
+<p>This fails if <code>projects/web</code> doesn&#39;t exist yet. The <code>-p</code> flag fixes that — it creates all necessary parent directories:</p>
+<pre><code class="language-bash">mkdir -p projects/web/frontend
+mkdir -p projects/web/backend
+mkdir -p projects/scripts
+</code></pre>
+<p>The <code>-p</code> flag is also safe to use on directories that already exist — it won&#39;t throw an error or overwrite anything.</p>
+<hr>
+<h2 id="creating-files">Creating Files</h2>
+<p>There are several ways to create files. Each has its place.</p>
+<h3><code>touch</code> — Create an Empty File</h3>
+<pre><code class="language-bash">touch notes.txt
+</code></pre>
+<p>If the file doesn&#39;t exist, it creates an empty one. If it already exists, it updates the file&#39;s modification timestamp without changing its contents. This makes <code>touch</code> safe to run repeatedly.</p>
+<p>Create several files at once:</p>
+<pre><code class="language-bash">touch file1.txt file2.txt file3.txt
+</code></pre>
+<h3><code>echo</code> with Redirection — Create a File with Content</h3>
+<pre><code class="language-bash">echo &quot;This is my first file&quot; &gt; hello.txt
+</code></pre>
+<p>The <code>&gt;</code> operator redirects the output of <code>echo</code> into a file. If the file exists, it gets <strong>overwritten</strong>. We&#39;ll cover redirection in depth in Lesson 04.</p>
+<h3 id="text-editors-create-and-edit-files">Text Editors — Create and Edit Files</h3>
+<p>For anything more than a line or two, you&#39;ll want a text editor:</p>
+<pre><code class="language-bash">nano notes.txt     # simple terminal editor, good for beginners
+vim notes.txt      # powerful but has a learning curve
+code notes.txt     # opens in VS Code (if installed)
+</code></pre>
+<p>If you&#39;re new to terminal editors, use <code>nano</code>. It shows keyboard shortcuts at the bottom of the screen. <code>Ctrl + O</code> saves, <code>Ctrl + X</code> exits.</p>
+<hr>
+<h2>Copying Files and Directories with <code>cp</code></h2>
+<h3 id="copying-a-file">Copying a File</h3>
+<pre><code class="language-bash">cp hello.txt hello-backup.txt
+</code></pre>
+<p>This creates a duplicate. The original is untouched.</p>
+<h3 id="copying-a-file-to-another-directory">Copying a File to Another Directory</h3>
+<pre><code class="language-bash">cp hello.txt projects/
+</code></pre>
+<p>This puts a copy of <code>hello.txt</code> inside the <code>projects</code> directory.</p>
+<h3 id="copying-a-file-to-another-directory-with-a-new-nam">Copying a File to Another Directory with a New Name</h3>
+<pre><code class="language-bash">cp hello.txt projects/greeting.txt
+</code></pre>
+<h3 id="copying-directories">Copying Directories</h3>
+<p>To copy a directory and everything inside it, you need the <code>-r</code> (recursive) flag:</p>
+<pre><code class="language-bash">cp -r projects projects-backup
+</code></pre>
+<p>Without <code>-r</code>, bash will refuse to copy a directory. This is a safety measure — copying a directory means copying potentially thousands of files, and bash wants you to be explicit about that.</p>
+<hr>
+<h2>Moving and Renaming with <code>mv</code></h2>
+<p>In bash, moving and renaming are the same operation. The <code>mv</code> command changes where a file lives — or what it&#39;s called.</p>
+<h3 id="renaming-a-file">Renaming a File</h3>
+<pre><code class="language-bash">mv hello.txt greetings.txt
+</code></pre>
+<p>The file <code>hello.txt</code> no longer exists. It&#39;s now called <code>greetings.txt</code>.</p>
+<h3 id="moving-a-file-to-another-directory">Moving a File to Another Directory</h3>
+<pre><code class="language-bash">mv greetings.txt projects/
+</code></pre>
+<p>The file is now at <code>projects/greetings.txt</code>. It&#39;s no longer in the current directory.</p>
+<h3 id="moving-and-renaming-at-the-same-time">Moving and Renaming at the Same Time</h3>
+<pre><code class="language-bash">mv projects/greetings.txt projects/web/welcome.txt
+</code></pre>
+<h3 id="moving-directories">Moving Directories</h3>
+<p>Unlike <code>cp</code>, <code>mv</code> doesn&#39;t need a <code>-r</code> flag for directories. It just works:</p>
+<pre><code class="language-bash">mv projects-backup old-projects
+</code></pre>
+<h3 id="a-useful-safety-flag">A Useful Safety Flag</h3>
+<p>The <code>-i</code> flag makes <code>mv</code> ask for confirmation before overwriting an existing file:</p>
+<pre><code class="language-bash">mv -i newfile.txt existingfile.txt
+</code></pre>
+<p>If <code>existingfile.txt</code> already exists, bash will ask you before replacing it. Without <code>-i</code>, it overwrites silently. Consider using <code>-i</code> when you&#39;re moving files into directories where name collisions might occur.</p>
+<hr>
+<h2>Deleting Files and Directories with <code>rm</code></h2>
+<p>This is the one command you need to be careful with. <strong>There is no trash bin in the terminal.</strong> When you <code>rm</code> a file, it&#39;s gone. No undo, no recovery.</p>
+<h3 id="deleting-a-file">Deleting a File</h3>
+<pre><code class="language-bash">rm file1.txt
+</code></pre>
+<p>Gone. Immediately. No confirmation.</p>
+<h3 id="deleting-multiple-files">Deleting Multiple Files</h3>
+<pre><code class="language-bash">rm file2.txt file3.txt
+</code></pre>
+<h3 id="deleting-with-confirmation">Deleting with Confirmation</h3>
+<pre><code class="language-bash">rm -i notes.txt
+</code></pre>
+<p>Bash will ask &quot;remove notes.txt?&quot; and wait for your <code>y</code> or <code>n</code>.</p>
+<h3 id="deleting-empty-directories">Deleting Empty Directories</h3>
+<pre><code class="language-bash">rmdir projects/scripts
+</code></pre>
+<p><code>rmdir</code> only works on empty directories. This is a safety feature.</p>
+<h3 id="deleting-directories-and-their-contents">Deleting Directories and Their Contents</h3>
+<pre><code class="language-bash">rm -r old-projects
+</code></pre>
+<p>The <code>-r</code> (recursive) flag tells <code>rm</code> to delete the directory and everything inside it. Every file. Every subdirectory. All of it.</p>
+<h3 id="the-dangerous-command">The Dangerous Command</h3>
+<p>You&#39;ll see this in tutorials and Stack Overflow answers:</p>
+<pre><code class="language-bash">rm -rf something/
+</code></pre>
+<p>The <code>-f</code> (force) flag suppresses all confirmation prompts and ignores errors. Combined with <code>-r</code>, it deletes everything without asking. This is useful in scripts but dangerous when typed manually.</p>
+<p><strong>Never run <code>rm -rf /</code> or <code>rm -rf ~</code>.</strong> The first attempts to delete your entire filesystem. The second deletes your entire home directory. Modern systems have safeguards against the first one, but the second will ruin your day.</p>
+<p>A good habit: always double-check the path before pressing Enter on any <code>rm -r</code> command. Read it twice.</p>
+<hr>
+<h2 id="wildcards-and-globbing">Wildcards and Globbing</h2>
+<p>Wildcards let you match multiple files with a pattern instead of naming each one individually.</p>
+<h3><code>*</code> — Matches Anything</h3>
+<pre><code class="language-bash">ls *.txt           # all files ending in .txt
+ls project*        # all files starting with &quot;project&quot;
+cp *.txt projects/ # copy all .txt files into projects/
+rm *.log           # delete all .log files
+</code></pre>
+<h3><code>?</code> — Matches Exactly One Character</h3>
+<pre><code class="language-bash">ls file?.txt       # matches file1.txt, file2.txt, but not file10.txt
+</code></pre>
+<h3><code>[...]</code> — Matches Any Character in the Set</h3>
+<pre><code class="language-bash">ls file[123].txt   # matches file1.txt, file2.txt, file3.txt
+ls file[1-5].txt   # matches file1.txt through file5.txt
+</code></pre>
+<h3 id="using-wildcards-safely">Using Wildcards Safely</h3>
+<p>Before deleting with wildcards, preview what you&#39;re about to delete:</p>
+<pre><code class="language-bash">ls *.tmp           # see what matches
+rm *.tmp           # then delete
+</code></pre>
+<p>Or use <code>rm -i *.tmp</code> to get confirmation for each file.</p>
+<hr>
+<h2 id="checking-file-properties">Checking File Properties</h2>
+<h3><code>file</code> — Determine File Type</h3>
+<pre><code class="language-bash">file notes.txt          # &quot;ASCII text&quot;
+file /usr/bin/bash      # &quot;ELF 64-bit LSB executable...&quot;
+file photo.jpg          # &quot;JPEG image data...&quot;
+</code></pre>
+<p>The <code>file</code> command looks at the actual contents, not just the extension. A <code>.txt</code> file that contains binary data will be reported as binary.</p>
+<h3><code>stat</code> — Detailed File Information</h3>
+<pre><code class="language-bash">stat notes.txt
+</code></pre>
+<p>This shows you everything: size, permissions, owner, creation date, modification date, inode number. It&#39;s more detail than you usually need, but it&#39;s there when you want it.</p>
+<h3><code>wc</code> — Word Count</h3>
+<pre><code class="language-bash">wc notes.txt        # lines, words, characters
+wc -l notes.txt     # just the line count
+wc -w notes.txt     # just the word count
+</code></pre>
+<h3><code>du</code> — Disk Usage</h3>
+<pre><code class="language-bash">du -sh projects/     # total size of a directory, human-readable
+du -sh */            # size of each subdirectory
+</code></pre>
+<hr>
+<h2 id="try-it-yourself">Try It Yourself</h2>
+<p>Work through these in your <code>~/bash-lessons</code> directory.</p>
+<ol>
+<li><p>Create this directory structure in a single command:</p>
+<pre><code>practice/
+├── drafts/
+├── final/
+└── archive/
+</code></pre>
+<p>(Hint: <code>mkdir -p</code> can take multiple arguments.)</p>
+</li>
+<li><p>Create five files: <code>note1.txt</code> through <code>note5.txt</code> using <code>touch</code>.</p>
+</li>
+<li><p>Write &quot;Draft version&quot; into <code>note1.txt</code> using <code>echo</code> and <code>&gt;</code>.</p>
+</li>
+<li><p>Copy <code>note1.txt</code> into the <code>practice/drafts/</code> directory.</p>
+</li>
+<li><p>Move <code>note2.txt</code> and <code>note3.txt</code> into <code>practice/drafts/</code>.</p>
+</li>
+<li><p>Rename <code>note4.txt</code> to <code>important.txt</code>.</p>
+</li>
+<li><p>Copy the entire <code>practice</code> directory to <code>practice-backup</code>.</p>
+</li>
+<li><p>Delete <code>note5.txt</code> and <code>important.txt</code>.</p>
+</li>
+<li><p>Use <code>ls *.txt</code> to see what <code>.txt</code> files remain in your current directory.</p>
+</li>
+<li><p>Use <code>du -sh practice/</code> to check the size of your practice directory.</p>
+</li>
+</ol>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ul>
+<li><code>mkdir -p</code> creates directories and any missing parents. It&#39;s always safe to use.</li>
+<li><code>touch</code> creates empty files or updates timestamps. <code>echo &quot;text&quot; &gt; file</code> creates files with content.</li>
+<li><code>cp</code> copies files. Add <code>-r</code> for directories.</li>
+<li><code>mv</code> both moves and renames. It works on files and directories without any flags.</li>
+<li><code>rm</code> deletes permanently. There is no undo. Use <code>rm -i</code> when you want confirmation. Use <code>rm -r</code> for directories.</li>
+<li>Wildcards (<code>*</code>, <code>?</code>, <code>[...]</code>) let you work with groups of files. Always preview with <code>ls</code> before deleting with wildcards.</li>
+</ul>
+<hr>
+<p><em>Next up: <a href="03-reading-and-searching-files.md">Lesson 03 — Reading and Searching Files</a></em></p>
+<div class="lesson-complete-wrap">
+  <button type="button" class="lesson-complete-btn" onclick="window.bashLessons.markComplete()">Mark lesson complete</button>
+</div>
+</div>
+      <div id="lesson-03" class="content-panel"><h1 id="lesson-03-reading-and-searching-files">Lesson 03: Reading and Searching Files</h1>
+<p><strong>Time: ~30 minutes</strong></p>
+<hr>
+<h2 id="why-this-matters">Why This Matters</h2>
+<p>You&#39;ll spend more time <em>reading</em> files than writing them. Log files, configuration files, code, data exports, documentation — being able to quickly view, search, and navigate file contents from the terminal is one of the most practical skills you can develop.</p>
+<p>This lesson covers the essential tools for looking at files and finding things inside them.</p>
+<hr>
+<h2 id="setting-up-practice-files">Setting Up Practice Files</h2>
+<p>Before we start, let&#39;s create some files to work with:</p>
+<pre><code class="language-bash">cd ~/bash-lessons
+mkdir -p lesson03
+cd lesson03
+</code></pre>
+<p>Create a sample log file:</p>
+<pre><code class="language-bash">for i in $(seq 1 100); do
+  echo &quot;$(date &#39;+%Y-%m-%d %H:%M:%S&#39;) [INFO] Processing record $i&quot; &gt;&gt; server.log
+done
+echo &quot;2025-01-15 10:23:45 [ERROR] Connection refused: database timeout&quot; &gt;&gt; server.log
+echo &quot;2025-01-15 10:24:01 [WARN] Retrying connection (attempt 1)&quot; &gt;&gt; server.log
+echo &quot;2025-01-15 10:24:15 [ERROR] Connection refused: database timeout&quot; &gt;&gt; server.log
+echo &quot;2025-01-15 10:25:00 [INFO] Connection restored&quot; &gt;&gt; server.log
+</code></pre>
+<p>Don&#39;t worry about the <code>for</code> loop syntax yet — that&#39;s in Lesson 08. Just run it and you&#39;ll have a realistic log file to practice with.</p>
+<p>Create a sample configuration file:</p>
+<pre><code class="language-bash">cat &gt; config.txt &lt;&lt; &#39;EOF&#39;
+# Application Configuration
+app_name=MyWebApp
+version=2.4.1
+debug=false
+
+# Database Settings
+db_host=localhost
+db_port=5432
+db_name=production
+db_user=admin
+
+# API Settings
+api_key=sk-abc123def456
+api_timeout=30
+api_retries=3
+
+# Feature Flags
+enable_caching=true
+enable_logging=true
+enable_notifications=false
+EOF
+</code></pre>
+<hr>
+<h2 id="viewing-entire-files">Viewing Entire Files</h2>
+<h3><code>cat</code> — Concatenate and Print</h3>
+<pre><code class="language-bash">cat config.txt
+</code></pre>
+<p><code>cat</code> dumps the entire file to your terminal. It&#39;s the simplest tool — and the right choice for short files. The name comes from &quot;concatenate&quot; because it can also join files together:</p>
+<pre><code class="language-bash">cat file1.txt file2.txt     # prints both files in sequence
+</code></pre>
+<h3><code>cat</code> with Line Numbers</h3>
+<pre><code class="language-bash">cat -n config.txt
+</code></pre>
+<p>The <code>-n</code> flag adds line numbers. Useful when you need to reference specific lines.</p>
+<h3>When <code>cat</code> Is the Wrong Tool</h3>
+<p>If a file is hundreds or thousands of lines long, <code>cat</code> will flood your terminal. You&#39;ll see only the last screenful of output and lose everything above it. For large files, use <code>less</code>.</p>
+<hr>
+<h2>Viewing Large Files with <code>less</code></h2>
+<pre><code class="language-bash">less server.log
+</code></pre>
+<p><code>less</code> opens the file in a scrollable viewer. Unlike <code>cat</code>, it doesn&#39;t dump everything at once — it shows one screen at a time and lets you navigate.</p>
+<h3>Navigation in <code>less</code></h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Space</code> or <code>f</code></td>
+<td>Forward one page</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td>Back one page</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td>Forward half a page</td>
+</tr>
+<tr>
+<td><code>u</code></td>
+<td>Back half a page</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td>Go to the beginning</td>
+</tr>
+<tr>
+<td><code>G</code></td>
+<td>Go to the end</td>
+</tr>
+<tr>
+<td><code>q</code></td>
+<td>Quit</td>
+</tr>
+<tr>
+<td><code>/pattern</code></td>
+<td>Search forward for &quot;pattern&quot;</td>
+</tr>
+<tr>
+<td><code>?pattern</code></td>
+<td>Search backward for &quot;pattern&quot;</td>
+</tr>
+<tr>
+<td><code>n</code></td>
+<td>Next search match</td>
+</tr>
+<tr>
+<td><code>N</code></td>
+<td>Previous search match</td>
+</tr>
+</tbody></table>
+<p>The search function inside <code>less</code> is incredibly useful. Open your log file and try:</p>
+<pre><code>/ERROR
+</code></pre>
+<p>This jumps to the first occurrence of &quot;ERROR&quot;. Press <code>n</code> to find the next one.</p>
+<h3>Why <code>less</code> and Not <code>more</code></h3>
+<p>You&#39;ll sometimes see the <code>more</code> command mentioned. <code>less</code> is the improved version of <code>more</code> (hence the joke: &quot;less is more&quot;). Use <code>less</code>. It does everything <code>more</code> does, plus backward scrolling, better searching, and more.</p>
+<hr>
+<h2 id="viewing-parts-of-files">Viewing Parts of Files</h2>
+<p>Sometimes you don&#39;t need the whole file — just the beginning or the end.</p>
+<h3><code>head</code> — View the Beginning</h3>
+<pre><code class="language-bash">head server.log          # first 10 lines (default)
+head -20 server.log      # first 20 lines
+head -1 server.log       # just the first line
+</code></pre>
+<p>Useful for checking the structure of a file or seeing its headers.</p>
+<h3><code>tail</code> — View the End</h3>
+<pre><code class="language-bash">tail server.log          # last 10 lines (default)
+tail -20 server.log      # last 20 lines
+tail -1 server.log       # just the last line
+</code></pre>
+<h3><code>tail -f</code> — Follow a File in Real Time</h3>
+<p>This is one of the most used commands in development and operations:</p>
+<pre><code class="language-bash">tail -f server.log
+</code></pre>
+<p>This shows the last 10 lines and then <em>waits</em>. Whenever new lines are added to the file, they appear immediately. It&#39;s how you watch logs in real time while debugging a running application.</p>
+<p>Press <code>Ctrl + C</code> to stop following.</p>
+<hr>
+<h2>Searching Inside Files with <code>grep</code></h2>
+<p><code>grep</code> is one of the most powerful and frequently used tools in bash. It searches for patterns in files and prints every line that matches.</p>
+<h3 id="basic-usage">Basic Usage</h3>
+<pre><code class="language-bash">grep &quot;ERROR&quot; server.log
+</code></pre>
+<p>This prints every line in <code>server.log</code> that contains the text &quot;ERROR&quot;.</p>
+<h3>Useful <code>grep</code> Flags</h3>
+<pre><code class="language-bash">grep -i &quot;error&quot; server.log       # case-insensitive search
+grep -n &quot;ERROR&quot; server.log       # show line numbers
+grep -c &quot;ERROR&quot; server.log       # count matching lines (just the number)
+grep -v &quot;INFO&quot; server.log        # invert match — show lines that DON&#39;T contain &quot;INFO&quot;
+</code></pre>
+<h3 id="searching-multiple-files">Searching Multiple Files</h3>
+<pre><code class="language-bash">grep &quot;database&quot; *.txt            # search all .txt files
+grep -r &quot;TODO&quot; ~/projects/       # search recursively through a directory
+grep -rl &quot;TODO&quot; ~/projects/      # just list filenames that contain matches
+</code></pre>
+<p>The <code>-r</code> flag makes <code>grep</code> search through directories recursively. The <code>-l</code> flag shows only filenames, not the matching lines themselves.</p>
+<h3 id="combining-flags">Combining Flags</h3>
+<p>Flags can be combined. This is common and encouraged:</p>
+<pre><code class="language-bash">grep -in &quot;error&quot; server.log      # case-insensitive with line numbers
+grep -rn &quot;TODO&quot; ~/projects/      # recursive with line numbers
+grep -cv &quot;^#&quot; config.txt         # count lines that aren&#39;t comments
+</code></pre>
+<h3 id="context-around-matches">Context Around Matches</h3>
+<p>Sometimes you need to see what&#39;s around a match, not just the matching line:</p>
+<pre><code class="language-bash">grep -A 2 &quot;ERROR&quot; server.log    # show 2 lines After each match
+grep -B 2 &quot;ERROR&quot; server.log    # show 2 lines Before each match
+grep -C 2 &quot;ERROR&quot; server.log    # show 2 lines of Context (before and after)
+</code></pre>
+<p>This is invaluable when reading logs — the error itself often only makes sense with surrounding context.</p>
+<hr>
+<h2>Basic Pattern Matching in <code>grep</code></h2>
+<p><code>grep</code> supports regular expressions — patterns that match text. You don&#39;t need to master regex right now, but a few basics go a long way.</p>
+<h3 id="the-dot-match-any-character">The Dot — Match Any Character</h3>
+<pre><code class="language-bash">grep &quot;db_....&quot; config.txt     # matches &quot;db_&quot; followed by any 4 characters
+</code></pre>
+<h3 id="start-and-end-of-line">Start and End of Line</h3>
+<pre><code class="language-bash">grep &quot;^#&quot; config.txt          # lines that start with #
+grep &quot;false$&quot; config.txt      # lines that end with &quot;false&quot;
+grep &quot;^$&quot; config.txt          # empty lines
+</code></pre>
+<p>The <code>^</code> means &quot;start of line&quot; and <code>$</code> means &quot;end of line.&quot;</p>
+<h3 id="character-classes">Character Classes</h3>
+<pre><code class="language-bash">grep &quot;[0-9]&quot; config.txt       # lines containing any digit
+grep &quot;^[^#]&quot; config.txt       # lines that don&#39;t start with # (inside brackets, ^ means &quot;not&quot;)
+</code></pre>
+<h3>Extended Regular Expressions with <code>-E</code></h3>
+<p>The <code>-E</code> flag enables extended regex, which gives you more pattern options:</p>
+<pre><code class="language-bash">grep -E &quot;ERROR|WARN&quot; server.log        # matches ERROR or WARN
+grep -E &quot;attempt [0-9]+&quot; server.log    # matches &quot;attempt&quot; followed by one or more digits
+</code></pre>
+<p>We&#39;ll revisit regex more in Lesson 10. For now, just knowing <code>^</code>, <code>$</code>, <code>.</code>, <code>[...]</code>, and <code>|</code> (with <code>-E</code>) covers most of what you&#39;ll need day to day.</p>
+<hr>
+<h2 id="other-useful-viewing-commands">Other Useful Viewing Commands</h2>
+<h3><code>sort</code> — Sort Lines</h3>
+<pre><code class="language-bash">sort config.txt              # sort alphabetically
+sort -r config.txt           # reverse sort
+sort -n numbers.txt          # numeric sort (so 10 comes after 9, not after 1)
+</code></pre>
+<h3><code>uniq</code> — Remove Duplicate Lines</h3>
+<pre><code class="language-bash">sort config.txt | uniq       # remove duplicates (file must be sorted first)
+sort config.txt | uniq -c    # show count of each unique line
+</code></pre>
+<p><code>uniq</code> only removes <em>adjacent</em> duplicates, which is why you almost always pair it with <code>sort</code>.</p>
+<h3><code>diff</code> — Compare Two Files</h3>
+<pre><code class="language-bash">cp config.txt config-new.txt
+echo &quot;debug=true&quot; &gt;&gt; config-new.txt
+diff config.txt config-new.txt
+</code></pre>
+<p><code>diff</code> shows you the differences between two files. It&#39;s the foundation of how version control systems like Git track changes.</p>
+<hr>
+<h2 id="try-it-yourself">Try It Yourself</h2>
+<ol>
+<li><p>Use <code>cat -n</code> to view <code>config.txt</code> with line numbers. What&#39;s on line 8?</p>
+</li>
+<li><p>Use <code>less</code> to open <code>server.log</code>. Search for &quot;ERROR&quot; using <code>/ERROR</code>. How many errors are there? (Use <code>n</code> to find each one, or exit and use <code>grep -c</code>.)</p>
+</li>
+<li><p>Use <code>head -5 server.log</code> to see the first 5 log entries.</p>
+</li>
+<li><p>Use <code>tail -5 server.log</code> to see the last 5 entries.</p>
+</li>
+<li><p>Use <code>grep</code> to find all lines in <code>config.txt</code> that contain &quot;enable&quot;. How many are there?</p>
+</li>
+<li><p>Use <code>grep -v &quot;^#&quot; config.txt | grep -v &quot;^$&quot;</code> to show only the actual configuration values (no comments, no blank lines).</p>
+</li>
+<li><p>Use <code>grep -c &quot;INFO&quot; server.log</code> to count the number of INFO messages.</p>
+</li>
+<li><p>Use <code>grep -C 1 &quot;ERROR&quot; server.log</code> to see context around each error.</p>
+</li>
+<li><p>Create a copy of <code>config.txt</code>, change one value in it using <code>nano</code>, then use <code>diff</code> to see the difference.</p>
+</li>
+<li><p>Run <code>grep -E &quot;ERROR|WARN&quot; server.log</code> to find all problems in the log at once.</p>
+</li>
+</ol>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ul>
+<li><code>cat</code> is for small files. <code>less</code> is for large files. Know when to use which.</li>
+<li><code>head</code> and <code>tail</code> show the beginning and end of files. <code>tail -f</code> follows files in real time — essential for watching logs.</li>
+<li><code>grep</code> is your search tool. Learn its flags: <code>-i</code> (case-insensitive), <code>-n</code> (line numbers), <code>-r</code> (recursive), <code>-v</code> (invert), <code>-c</code> (count), <code>-A</code>/<code>-B</code>/<code>-C</code> (context).</li>
+<li>Basic regex patterns (<code>^</code>, <code>$</code>, <code>.</code>, <code>[...]</code>, <code>|</code>) make your searches far more powerful.</li>
+<li><code>sort</code>, <code>uniq</code>, and <code>diff</code> round out your text analysis toolkit.</li>
+</ul>
+<hr>
+<p><em>Next up: <a href="04-pipes-and-redirection.md">Lesson 04 — Pipes and Redirection</a></em></p>
+<div class="lesson-complete-wrap">
+  <button type="button" class="lesson-complete-btn" onclick="window.bashLessons.markComplete()">Mark lesson complete</button>
+</div>
+</div>
+      <div id="lesson-04" class="content-panel"><h1 id="lesson-04-pipes-and-redirection">Lesson 04: Pipes and Redirection</h1>
+<p><strong>Time: ~30 minutes</strong></p>
+<hr>
+<h2 id="the-big-idea">The Big Idea</h2>
+<p>In Lesson 03, you used commands one at a time — run <code>grep</code>, see the output, run another command. That works, but the real power of bash comes from connecting commands together.</p>
+<p>The Unix philosophy is: make each tool do one thing well, then combine them. <code>grep</code> searches. <code>sort</code> sorts. <code>wc</code> counts. Alone, they&#39;re useful. Chained together, they&#39;re a data processing pipeline that can rival a script in any language — written in a single line.</p>
+<p>This lesson teaches you how to chain commands with pipes and control where output goes with redirection. Once you understand these two concepts, the terminal stops feeling like a one-trick tool and starts feeling like a workshop.</p>
+<hr>
+<h2 id="standard-streams">Standard Streams</h2>
+<p>Every command in bash has three data streams:</p>
+<ul>
+<li><strong>stdin</strong> (standard input) — where data comes in. Usually your keyboard.</li>
+<li><strong>stdout</strong> (standard output) — where results go. Usually your terminal screen.</li>
+<li><strong>stderr</strong> (standard error) — where error messages go. Also usually your terminal screen.</li>
+</ul>
+<p>These streams are numbered: stdin is 0, stdout is 1, stderr is 2. These numbers matter when you want to redirect specific streams, which we&#39;ll get to shortly.</p>
+<p>When you run <code>ls</code>, the list of files goes to stdout (your screen). If you <code>ls</code> a directory that doesn&#39;t exist, the error message goes to stderr (also your screen). They look the same, but bash treats them differently — and you can redirect them independently.</p>
+<hr>
+<h2 id="pipes-connecting-commands">Pipes: Connecting Commands</h2>
+<p>The pipe operator <code>|</code> takes the stdout of one command and sends it to the stdin of the next command.</p>
+<pre><code class="language-bash">ls -la | less
+</code></pre>
+<p>This runs <code>ls -la</code>, but instead of printing to the screen, it sends the output into <code>less</code> so you can scroll through it. The first command produces data; the second command receives it.</p>
+<h3 id="building-a-pipeline">Building a Pipeline</h3>
+<p>You can chain as many commands as you want:</p>
+<pre><code class="language-bash">cat server.log | grep &quot;ERROR&quot; | wc -l
+</code></pre>
+<p>What happens here, step by step:</p>
+<ol>
+<li><code>cat server.log</code> — outputs the entire log file</li>
+<li><code>grep &quot;ERROR&quot;</code> — receives that output, keeps only lines containing &quot;ERROR&quot;</li>
+<li><code>wc -l</code> — receives those filtered lines, counts them</li>
+</ol>
+<p>The result is a single number: how many error lines are in the log.</p>
+<h3 id="more-pipeline-examples">More Pipeline Examples</h3>
+<p>Find the 5 largest files in a directory:</p>
+<pre><code class="language-bash">ls -lS | head -6
+</code></pre>
+<p>(Head 6 because <code>ls -l</code> includes a &quot;total&quot; line at the top.)</p>
+<p>Show unique error types in a log:</p>
+<pre><code class="language-bash">grep &quot;ERROR&quot; server.log | sort | uniq
+</code></pre>
+<p>Count how many times each error message appears:</p>
+<pre><code class="language-bash">grep &quot;ERROR&quot; server.log | sort | uniq -c | sort -rn
+</code></pre>
+<p>This is where it gets elegant. Four commands, each doing one thing, producing a frequency-sorted list of error messages. No temporary files, no scripting language needed.</p>
+<p>Find the 10 most recently modified files:</p>
+<pre><code class="language-bash">ls -lt | head -11
+</code></pre>
+<p>See which processes are using the most memory:</p>
+<pre><code class="language-bash">ps aux | sort -k4 -rn | head -10
+</code></pre>
+<hr>
+<h2 id="output-redirection">Output Redirection</h2>
+<p>Pipes send output to another command. Redirection sends output to a file.</p>
+<h3><code>&gt;</code> — Write to a File (Overwrite)</h3>
+<pre><code class="language-bash">echo &quot;Hello World&quot; &gt; output.txt
+ls -la &gt; filelist.txt
+grep &quot;ERROR&quot; server.log &gt; errors.txt
+</code></pre>
+<p>If the file exists, it gets replaced. If it doesn&#39;t exist, it gets created. The output no longer appears on screen — it goes into the file instead.</p>
+<h3><code>&gt;&gt;</code> — Append to a File</h3>
+<pre><code class="language-bash">echo &quot;First line&quot; &gt; log.txt
+echo &quot;Second line&quot; &gt;&gt; log.txt
+echo &quot;Third line&quot; &gt;&gt; log.txt
+cat log.txt
+</code></pre>
+<p>The <code>&gt;&gt;</code> operator adds to the end of the file instead of overwriting. This is how you build up files incrementally, and it&#39;s essential for logging.</p>
+<h3 id="the-overwrite-trap">The Overwrite Trap</h3>
+<p>This is a common mistake:</p>
+<pre><code class="language-bash">sort data.txt &gt; data.txt    # DANGER — this empties the file!
+</code></pre>
+<p>Bash sets up the redirection (creating/emptying <code>data.txt</code>) <em>before</em> the command runs. So <code>sort</code> reads from an already-empty file. The result is an empty file. Always redirect to a different filename, then rename if needed:</p>
+<pre><code class="language-bash">sort data.txt &gt; data-sorted.txt
+mv data-sorted.txt data.txt
+</code></pre>
+<hr>
+<h2 id="input-redirection">Input Redirection</h2>
+<h3><code>&lt;</code> — Read from a File</h3>
+<p>Most commands can take a filename as an argument, so you don&#39;t use <code>&lt;</code> as often. But it exists:</p>
+<pre><code class="language-bash">sort &lt; unsorted.txt
+wc -l &lt; server.log
+</code></pre>
+<p>This is functionally the same as <code>sort unsorted.txt</code>, but the mechanism is different: with <code>&lt;</code>, bash opens the file and feeds it to the command&#39;s stdin. With <code>sort unsorted.txt</code>, the sort command opens the file itself.</p>
+<h3>Here Documents (<code>&lt;&lt;</code>) — Inline Multi-line Input</h3>
+<p>This lets you feed multiple lines of text to a command:</p>
+<pre><code class="language-bash">cat &lt;&lt; EOF
+Line one
+Line two
+Line three
+EOF
+</code></pre>
+<p>The word after <code>&lt;&lt;</code> (here, <code>EOF</code>) is a delimiter. Everything between the first <code>EOF</code> and the last <code>EOF</code> becomes the input. You can use any word as the delimiter, but <code>EOF</code> is conventional.</p>
+<p>This is extremely useful in scripts for creating files or feeding input to commands:</p>
+<pre><code class="language-bash">cat &lt;&lt; EOF &gt; config.ini
+[database]
+host=localhost
+port=5432
+EOF
+</code></pre>
+<hr>
+<h2 id="redirecting-stderr">Redirecting stderr</h2>
+<p>By default, error messages go to your screen even when you redirect stdout. This is usually what you want — if something goes wrong, you want to see it. But sometimes you need to control error output separately.</p>
+<h3 id="redirect-only-errors-to-a-file">Redirect Only Errors to a File</h3>
+<pre><code class="language-bash">ls /nonexistent 2&gt; errors.txt
+</code></pre>
+<p>The <code>2&gt;</code> redirects stream number 2 (stderr) to a file. Normal output still goes to the screen.</p>
+<h3 id="redirect-stdout-and-stderr-separately">Redirect stdout and stderr Separately</h3>
+<pre><code class="language-bash">command &gt; output.txt 2&gt; errors.txt
+</code></pre>
+<p>Output goes to one file, errors go to another. This is useful in scripts where you want to log errors separately.</p>
+<h3 id="redirect-both-to-the-same-file">Redirect Both to the Same File</h3>
+<pre><code class="language-bash">command &gt; all-output.txt 2&gt;&amp;1
+</code></pre>
+<p>The <code>2&gt;&amp;1</code> means &quot;send stderr to the same place as stdout.&quot; The order matters here — the stdout redirect must come first.</p>
+<p>There&#39;s also a shorthand:</p>
+<pre><code class="language-bash">command &amp;&gt; all-output.txt
+</code></pre>
+<p>This does the same thing and is easier to read.</p>
+<h3 id="discard-output-entirely">Discard Output Entirely</h3>
+<pre><code class="language-bash">command &gt; /dev/null 2&gt;&amp;1
+</code></pre>
+<p><code>/dev/null</code> is a special file that discards everything written to it. This is how you silence a command completely. You&#39;ll see this in scripts when you care about a command&#39;s exit status but not its output.</p>
+<hr>
+<h2 id="combining-pipes-and-redirection">Combining Pipes and Redirection</h2>
+<p>Pipes and redirection work together. The pipe chains commands; the redirection at the end captures the final result:</p>
+<pre><code class="language-bash">grep &quot;ERROR&quot; server.log | sort | uniq -c | sort -rn &gt; error-report.txt
+</code></pre>
+<p>This runs the entire pipeline and saves the final output to a file. The intermediate steps aren&#39;t saved anywhere — they flow through the pipe and are gone.</p>
+<p>You can also redirect at different points in the pipeline, though this is less common:</p>
+<pre><code class="language-bash">grep &quot;ERROR&quot; server.log 2&gt;/dev/null | sort | uniq -c &gt; report.txt
+</code></pre>
+<p>Here, any errors from <code>grep</code> are silently discarded, while the successful output flows through the pipeline and into a file.</p>
+<hr>
+<h2>The <code>tee</code> Command — Output to Screen AND File</h2>
+<p>Sometimes you want to see the output and save it. <code>tee</code> does exactly that:</p>
+<pre><code class="language-bash">grep &quot;ERROR&quot; server.log | tee errors.txt
+</code></pre>
+<p>This prints the matching lines to your screen and simultaneously writes them to <code>errors.txt</code>. It&#39;s like a T-junction for your data stream.</p>
+<p>Use <code>tee -a</code> to append instead of overwrite:</p>
+<pre><code class="language-bash">echo &quot;New error found&quot; | tee -a errors.txt
+</code></pre>
+<p><code>tee</code> is also useful mid-pipeline for debugging — you can see what&#39;s flowing through at a specific point:</p>
+<pre><code class="language-bash">cat server.log | grep &quot;ERROR&quot; | tee /dev/stderr | wc -l
+</code></pre>
+<p>This shows you the matching lines (via <code>tee</code> to stderr) and also gives you the count (via <code>wc -l</code> to stdout).</p>
+<hr>
+<h2 id="practical-pipeline-patterns">Practical Pipeline Patterns</h2>
+<p>Here are some pipeline patterns you&#39;ll use repeatedly:</p>
+<h3 id="find-and-count">Find and Count</h3>
+<pre><code class="language-bash"># How many Python files are in this project?
+find . -name &quot;*.py&quot; | wc -l
+
+# How many unique IP addresses are in the access log?
+awk &#39;{print $1}&#39; access.log | sort -u | wc -l
+</code></pre>
+<h3 id="filter-and-format">Filter and Format</h3>
+<pre><code class="language-bash"># Show only active config values (no comments, no blank lines), sorted
+grep -v &quot;^#&quot; config.txt | grep -v &quot;^$&quot; | sort
+</code></pre>
+<h3 id="extract-and-aggregate">Extract and Aggregate</h3>
+<pre><code class="language-bash"># Find the most common words in a file
+cat document.txt | tr &#39; &#39; &#39;\n&#39; | sort | uniq -c | sort -rn | head -20
+</code></pre>
+<p>This pipeline: converts spaces to newlines (one word per line), sorts them, counts unique occurrences, sorts by count descending, and shows the top 20.</p>
+<h3 id="search-across-multiple-files">Search Across Multiple Files</h3>
+<pre><code class="language-bash"># Find all TODO comments in a project and list by file
+grep -rn &quot;TODO&quot; ~/projects/ | sort -t: -k1,1
+</code></pre>
+<hr>
+<h2 id="try-it-yourself">Try It Yourself</h2>
+<p>First, make sure you&#39;re in the <code>lesson03</code> directory (or wherever your <code>server.log</code> and <code>config.txt</code> files are).</p>
+<ol>
+<li><p>Use a pipe to count how many lines in <code>server.log</code> contain &quot;INFO&quot;: <code>grep &quot;INFO&quot; server.log | wc -l</code></p>
+</li>
+<li><p>Extract all the error and warning lines from <code>server.log</code>, sort them, and save to <code>problems.txt</code>.</p>
+</li>
+<li><p>Show only the configuration keys (not comments, not blank lines) from <code>config.txt</code>, sorted alphabetically. Save the result to <code>active-config.txt</code>.</p>
+</li>
+<li><p>Run <code>ls -la /etc</code> — if the output is too long, pipe it to <code>less</code>.</p>
+</li>
+<li><p>Run a command that produces an error (like <code>ls /nonexistent</code>) and redirect only the error to <code>oops.txt</code>. Verify the file contains the error message.</p>
+</li>
+<li><p>Use <code>echo</code> and <code>&gt;&gt;</code> to create a file with three lines, one command at a time. Verify with <code>cat</code>.</p>
+</li>
+<li><p>Use <code>tee</code> to both display and save the output of <code>grep &quot;ERROR&quot; server.log</code>.</p>
+</li>
+<li><p>Build a pipeline that finds all unique log levels in <code>server.log</code> (the words in square brackets like INFO, ERROR, WARN). Hint: <code>grep -oE &#39;\[.*?\]&#39;</code> or think about how to extract them with <code>cut</code>.</p>
+</li>
+</ol>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ul>
+<li>The pipe <code>|</code> sends the output of one command into the input of the next. This is the backbone of bash&#39;s power.</li>
+<li><code>&gt;</code> writes output to a file (overwriting). <code>&gt;&gt;</code> appends. Never redirect to the same file you&#39;re reading from.</li>
+<li>stderr (<code>2&gt;</code>) and stdout (<code>&gt;</code>) are separate streams. You can redirect them independently.</li>
+<li><code>/dev/null</code> is the black hole — redirect there to discard output.</li>
+<li><code>tee</code> splits output to both the screen and a file. Use it when you need to see and save simultaneously.</li>
+<li>Pipelines let you build complex data transformations from simple commands. Think of each command as a step in an assembly line.</li>
+</ul>
+<hr>
+<p><em>Next up: <a href="05-permissions-and-ownership.md">Lesson 05 — Permissions and Ownership</a></em></p>
+<div class="lesson-complete-wrap">
+  <button type="button" class="lesson-complete-btn" onclick="window.bashLessons.markComplete()">Mark lesson complete</button>
+</div>
+</div>
+      <div id="lesson-05" class="content-panel"><h1 id="lesson-05-permissions-and-ownership">Lesson 05: Permissions and Ownership</h1>
+<p><strong>Time: ~30 minutes</strong></p>
+<hr>
+<h2 id="why-permissions-exist">Why Permissions Exist</h2>
+<p>Every file and directory on your system has rules about who can do what with it. These rules exist for good reason: they prevent you from accidentally deleting system files, they keep other users out of your private data, and they control which programs can execute.</p>
+<p>If you&#39;ve ever seen &quot;Permission denied&quot; in your terminal, this lesson explains why — and how to fix it.</p>
+<hr>
+<h2 id="reading-permissions">Reading Permissions</h2>
+<p>Run <code>ls -la</code> in any directory:</p>
+<pre><code>drwxr-xr-x  5 kevin  staff   160 Jan 15 10:30 projects
+-rw-r--r--  1 kevin  staff   425 Jan 15 09:15 config.txt
+-rwxr-xr-x  1 kevin  staff  1024 Jan 14 14:22 deploy.sh
+</code></pre>
+<p>That first column is the permission string. Let&#39;s break it down using <code>-rw-r--r--</code> as an example:</p>
+<pre><code>-  rw-  r--  r--
+│  │    │    │
+│  │    │    └── Others (everyone else): read only
+│  │    └─────── Group (staff): read only
+│  └──────────── Owner (kevin): read and write
+└─────────────── File type: - = file, d = directory, l = symlink
+</code></pre>
+<h3 id="the-three-permission-types">The Three Permission Types</h3>
+<ul>
+<li><strong>r</strong> (read) — can view the file&#39;s contents, or list a directory&#39;s contents</li>
+<li><strong>w</strong> (write) — can modify the file, or add/remove files in a directory</li>
+<li><strong>x</strong> (execute) — can run the file as a program, or enter/traverse a directory</li>
+</ul>
+<h3 id="the-three-user-classes">The Three User Classes</h3>
+<p>Permissions are set for three groups of people:</p>
+<ul>
+<li><strong>Owner</strong> (u) — the user who owns the file, usually whoever created it</li>
+<li><strong>Group</strong> (g) — a group of users that the file belongs to</li>
+<li><strong>Others</strong> (o) — everyone else on the system</li>
+</ul>
+<h3>Reading the <code>ls -la</code> Output</h3>
+<p>The other columns tell you:</p>
+<pre><code>-rw-r--r--  1  kevin  staff  425  Jan 15 09:15  config.txt
+│           │  │      │      │    │              │
+│           │  │      │      │    │              └── filename
+│           │  │      │      │    └── modification date
+│           │  │      │      └── file size in bytes
+│           │  │      └── group owner
+│           │  └── user owner
+│           └── number of hard links
+└── permissions
+</code></pre>
+<hr>
+<h2 id="directory-permissions">Directory Permissions</h2>
+<p>Permissions work slightly differently for directories:</p>
+<ul>
+<li><strong>r</strong> on a directory means you can list its contents (<code>ls</code>)</li>
+<li><strong>w</strong> on a directory means you can add or remove files inside it</li>
+<li><strong>x</strong> on a directory means you can <code>cd</code> into it and access files within it</li>
+</ul>
+<p>A directory with <code>r--</code> but no <code>x</code> is an odd case: you can see the names of files inside it, but you can&#39;t actually read or access them. You usually want <code>r</code> and <code>x</code> together for directories.</p>
+<hr>
+<h2>Changing Permissions with <code>chmod</code></h2>
+<p>There are two ways to use <code>chmod</code>: symbolic mode (letters) and numeric mode (numbers). Both do the same thing.</p>
+<h3 id="symbolic-mode">Symbolic Mode</h3>
+<p>The format is: <code>chmod [who][operator][permission] file</code></p>
+<p><strong>Who:</strong> <code>u</code> (owner), <code>g</code> (group), <code>o</code> (others), <code>a</code> (all three)
+<strong>Operator:</strong> <code>+</code> (add), <code>-</code> (remove), <code>=</code> (set exactly)
+<strong>Permission:</strong> <code>r</code>, <code>w</code>, <code>x</code></p>
+<pre><code class="language-bash">chmod u+x script.sh        # give the owner execute permission
+chmod g-w config.txt        # remove write permission from the group
+chmod o-rwx private.txt     # remove all permissions from others
+chmod a+r readme.txt        # give everyone read permission
+chmod u=rwx,g=rx,o=r file   # set exact permissions for each class
+</code></pre>
+<h3 id="numeric-octal-mode">Numeric (Octal) Mode</h3>
+<p>Each permission has a numeric value:</p>
+<ul>
+<li>r = 4</li>
+<li>w = 2</li>
+<li>x = 1</li>
+</ul>
+<p>You add these values together for each user class to get a three-digit number:</p>
+<pre><code>rwx = 4+2+1 = 7
+rw- = 4+2+0 = 6
+r-x = 4+0+1 = 5
+r-- = 4+0+0 = 4
+--- = 0+0+0 = 0
+</code></pre>
+<p>So a three-digit number represents owner, group, and others:</p>
+<pre><code class="language-bash">chmod 755 script.sh        # rwxr-xr-x — owner can do everything, others can read/execute
+chmod 644 config.txt       # rw-r--r-- — owner can read/write, others can only read
+chmod 700 private/         # rwx------ — only the owner can access
+chmod 600 secrets.txt      # rw------- — only the owner can read/write
+</code></pre>
+<h3 id="common-permission-patterns">Common Permission Patterns</h3>
+<table>
+<thead>
+<tr>
+<th>Numeric</th>
+<th>Symbolic</th>
+<th>Meaning</th>
+<th>Typical Use</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>755</td>
+<td>rwxr-xr-x</td>
+<td>Owner full, others read/execute</td>
+<td>Scripts, programs, directories</td>
+</tr>
+<tr>
+<td>644</td>
+<td>rw-r--r--</td>
+<td>Owner read/write, others read</td>
+<td>Regular files, configs</td>
+</tr>
+<tr>
+<td>700</td>
+<td>rwx------</td>
+<td>Owner only, full access</td>
+<td>Private directories</td>
+</tr>
+<tr>
+<td>600</td>
+<td>rw-------</td>
+<td>Owner only, read/write</td>
+<td>SSH keys, sensitive files</td>
+</tr>
+<tr>
+<td>666</td>
+<td>rw-rw-rw-</td>
+<td>Everyone read/write</td>
+<td>Rarely a good idea</td>
+</tr>
+<tr>
+<td>777</td>
+<td>rwxrwxrwx</td>
+<td>Everyone everything</td>
+<td>Almost never use this</td>
+</tr>
+</tbody></table>
+<h3 id="making-scripts-executable">Making Scripts Executable</h3>
+<p>This is the most common <code>chmod</code> use case you&#39;ll encounter:</p>
+<pre><code class="language-bash">echo &#39;#!/bin/bash&#39; &gt; myscript.sh
+echo &#39;echo &quot;It works!&quot;&#39; &gt;&gt; myscript.sh
+./myscript.sh                # Permission denied
+chmod +x myscript.sh         # shorthand for chmod a+x
+./myscript.sh                # It works!
+</code></pre>
+<p>When you write <code>chmod +x</code>, it adds execute permission for everyone. This is what you&#39;ll do every time you create a new bash script.</p>
+<h3 id="recursive-permission-changes">Recursive Permission Changes</h3>
+<pre><code class="language-bash">chmod -R 755 projects/      # apply 755 to the directory and everything inside it
+</code></pre>
+<p>Be careful with <code>-R</code>. It applies the same permissions to files and directories, which isn&#39;t always what you want. Files usually don&#39;t need execute permission. A safer approach:</p>
+<pre><code class="language-bash">find projects/ -type d -exec chmod 755 {} \;    # directories get 755
+find projects/ -type f -exec chmod 644 {} \;    # files get 644
+</code></pre>
+<p>Don&#39;t worry about the <code>find -exec</code> syntax yet — we&#39;ll cover it later. Just know this pattern exists for when you need it.</p>
+<hr>
+<h2>Ownership with <code>chown</code></h2>
+<p>Every file has an owner and a group. You can change these with <code>chown</code>:</p>
+<pre><code class="language-bash">chown kevin file.txt           # change the owner to kevin
+chown kevin:staff file.txt     # change owner and group
+chown :staff file.txt          # change only the group
+chown -R kevin:staff projects/ # change recursively
+</code></pre>
+<p>You generally need <code>sudo</code> (superuser privileges) to change ownership:</p>
+<pre><code class="language-bash">sudo chown kevin:staff file.txt
+</code></pre>
+<h3>What Is <code>sudo</code>?</h3>
+<p><code>sudo</code> means &quot;superuser do.&quot; It runs a single command with administrator privileges. The system will ask for your password.</p>
+<pre><code class="language-bash">sudo ls /root                  # view a protected directory
+sudo chmod 644 /etc/somefile   # change permissions on a system file
+</code></pre>
+<p>Use <code>sudo</code> only when necessary. If a command works without it, don&#39;t add it. Running everything as superuser is a bad habit that can lead to accidentally modifying system files.</p>
+<hr>
+<h2 id="understanding-quotpermission-deniedquot">Understanding &quot;Permission Denied&quot;</h2>
+<p>When you see this error, work through this checklist:</p>
+<ol>
+<li><strong>Check the permissions:</strong> <code>ls -la file.txt</code> — do you have the permission you need?</li>
+<li><strong>Check the owner:</strong> Is the file owned by you? If not, do you have group or other permissions?</li>
+<li><strong>Check the parent directory:</strong> Do you have <code>x</code> permission on every directory in the path?</li>
+<li><strong>Try the fix:</strong><ul>
+<li>Need to read a file? <code>chmod u+r file.txt</code></li>
+<li>Need to run a script? <code>chmod u+x script.sh</code></li>
+<li>Need to write to a directory? <code>chmod u+w directory/</code></li>
+<li>File owned by root? <code>sudo</code> may be needed.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2>The <code>umask</code> — Default Permissions</h2>
+<p>When you create a new file or directory, it gets default permissions. The <code>umask</code> controls what those defaults are.</p>
+<pre><code class="language-bash">umask           # shows current umask (usually 022)
+</code></pre>
+<p>The umask is <em>subtracted</em> from the maximum permissions:</p>
+<ul>
+<li>Files max: 666 (rw-rw-rw-) — files don&#39;t get execute by default</li>
+<li>Directories max: 777 (rwxrwxrwx)</li>
+</ul>
+<p>With a umask of 022:</p>
+<ul>
+<li>New files: 666 - 022 = 644 (rw-r--r--)</li>
+<li>New directories: 777 - 022 = 755 (rwxr-xr-x)</li>
+</ul>
+<p>You rarely need to change the umask, but understanding it explains why your files get the permissions they do.</p>
+<hr>
+<h2 id="special-permissions-brief-overview">Special Permissions (Brief Overview)</h2>
+<p>You&#39;ll occasionally encounter these. You don&#39;t need to memorise them now, but knowing they exist helps when you see unfamiliar permission strings.</p>
+<p><strong>Setuid (s in owner execute):</strong> When a setuid program runs, it executes with the permissions of the file&#39;s owner, not the person running it. <code>passwd</code> uses this to modify system files.</p>
+<p><strong>Setgid (s in group execute):</strong> Similar to setuid but for the group. On directories, new files inherit the directory&#39;s group.</p>
+<p><strong>Sticky bit (t in others execute):</strong> On directories, prevents users from deleting files they don&#39;t own. The <code>/tmp</code> directory uses this — everyone can create files there, but only the owner can delete their own.</p>
+<pre><code>-rwsr-xr-x   ← setuid (note the s in owner execute)
+drwxrwsr-x   ← setgid on a directory
+drwxrwxrwt   ← sticky bit (note the t)
+</code></pre>
+<hr>
+<h2 id="try-it-yourself">Try It Yourself</h2>
+<pre><code class="language-bash">cd ~/bash-lessons
+mkdir -p lesson05
+cd lesson05
+</code></pre>
+<ol>
+<li><p>Create a file called <code>public.txt</code> with some content. Set its permissions so everyone can read it but only you can write to it. Verify with <code>ls -la</code>.</p>
+</li>
+<li><p>Create a script called <code>hello.sh</code> that contains <code>#!/bin/bash</code> and <code>echo &quot;Hello!&quot;</code>. Try to run it with <code>./hello.sh</code>. Fix the permission error and run it again.</p>
+</li>
+<li><p>Create a directory called <code>private</code>. Set its permissions to 700. Verify that <code>ls -la</code> shows <code>rwx------</code>.</p>
+</li>
+<li><p>Create a file called <code>readonly.txt</code>. Remove your own write permission with <code>chmod u-w readonly.txt</code>. Try to append to it with <code>echo &quot;test&quot; &gt;&gt; readonly.txt</code>. What happens? Restore write permission.</p>
+</li>
+<li><p>Check the permissions on <code>/etc/passwd</code> and <code>/etc/shadow</code> using <code>ls -la</code>. Notice the difference — one is world-readable, the other is not. This is by design.</p>
+</li>
+<li><p>Run <code>umask</code> to see your current default. Create a new file and directory and verify their permissions match what you&#39;d expect from the umask.</p>
+</li>
+</ol>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ul>
+<li>Every file has three sets of permissions (owner, group, others) with three types each (read, write, execute).</li>
+<li><code>chmod</code> changes permissions. Use symbolic mode (<code>chmod u+x</code>) for quick changes, numeric mode (<code>chmod 755</code>) when you want to set everything at once.</li>
+<li><code>chmod +x script.sh</code> is what you&#39;ll use most often — making scripts executable.</li>
+<li><code>chown</code> changes ownership. Usually requires <code>sudo</code>.</li>
+<li>&quot;Permission denied&quot; means you lack a specific permission. Check with <code>ls -la</code> and fix with <code>chmod</code>.</li>
+<li>Use <code>sudo</code> sparingly and intentionally. Don&#39;t make it a habit.</li>
+<li>755 for directories and scripts, 644 for regular files, 600 for sensitive files — these three patterns cover most situations.</li>
+</ul>
+<hr>
+<p><em>Next up: <a href="06-your-first-bash-script.md">Lesson 06 — Your First Bash Script</a></em></p>
+<div class="lesson-complete-wrap">
+  <button type="button" class="lesson-complete-btn" onclick="window.bashLessons.markComplete()">Mark lesson complete</button>
+</div>
+</div>
+      <div id="lesson-06" class="content-panel"><h1 id="lesson-06-your-first-bash-script">Lesson 06: Your First Bash Script</h1>
+<p><strong>Time: ~30 minutes</strong></p>
+<hr>
+<h2 id="from-commands-to-scripts">From Commands to Scripts</h2>
+<p>Up to now, you&#39;ve been typing commands one at a time. That&#39;s fine for quick tasks, but as soon as you find yourself running the same sequence of commands more than twice, it&#39;s time to put them in a script.</p>
+<p>A bash script is just a text file containing commands. When you run it, bash executes each line in order — exactly as if you&#39;d typed them yourself. That&#39;s all a script is. No compilation, no special tooling. Write it, make it executable, run it.</p>
+<hr>
+<h2 id="anatomy-of-a-script">Anatomy of a Script</h2>
+<p>Create your first script:</p>
+<pre><code class="language-bash">cd ~/bash-lessons
+mkdir -p lesson06
+cd lesson06
+</code></pre>
+<p>Open a new file in your editor:</p>
+<pre><code class="language-bash">nano greet.sh
+</code></pre>
+<p>Type this:</p>
+<pre><code class="language-bash">#!/bin/bash
+
+# A simple greeting script
+echo &quot;Hello! Today is $(date &#39;+%A, %B %d, %Y&#39;).&quot;
+echo &quot;You are logged in as: $USER&quot;
+echo &quot;Your current directory is: $PWD&quot;
+</code></pre>
+<p>Save and exit (<code>Ctrl + O</code>, then <code>Ctrl + X</code> in nano).</p>
+<p>Now make it executable and run it:</p>
+<pre><code class="language-bash">chmod +x greet.sh
+./greet.sh
+</code></pre>
+<p>Let&#39;s break down what&#39;s happening.</p>
+<h3 id="the-shebang-line">The Shebang Line</h3>
+<pre><code class="language-bash">#!/bin/bash
+</code></pre>
+<p>The first line of every bash script. The <code>#!</code> (called a &quot;shebang&quot; or &quot;hashbang&quot;) tells the system which interpreter to use. <code>/bin/bash</code> means &quot;run this file using bash.&quot; Without this line, the system might try to interpret your script with a different shell.</p>
+<p>Some systems have bash at <code>/usr/bin/bash</code>. A more portable alternative is:</p>
+<pre><code class="language-bash">#!/usr/bin/env bash
+</code></pre>
+<p>This finds bash wherever it&#39;s installed. Use either one — both work. Just pick one and be consistent.</p>
+<h3 id="comments">Comments</h3>
+<pre><code class="language-bash"># This is a comment
+</code></pre>
+<p>Lines starting with <code>#</code> (other than the shebang) are comments. Bash ignores them. Write comments to explain <em>why</em> you&#39;re doing something, not <em>what</em> you&#39;re doing — the code already shows the what.</p>
+<h3 id="running-the-script">Running the Script</h3>
+<p>The <code>./</code> prefix tells bash to look for the script in the current directory. Without it, bash searches your PATH (a list of standard directories) and won&#39;t find your script.</p>
+<p>Alternatively, you can run a script without making it executable:</p>
+<pre><code class="language-bash">bash greet.sh
+</code></pre>
+<p>This explicitly tells bash to interpret the file. It works, but making scripts executable with <code>chmod +x</code> is the standard practice.</p>
+<hr>
+<h2 id="variables">Variables</h2>
+<p>Variables store values. In bash, you create them with <code>=</code> and access them with <code>$</code>.</p>
+<pre><code class="language-bash">#!/bin/bash
+
+name=&quot;Kevin&quot;
+project=&quot;Project 412&quot;
+count=42
+
+echo &quot;Name: $name&quot;
+echo &quot;Project: $project&quot;
+echo &quot;Count: $count&quot;
+</code></pre>
+<h3 id="critical-rules-for-variables">Critical Rules for Variables</h3>
+<p><strong>No spaces around the <code>=</code> sign.</strong> This is the number one mistake beginners make.</p>
+<pre><code class="language-bash">name=&quot;Kevin&quot;       # correct
+name = &quot;Kevin&quot;     # WRONG — bash thinks &quot;name&quot; is a command with arguments &quot;=&quot; and &quot;Kevin&quot;
+</code></pre>
+<p><strong>Use quotes when the value contains spaces:</strong></p>
+<pre><code class="language-bash">greeting=&quot;Hello World&quot;     # correct
+greeting=Hello World       # WRONG — &quot;World&quot; becomes a separate command
+</code></pre>
+<p><strong>Use <code>$</code> to read a variable, nothing to set it:</strong></p>
+<pre><code class="language-bash">city=&quot;Perth&quot;          # setting — no $
+echo &quot;$city&quot;          # reading — use $
+echo &quot;I live in $city&quot;
+</code></pre>
+<h3 id="curly-braces-for-clarity">Curly Braces for Clarity</h3>
+<p>When a variable name could be ambiguous, use <code>${variable}</code>:</p>
+<pre><code class="language-bash">file=&quot;report&quot;
+echo &quot;${file}_final.txt&quot;    # report_final.txt
+echo &quot;$file_final.txt&quot;      # WRONG — looks for variable named &quot;file_final&quot;
+</code></pre>
+<p>The curly braces tell bash exactly where the variable name ends.</p>
+<h3 id="variable-naming-conventions">Variable Naming Conventions</h3>
+<ul>
+<li>Use lowercase for local variables in scripts: <code>filename</code>, <code>count</code>, <code>output_dir</code></li>
+<li>Use UPPERCASE for environment variables and constants: <code>PATH</code>, <code>HOME</code>, <code>MAX_RETRIES</code></li>
+<li>Use underscores to separate words: <code>log_file</code>, not <code>logfile</code> or <code>logFile</code></li>
+</ul>
+<hr>
+<h2 id="environment-variables">Environment Variables</h2>
+<p>Some variables are already set by the system. These are called environment variables:</p>
+<pre><code class="language-bash">echo &quot;$HOME&quot;        # your home directory
+echo &quot;$USER&quot;        # your username
+echo &quot;$PATH&quot;        # directories bash searches for commands
+echo &quot;$SHELL&quot;       # your default shell
+echo &quot;$PWD&quot;         # current working directory
+echo &quot;$HOSTNAME&quot;    # your computer&#39;s name
+</code></pre>
+<p>You can create your own environment variables with <code>export</code>:</p>
+<pre><code class="language-bash">export API_KEY=&quot;sk-abc123&quot;
+</code></pre>
+<p>The <code>export</code> keyword makes the variable available to child processes — programs you launch from this shell. Without <code>export</code>, the variable only exists in the current shell.</p>
+<hr>
+<h2 id="command-substitution">Command Substitution</h2>
+<p>You can capture the output of a command and use it as a value:</p>
+<pre><code class="language-bash">current_date=$(date &#39;+%Y-%m-%d&#39;)
+file_count=$(ls | wc -l)
+my_ip=$(curl -s ifconfig.me)
+
+echo &quot;Date: $current_date&quot;
+echo &quot;Files in current directory: $file_count&quot;
+echo &quot;My IP: $my_ip&quot;
+</code></pre>
+<p>The <code>$(command)</code> syntax runs the command and substitutes its output. You&#39;ll see an older syntax using backticks <code>`command`</code> — it does the same thing but is harder to read and can&#39;t be nested. Use <code>$()</code>.</p>
+<hr>
+<h2 id="reading-user-input">Reading User Input</h2>
+<p>The <code>read</code> command waits for the user to type something:</p>
+<pre><code class="language-bash">#!/bin/bash
+
+echo &quot;What is your name?&quot;
+read name
+echo &quot;Hello, $name!&quot;
+</code></pre>
+<h3><code>read</code> with a Prompt</h3>
+<pre><code class="language-bash">read -p &quot;Enter your name: &quot; name
+echo &quot;Hello, $name!&quot;
+</code></pre>
+<p>The <code>-p</code> flag displays a prompt on the same line.</p>
+<h3><code>read</code> with a Default Value</h3>
+<pre><code class="language-bash">read -p &quot;Enter port (default 8080): &quot; port
+port=${port:-8080}
+echo &quot;Using port: $port&quot;
+</code></pre>
+<p>The <code>${variable:-default}</code> syntax means &quot;use the variable&#39;s value, but if it&#39;s empty, use this default instead.&quot; This is one of the most useful patterns in bash scripting.</p>
+<h3 id="reading-sensitive-input">Reading Sensitive Input</h3>
+<pre><code class="language-bash">read -sp &quot;Enter password: &quot; password
+echo    # print a newline since -s suppresses it
+echo &quot;Password is ${#password} characters long.&quot;
+</code></pre>
+<p>The <code>-s</code> flag hides what the user types (for passwords). <code>${#variable}</code> gives the length of a string.</p>
+<hr>
+<h2 id="script-arguments">Script Arguments</h2>
+<p>Instead of asking for input interactively, you can pass arguments when running the script:</p>
+<pre><code class="language-bash">./myscript.sh arg1 arg2 arg3
+</code></pre>
+<p>Inside the script, these are accessed with special variables:</p>
+<pre><code class="language-bash">#!/bin/bash
+
+echo &quot;Script name: $0&quot;
+echo &quot;First argument: $1&quot;
+echo &quot;Second argument: $2&quot;
+echo &quot;All arguments: $@&quot;
+echo &quot;Number of arguments: $#&quot;
+</code></pre>
+<p>Save this as <code>args.sh</code>, make it executable, and try:</p>
+<pre><code class="language-bash">./args.sh hello world
+</code></pre>
+<h3 id="a-practical-example">A Practical Example</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+# backup.sh — create a timestamped backup of a file
+# Usage: ./backup.sh filename
+
+if [ $# -eq 0 ]; then
+    echo &quot;Usage: $0 filename&quot;
+    echo &quot;Creates a timestamped backup of the specified file.&quot;
+    exit 1
+fi
+
+source_file=&quot;$1&quot;
+timestamp=$(date &#39;+%Y%m%d_%H%M%S&#39;)
+backup_file=&quot;${source_file}.backup_${timestamp}&quot;
+
+cp &quot;$source_file&quot; &quot;$backup_file&quot;
+echo &quot;Backed up: $source_file → $backup_file&quot;
+</code></pre>
+<p>Don&#39;t worry about the <code>if</code> statement — that&#39;s next lesson. Just note the pattern: check that arguments were provided, use them as variables, do the work.</p>
+<hr>
+<h2 id="quoting-singles-doubles-and-none">Quoting: Singles, Doubles, and None</h2>
+<p>Quoting in bash is a source of subtle bugs. Here are the rules:</p>
+<h3 id="double-quotes-variable-expansion">Double Quotes — Variable Expansion</h3>
+<pre><code class="language-bash">name=&quot;Kevin&quot;
+echo &quot;Hello, $name&quot;       # Hello, Kevin — variables are expanded
+echo &quot;Path is $HOME&quot;      # Path is /Users/kevin
+echo &quot;Date: $(date)&quot;      # Date: Thu Jan 15... — command substitution works
+</code></pre>
+<p>Double quotes preserve spaces and expand variables. <strong>Use double quotes around variables as a default habit:</strong></p>
+<pre><code class="language-bash">filename=&quot;my file.txt&quot;
+cat &quot;$filename&quot;            # correct — treats &quot;my file.txt&quot; as one argument
+cat $filename              # WRONG — bash sees two arguments: &quot;my&quot; and &quot;file.txt&quot;
+</code></pre>
+<h3 id="single-quotes-literal-text">Single Quotes — Literal Text</h3>
+<pre><code class="language-bash">echo &#39;Hello, $name&#39;       # Hello, $name — the literal text, no expansion
+echo &#39;Cost is $5.00&#39;      # Cost is $5.00 — useful when you want literal dollar signs
+</code></pre>
+<p>Single quotes prevent all expansion. What you type is exactly what you get.</p>
+<h3 id="no-quotes-word-splitting">No Quotes — Word Splitting</h3>
+<pre><code class="language-bash">files=&quot;file1.txt file2.txt&quot;
+ls $files                  # works — bash splits into two arguments
+ls &quot;$files&quot;                # fails — bash treats the whole string as one filename
+</code></pre>
+<p>Without quotes, bash splits on whitespace and expands wildcards. This is sometimes useful but usually a source of bugs. The safe default is to <strong>always quote your variables</strong> unless you specifically want word splitting.</p>
+<hr>
+<h2 id="exit-codes">Exit Codes</h2>
+<p>Every command returns a number when it finishes: 0 means success, anything else means failure.</p>
+<pre><code class="language-bash">ls /tmp
+echo $?        # 0 — success
+
+ls /nonexistent
+echo $?        # 2 (or non-zero) — failure
+</code></pre>
+<p>The <code>$?</code> variable holds the exit code of the last command. You can set your own in scripts:</p>
+<pre><code class="language-bash">#!/bin/bash
+
+if [ -f &quot;$1&quot; ]; then
+    echo &quot;File exists.&quot;
+    exit 0
+else
+    echo &quot;File not found.&quot;
+    exit 1
+fi
+</code></pre>
+<p>Exit codes matter because they let other tools and scripts check whether your script succeeded.</p>
+<hr>
+<h2 id="try-it-yourself">Try It Yourself</h2>
+<ol>
+<li><p>Create a script called <code>sysinfo.sh</code> that prints:</p>
+<ul>
+<li>Your username</li>
+<li>Your home directory</li>
+<li>The current date and time</li>
+<li>The number of files in your home directory
+Make it executable and run it.</li>
+</ul>
+</li>
+<li><p>Create a script called <code>greet.sh</code> that takes a name as an argument and prints &quot;Hello, [name]! Welcome.&quot; If no name is given, print a usage message and exit with code 1.</p>
+</li>
+<li><p>Create a script called <code>mkproject.sh</code> that:</p>
+<ul>
+<li>Takes a project name as an argument</li>
+<li>Creates a directory with that name</li>
+<li>Creates <code>README.md</code>, <code>notes.txt</code>, and a <code>src/</code> subdirectory inside it</li>
+<li>Prints a confirmation message</li>
+</ul>
+</li>
+<li><p>Create a script that uses <code>read -p</code> to ask for a city name, then prints &quot;You chose [city]!&quot; Use a default of &quot;Perth&quot; if nothing is entered.</p>
+</li>
+<li><p>Experiment with quoting. Create a variable containing a filename with spaces. Try accessing it with and without double quotes to see the difference.</p>
+</li>
+</ol>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ul>
+<li>A bash script is a text file with a <code>#!/bin/bash</code> shebang, made executable with <code>chmod +x</code>.</li>
+<li>Variables are set with <code>name=value</code> (no spaces!) and read with <code>$name</code>.</li>
+<li>Always quote your variables: <code>&quot;$variable&quot;</code>. This prevents word-splitting bugs.</li>
+<li><code>$(command)</code> captures command output. Use it to store dates, counts, or any dynamic value.</li>
+<li><code>$1</code>, <code>$2</code>, etc. are script arguments. <code>$#</code> is the argument count. <code>$@</code> is all arguments.</li>
+<li><code>read -p</code> gets user input. <code>${var:-default}</code> provides fallback values.</li>
+<li>Exit codes (<code>exit 0</code> for success, <code>exit 1</code> for failure) let other tools know if your script worked.</li>
+</ul>
+<hr>
+<p><em>Next up: <a href="07-conditionals-and-logic.md">Lesson 07 — Conditionals and Logic</a></em></p>
+<div class="lesson-complete-wrap">
+  <button type="button" class="lesson-complete-btn" onclick="window.bashLessons.markComplete()">Mark lesson complete</button>
+</div>
+</div>
+      <div id="lesson-07" class="content-panel"><h1 id="lesson-07-conditionals-and-logic">Lesson 07: Conditionals and Logic</h1>
+<p><strong>Time: ~30 minutes</strong></p>
+<hr>
+<h2 id="making-decisions">Making Decisions</h2>
+<p>So far, your scripts have been straight-line sequences: do this, then this, then this. Real scripts need to make decisions. Does a file exist before trying to read it? Did a command succeed or fail? Did the user provide the right number of arguments?</p>
+<p>This lesson teaches you how to branch — how to make your scripts do different things based on conditions.</p>
+<hr>
+<h2>The <code>if</code> Statement</h2>
+<p>The basic structure:</p>
+<pre><code class="language-bash">if [ condition ]; then
+    # commands to run if condition is true
+fi
+</code></pre>
+<p>A concrete example:</p>
+<pre><code class="language-bash">#!/bin/bash
+
+if [ -f &quot;config.txt&quot; ]; then
+    echo &quot;Config file found.&quot;
+fi
+</code></pre>
+<p>The <code>-f</code> test checks whether a file exists and is a regular file. The <code>[ ... ]</code> is actually a command (an alias for the <code>test</code> command), and the spaces inside the brackets are mandatory.</p>
+<h3><code>if</code>/<code>else</code></h3>
+<pre><code class="language-bash">if [ -f &quot;config.txt&quot; ]; then
+    echo &quot;Loading configuration...&quot;
+    source config.txt
+else
+    echo &quot;No config file found. Using defaults.&quot;
+fi
+</code></pre>
+<h3><code>if</code>/<code>elif</code>/<code>else</code></h3>
+<pre><code class="language-bash">if [ &quot;$1&quot; = &quot;start&quot; ]; then
+    echo &quot;Starting service...&quot;
+elif [ &quot;$1&quot; = &quot;stop&quot; ]; then
+    echo &quot;Stopping service...&quot;
+elif [ &quot;$1&quot; = &quot;status&quot; ]; then
+    echo &quot;Checking status...&quot;
+else
+    echo &quot;Usage: $0 {start|stop|status}&quot;
+    exit 1
+fi
+</code></pre>
+<p>Note: <code>elif</code> is bash&#39;s &quot;else if.&quot; You can chain as many as you need.</p>
+<hr>
+<h2 id="test-expressions">Test Expressions</h2>
+<p>The <code>[ ... ]</code> brackets support many different tests. Here are the ones you&#39;ll use constantly.</p>
+<h3 id="file-tests">File Tests</h3>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>True when...</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-f file</code></td>
+<td>File exists and is a regular file</td>
+</tr>
+<tr>
+<td><code>-d dir</code></td>
+<td>Directory exists</td>
+</tr>
+<tr>
+<td><code>-e path</code></td>
+<td>Path exists (file or directory)</td>
+</tr>
+<tr>
+<td><code>-r file</code></td>
+<td>File is readable</td>
+</tr>
+<tr>
+<td><code>-w file</code></td>
+<td>File is writable</td>
+</tr>
+<tr>
+<td><code>-x file</code></td>
+<td>File is executable</td>
+</tr>
+<tr>
+<td><code>-s file</code></td>
+<td>File exists and is not empty</td>
+</tr>
+<tr>
+<td><code>-L file</code></td>
+<td>File is a symbolic link</td>
+</tr>
+</tbody></table>
+<pre><code class="language-bash">if [ -d &quot;$HOME/projects&quot; ]; then
+    echo &quot;Projects directory exists.&quot;
+fi
+
+if [ ! -f &quot;output.log&quot; ]; then
+    echo &quot;No log file yet.&quot;
+fi
+</code></pre>
+<p>The <code>!</code> negates a test — &quot;if NOT.&quot;</p>
+<h3 id="string-comparisons">String Comparisons</h3>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>True when...</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&quot;$a&quot; = &quot;$b&quot;</code></td>
+<td>Strings are equal</td>
+</tr>
+<tr>
+<td><code>&quot;$a&quot; != &quot;$b&quot;</code></td>
+<td>Strings are not equal</td>
+</tr>
+<tr>
+<td><code>-z &quot;$a&quot;</code></td>
+<td>String is empty (zero length)</td>
+</tr>
+<tr>
+<td><code>-n &quot;$a&quot;</code></td>
+<td>String is not empty</td>
+</tr>
+</tbody></table>
+<pre><code class="language-bash">if [ &quot;$USER&quot; = &quot;root&quot; ]; then
+    echo &quot;Running as root — be careful!&quot;
+fi
+
+if [ -z &quot;$1&quot; ]; then
+    echo &quot;No argument provided.&quot;
+    exit 1
+fi
+</code></pre>
+<p>Always quote your variables inside <code>[ ... ]</code>. Without quotes, an empty variable causes a syntax error:</p>
+<pre><code class="language-bash">name=&quot;&quot;
+[ $name = &quot;Kevin&quot; ]    # ERROR: [ = &quot;Kevin&quot; ] — bash is confused
+[ &quot;$name&quot; = &quot;Kevin&quot; ]  # Works fine: [ &quot;&quot; = &quot;Kevin&quot; ] — evaluates to false
+</code></pre>
+<h3 id="numeric-comparisons">Numeric Comparisons</h3>
+<p>Numbers use different operators than strings:</p>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>$a -eq $b</code></td>
+<td>Equal</td>
+</tr>
+<tr>
+<td><code>$a -ne $b</code></td>
+<td>Not equal</td>
+</tr>
+<tr>
+<td><code>$a -lt $b</code></td>
+<td>Less than</td>
+</tr>
+<tr>
+<td><code>$a -le $b</code></td>
+<td>Less than or equal</td>
+</tr>
+<tr>
+<td><code>$a -gt $b</code></td>
+<td>Greater than</td>
+</tr>
+<tr>
+<td><code>$a -ge $b</code></td>
+<td>Greater than or equal</td>
+</tr>
+</tbody></table>
+<pre><code class="language-bash">count=$(ls | wc -l)
+
+if [ &quot;$count&quot; -gt 100 ]; then
+    echo &quot;That&#39;s a lot of files: $count&quot;
+elif [ &quot;$count&quot; -gt 10 ]; then
+    echo &quot;Moderate number of files: $count&quot;
+else
+    echo &quot;Just a few files: $count&quot;
+fi
+</code></pre>
+<p>Why <code>-eq</code> instead of <code>=</code>? Because <code>=</code> does string comparison. The string &quot;10&quot; comes before &quot;9&quot; alphabetically, but numerically 10 is greater than 9. The <code>-eq</code> family does proper number comparison.</p>
+<hr>
+<h2>Double Brackets: <code>[[ ... ]]</code></h2>
+<p>Bash has an improved test syntax with double brackets. It&#39;s more forgiving and supports more features:</p>
+<pre><code class="language-bash">if [[ &quot;$name&quot; = &quot;Kevin&quot; ]]; then
+    echo &quot;Hello Kevin&quot;
+fi
+</code></pre>
+<h3>Advantages of <code>[[ ... ]]</code></h3>
+<p><strong>Pattern matching:</strong></p>
+<pre><code class="language-bash">if [[ &quot;$filename&quot; == *.txt ]]; then
+    echo &quot;It&#39;s a text file.&quot;
+fi
+</code></pre>
+<p><strong>Regex matching:</strong></p>
+<pre><code class="language-bash">if [[ &quot;$email&quot; =~ ^[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]+$ ]]; then
+    echo &quot;Looks like a valid email.&quot;
+fi
+</code></pre>
+<p><strong>No word-splitting issues:</strong></p>
+<pre><code class="language-bash">name=&quot;&quot;
+if [[ $name = &quot;Kevin&quot; ]]; then    # works even without quotes
+    echo &quot;Hi&quot;
+fi
+</code></pre>
+<p><strong>Logical operators inside the brackets:</strong></p>
+<pre><code class="language-bash">if [[ &quot;$age&quot; -ge 18 &amp;&amp; &quot;$age&quot; -le 65 ]]; then
+    echo &quot;Working age.&quot;
+fi
+</code></pre>
+<p>As a rule: use <code>[[ ... ]]</code> in bash scripts. Use <code>[ ... ]</code> only when you need strict POSIX compatibility (which is rare in practice).</p>
+<hr>
+<h2 id="logical-operators">Logical Operators</h2>
+<h3>Inside <code>[[ ... ]]</code></h3>
+<pre><code class="language-bash">if [[ &quot;$a&quot; -gt 0 &amp;&amp; &quot;$a&quot; -lt 100 ]]; then     # AND
+    echo &quot;Between 1 and 99&quot;
+fi
+
+if [[ &quot;$day&quot; = &quot;Saturday&quot; || &quot;$day&quot; = &quot;Sunday&quot; ]]; then   # OR
+    echo &quot;Weekend!&quot;
+fi
+
+if [[ ! -f &quot;lock.file&quot; ]]; then                # NOT
+    echo &quot;No lock file — safe to proceed.&quot;
+fi
+</code></pre>
+<h3>Combining <code>[ ... ]</code> with External Operators</h3>
+<p>With single brackets, you can&#39;t use <code>&amp;&amp;</code> and <code>||</code> inside. Use <code>-a</code> and <code>-o</code> instead, or combine multiple bracket expressions:</p>
+<pre><code class="language-bash"># These two are equivalent:
+if [ &quot;$a&quot; -gt 0 ] &amp;&amp; [ &quot;$a&quot; -lt 100 ]; then
+    echo &quot;In range&quot;
+fi
+
+# -a and -o work inside single brackets but are considered outdated:
+if [ &quot;$a&quot; -gt 0 -a &quot;$a&quot; -lt 100 ]; then
+    echo &quot;In range&quot;
+fi
+</code></pre>
+<p>Another reason to prefer <code>[[ ... ]]</code>.</p>
+<hr>
+<h2 id="short-circuit-evaluation">Short-Circuit Evaluation</h2>
+<p><code>&amp;&amp;</code> and <code>||</code> can be used outside of <code>if</code> statements for quick conditional execution:</p>
+<pre><code class="language-bash"># Run the second command only if the first succeeds
+mkdir -p backups &amp;&amp; echo &quot;Backup directory ready.&quot;
+
+# Run the second command only if the first fails
+[ -f &quot;config.txt&quot; ] || echo &quot;Warning: config not found!&quot;
+
+# A common pattern for validation
+[ -z &quot;$1&quot; ] &amp;&amp; echo &quot;Usage: $0 filename&quot; &amp;&amp; exit 1
+</code></pre>
+<p>This is useful for one-liners but can get hard to read for complex logic. Use proper <code>if</code> statements when clarity matters.</p>
+<hr>
+<h2>The <code>case</code> Statement</h2>
+<p>When you&#39;re comparing one variable against many possible values, <code>case</code> is cleaner than a chain of <code>elif</code>:</p>
+<pre><code class="language-bash">#!/bin/bash
+
+case &quot;$1&quot; in
+    start)
+        echo &quot;Starting the service...&quot;
+        ;;
+    stop)
+        echo &quot;Stopping the service...&quot;
+        ;;
+    restart)
+        echo &quot;Restarting...&quot;
+        ;;
+    status)
+        echo &quot;Service is running.&quot;
+        ;;
+    *)
+        echo &quot;Usage: $0 {start|stop|restart|status}&quot;
+        exit 1
+        ;;
+esac
+</code></pre>
+<p>Each pattern ends with <code>)</code>. Each block ends with <code>;;</code>. The <code>*</code> pattern matches anything not matched above — it&#39;s the default case. The whole thing ends with <code>esac</code> (&quot;case&quot; backwards).</p>
+<h3>Pattern Matching in <code>case</code></h3>
+<pre><code class="language-bash">case &quot;$filename&quot; in
+    *.txt)
+        echo &quot;Text file&quot;
+        ;;
+    *.jpg|*.png|*.gif)
+        echo &quot;Image file&quot;
+        ;;
+    *.sh)
+        echo &quot;Shell script&quot;
+        ;;
+    *)
+        echo &quot;Unknown type&quot;
+        ;;
+esac
+</code></pre>
+<p>The <code>|</code> lets you match multiple patterns for the same block.</p>
+<hr>
+<h2>Arithmetic with <code>(( ... ))</code></h2>
+<p>For numeric operations and comparisons, double parentheses give you a more natural syntax:</p>
+<pre><code class="language-bash">x=10
+y=3
+
+if (( x &gt; y )); then
+    echo &quot;$x is greater than $y&quot;
+fi
+
+if (( x % 2 == 0 )); then
+    echo &quot;$x is even&quot;
+fi
+
+(( count++ ))           # increment
+(( total = x + y ))     # arithmetic assignment
+echo &quot;$total&quot;           # 13
+</code></pre>
+<p>Inside <code>(( ... ))</code>, you don&#39;t need <code>$</code> before variable names (though it still works). You can use familiar operators: <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>==</code>, <code>!=</code>, <code>%</code>, <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>.</p>
+<hr>
+<h2 id="putting-it-together-a-practical-script">Putting It Together: A Practical Script</h2>
+<pre><code class="language-bash">#!/bin/bash
+
+# deploy.sh — a simple deployment checker
+# Usage: ./deploy.sh [environment]
+
+environment=&quot;${1:-staging}&quot;
+
+echo &quot;=== Deployment Check for: $environment ===&quot;
+
+# Validate environment
+case &quot;$environment&quot; in
+    staging|production|development)
+        echo &quot;Environment: $environment — valid.&quot;
+        ;;
+    *)
+        echo &quot;Error: Unknown environment &#39;$environment&#39;.&quot;
+        echo &quot;Valid options: staging, production, development&quot;
+        exit 1
+        ;;
+esac
+
+# Check prerequisites
+if [[ ! -f &quot;app.conf&quot; ]]; then
+    echo &quot;Error: app.conf not found. Cannot deploy.&quot;
+    exit 1
+fi
+
+if [[ &quot;$environment&quot; = &quot;production&quot; ]]; then
+    read -p &quot;You&#39;re deploying to PRODUCTION. Are you sure? (yes/no): &quot; confirm
+    if [[ &quot;$confirm&quot; != &quot;yes&quot; ]]; then
+        echo &quot;Deployment cancelled.&quot;
+        exit 0
+    fi
+fi
+
+echo &quot;All checks passed. Ready to deploy to $environment.&quot;
+</code></pre>
+<hr>
+<h2 id="try-it-yourself">Try It Yourself</h2>
+<ol>
+<li><p>Write a script called <code>filecheck.sh</code> that takes a filename as an argument and reports whether it exists, whether it&#39;s a file or directory, and whether it&#39;s readable, writable, and executable.</p>
+</li>
+<li><p>Write a script called <code>age.sh</code> that asks the user for their age and responds differently based on the value (under 18, 18-65, over 65). Handle non-numeric input gracefully.</p>
+</li>
+<li><p>Write a script called <code>extension.sh</code> that takes a filename as an argument and uses a <code>case</code> statement to print what type of file it is based on the extension (.txt, .sh, .py, .jpg, etc.).</p>
+</li>
+<li><p>Write a script that checks if a command-line tool is installed (like <code>git</code>, <code>python3</code>, or <code>docker</code>) using <code>command -v toolname</code> and reports whether it&#39;s available or not.</p>
+</li>
+<li><p>Modify one of your earlier scripts to validate its arguments properly — check that the right number of arguments were given and that any files referenced actually exist.</p>
+</li>
+</ol>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ul>
+<li><code>if [ condition ]; then ... fi</code> is the basic branching structure. Add <code>elif</code> and <code>else</code> as needed.</li>
+<li>Use <code>[[ ... ]]</code> in bash scripts — it&#39;s safer and more powerful than <code>[ ... ]</code>.</li>
+<li>File tests (<code>-f</code>, <code>-d</code>, <code>-e</code>, <code>-r</code>, <code>-w</code>, <code>-x</code>) are how you check the filesystem.</li>
+<li>String comparison uses <code>=</code> and <code>!=</code>. Numeric comparison uses <code>-eq</code>, <code>-ne</code>, <code>-lt</code>, <code>-gt</code>, etc.</li>
+<li>Always quote variables inside tests: <code>[[ &quot;$var&quot; = &quot;value&quot; ]]</code>.</li>
+<li><code>case</code> statements are cleaner than long <code>elif</code> chains when matching one variable against many values.</li>
+<li><code>(( ... ))</code> gives you natural arithmetic syntax.</li>
+<li><code>&amp;&amp;</code> and <code>||</code> let you do quick conditional execution without a full <code>if</code> statement.</li>
+</ul>
+<hr>
+<p><em>Next up: <a href="08-loops-and-iteration.md">Lesson 08 — Loops and Iteration</a></em></p>
+<div class="lesson-complete-wrap">
+  <button type="button" class="lesson-complete-btn" onclick="window.bashLessons.markComplete()">Mark lesson complete</button>
+</div>
+</div>
+      <div id="lesson-08" class="content-panel"><h1 id="lesson-08-loops-and-iteration">Lesson 08: Loops and Iteration</h1>
+<p><strong>Time: ~30 minutes</strong></p>
+<hr>
+<h2 id="why-loops-matter">Why Loops Matter</h2>
+<p>You have 200 image files to rename. Or 50 servers to check. Or a log file you need to process line by line. Doing any of this manually would be tedious and error-prone. Loops let you say &quot;do this thing for each item in this list&quot; and walk away.</p>
+<p>Loops are where scripting starts to save you real time. A task that would take 20 minutes by hand takes 3 seconds in a loop.</p>
+<hr>
+<h2>The <code>for</code> Loop</h2>
+<p>The <code>for</code> loop iterates over a list of items:</p>
+<pre><code class="language-bash">for name in Alice Bob Charlie; do
+    echo &quot;Hello, $name!&quot;
+done
+</code></pre>
+<p>Output:</p>
+<pre><code>Hello, Alice!
+Hello, Bob!
+Hello, Charlie!
+</code></pre>
+<p>The variable <code>name</code> takes each value in turn. The code between <code>do</code> and <code>done</code> runs once per value.</p>
+<h3 id="looping-over-files">Looping Over Files</h3>
+<p>This is the most common use of <code>for</code> loops:</p>
+<pre><code class="language-bash">for file in *.txt; do
+    echo &quot;Processing: $file&quot;
+done
+</code></pre>
+<p>The <code>*.txt</code> glob expands to a list of all <code>.txt</code> files in the current directory. Each one gets assigned to <code>$file</code> in turn.</p>
+<h3 id="looping-over-command-output">Looping Over Command Output</h3>
+<pre><code class="language-bash">for user in $(cat users.txt); do
+    echo &quot;Setting up account for: $user&quot;
+done
+</code></pre>
+<p><code>$(cat users.txt)</code> expands to the contents of the file, split on whitespace. Each word becomes one iteration.</p>
+<p>A word of caution: this splits on all whitespace, including spaces within lines. If your file has lines with spaces, use a <code>while read</code> loop instead (covered below).</p>
+<h3 id="looping-over-a-range-of-numbers">Looping Over a Range of Numbers</h3>
+<pre><code class="language-bash">for i in {1..10}; do
+    echo &quot;Iteration $i&quot;
+done
+</code></pre>
+<p>Brace expansion generates the sequence. You can also specify a step:</p>
+<pre><code class="language-bash">for i in {0..100..5}; do
+    echo &quot;$i&quot;
+done
+</code></pre>
+<p>This counts from 0 to 100 in steps of 5.</p>
+<h3>C-style <code>for</code> Loop</h3>
+<p>If you&#39;re coming from a C, Java, or JavaScript background, this syntax will feel familiar:</p>
+<pre><code class="language-bash">for (( i=1; i&lt;=10; i++ )); do
+    echo &quot;Count: $i&quot;
+done
+</code></pre>
+<p>This is useful when you need precise control over the counter.</p>
+<hr>
+<h2>The <code>while</code> Loop</h2>
+<p>A <code>while</code> loop runs as long as its condition is true:</p>
+<pre><code class="language-bash">count=1
+while [ $count -le 5 ]; do
+    echo &quot;Count: $count&quot;
+    (( count++ ))
+done
+</code></pre>
+<p>This counts from 1 to 5. The <code>(( count++ ))</code> increments the counter each time. Without it, you&#39;d have an infinite loop.</p>
+<h3 id="reading-files-line-by-line">Reading Files Line by Line</h3>
+<p>This is the correct way to process a file line by line, preserving spaces and special characters:</p>
+<pre><code class="language-bash">while IFS= read -r line; do
+    echo &quot;Line: $line&quot;
+done &lt; input.txt
+</code></pre>
+<p>Breaking this down:</p>
+<ul>
+<li><code>IFS=</code> prevents leading/trailing whitespace from being stripped</li>
+<li><code>read -r</code> reads one line, <code>-r</code> prevents backslash interpretation</li>
+<li><code>done &lt; input.txt</code> feeds the file into the loop&#39;s stdin</li>
+</ul>
+<p>This is safer than <code>for line in $(cat file)</code> because it handles spaces, tabs, and special characters correctly.</p>
+<h3 id="processing-a-file-with-line-numbers">Processing a File with Line Numbers</h3>
+<pre><code class="language-bash">line_number=0
+while IFS= read -r line; do
+    (( line_number++ ))
+    echo &quot;$line_number: $line&quot;
+done &lt; data.txt
+</code></pre>
+<h3 id="reading-from-a-pipe">Reading from a Pipe</h3>
+<pre><code class="language-bash">grep &quot;ERROR&quot; server.log | while IFS= read -r line; do
+    echo &quot;Found error: $line&quot;
+done
+</code></pre>
+<p>A subtle gotcha: when you pipe into <code>while</code>, the loop runs in a subshell. Variables set inside the loop won&#39;t be available after the loop ends. If you need variables to persist, use process substitution instead:</p>
+<pre><code class="language-bash">count=0
+while IFS= read -r line; do
+    (( count++ ))
+done &lt; &lt;(grep &quot;ERROR&quot; server.log)
+echo &quot;Found $count errors&quot;   # this works because of &lt; &lt;(...)
+</code></pre>
+<hr>
+<h2>The <code>until</code> Loop</h2>
+<p><code>until</code> is the inverse of <code>while</code> — it runs as long as the condition is <em>false</em>:</p>
+<pre><code class="language-bash">count=1
+until [ $count -gt 5 ]; do
+    echo &quot;Count: $count&quot;
+    (( count++ ))
+done
+</code></pre>
+<p>This produces the same output as the <code>while</code> example above. Use whichever reads more naturally for your situation. In practice, <code>while</code> is used far more often.</p>
+<h3 id="waiting-for-something">Waiting for Something</h3>
+<p><code>until</code> shines when you&#39;re waiting for a condition to become true:</p>
+<pre><code class="language-bash">echo &quot;Waiting for server.lock to disappear...&quot;
+until [ ! -f &quot;server.lock&quot; ]; do
+    sleep 1
+done
+echo &quot;Lock file gone. Proceeding.&quot;
+</code></pre>
+<hr>
+<h2 id="loop-control">Loop Control</h2>
+<h3><code>break</code> — Exit the Loop Early</h3>
+<pre><code class="language-bash">for file in *.log; do
+    if [ ! -r &quot;$file&quot; ]; then
+        echo &quot;Cannot read $file — stopping.&quot;
+        break
+    fi
+    echo &quot;Processing $file&quot;
+done
+</code></pre>
+<p><code>break</code> immediately exits the nearest enclosing loop.</p>
+<h3><code>continue</code> — Skip to the Next Iteration</h3>
+<pre><code class="language-bash">for file in *; do
+    if [ -d &quot;$file&quot; ]; then
+        continue    # skip directories
+    fi
+    echo &quot;File: $file&quot;
+done
+</code></pre>
+<p><code>continue</code> skips the rest of the current iteration and moves to the next one.</p>
+<hr>
+<h2 id="practical-loop-patterns">Practical Loop Patterns</h2>
+<h3 id="batch-rename-files">Batch Rename Files</h3>
+<pre><code class="language-bash">for file in *.jpeg; do
+    mv &quot;$file&quot; &quot;${file%.jpeg}.jpg&quot;
+done
+</code></pre>
+<p>The <code>${file%.jpeg}</code> syntax removes <code>.jpeg</code> from the end of the variable. So <code>photo.jpeg</code> becomes <code>photo</code>, and then <code>.jpg</code> is appended to get <code>photo.jpg</code>.</p>
+<h3 id="process-csv-data">Process CSV Data</h3>
+<pre><code class="language-bash">while IFS=&#39;,&#39; read -r name email role; do
+    echo &quot;Name: $name, Email: $email, Role: $role&quot;
+done &lt; employees.csv
+</code></pre>
+<p>Setting <code>IFS=&#39;,&#39;</code> tells <code>read</code> to split on commas instead of whitespace. Each comma-separated value goes into its own variable.</p>
+<h3 id="create-multiple-directories">Create Multiple Directories</h3>
+<pre><code class="language-bash">for month in {01..12}; do
+    mkdir -p &quot;2025/$month&quot;
+done
+</code></pre>
+<h3 id="check-multiple-servers">Check Multiple Servers</h3>
+<pre><code class="language-bash">for server in web1 web2 web3 db1 db2; do
+    if ping -c 1 -W 2 &quot;$server&quot; &gt; /dev/null 2&gt;&amp;1; then
+        echo &quot;$server: UP&quot;
+    else
+        echo &quot;$server: DOWN&quot;
+    fi
+done
+</code></pre>
+<h3 id="find-and-process-specific-files">Find and Process Specific Files</h3>
+<pre><code class="language-bash">find . -name &quot;*.tmp&quot; -mtime +7 | while IFS= read -r file; do
+    echo &quot;Deleting old temp file: $file&quot;
+    rm &quot;$file&quot;
+done
+</code></pre>
+<p>This finds all <code>.tmp</code> files older than 7 days and deletes them.</p>
+<h3 id="retry-logic">Retry Logic</h3>
+<pre><code class="language-bash">max_attempts=5
+attempt=1
+
+while [ $attempt -le $max_attempts ]; do
+    echo &quot;Attempt $attempt of $max_attempts...&quot;
+    
+    if curl -s -o /dev/null -w &quot;%{http_code}&quot; https://example.com | grep -q &quot;200&quot;; then
+        echo &quot;Success!&quot;
+        break
+    fi
+    
+    echo &quot;Failed. Waiting 5 seconds...&quot;
+    sleep 5
+    (( attempt++ ))
+done
+
+if [ $attempt -gt $max_attempts ]; then
+    echo &quot;All $max_attempts attempts failed.&quot;
+    exit 1
+fi
+</code></pre>
+<hr>
+<h2 id="nested-loops">Nested Loops</h2>
+<p>Loops can contain other loops:</p>
+<pre><code class="language-bash">for dir in project1 project2 project3; do
+    echo &quot;=== $dir ===&quot;
+    for file in &quot;$dir&quot;/*.txt; do
+        echo &quot;  Found: $file&quot;
+    done
+done
+</code></pre>
+<p>Use nested loops sparingly. If you&#39;re going more than two levels deep, consider whether there&#39;s a simpler approach (like <code>find</code>).</p>
+<hr>
+<h2>The <code>select</code> Loop — Simple Menus</h2>
+<p><code>select</code> creates an interactive numbered menu:</p>
+<pre><code class="language-bash">echo &quot;Choose an environment:&quot;
+select env in development staging production quit; do
+    case &quot;$env&quot; in
+        development|staging|production)
+            echo &quot;Deploying to $env...&quot;
+            break
+            ;;
+        quit)
+            echo &quot;Goodbye.&quot;
+            exit 0
+            ;;
+        *)
+            echo &quot;Invalid option. Try again.&quot;
+            ;;
+    esac
+done
+</code></pre>
+<p>This displays a numbered list and waits for input. It loops until <code>break</code> or <code>exit</code> is called.</p>
+<hr>
+<h2 id="common-mistakes">Common Mistakes</h2>
+<p><strong>Forgetting quotes around variables with spaces:</strong></p>
+<pre><code class="language-bash"># WRONG — breaks on filenames with spaces
+for file in $(ls); do ...
+
+# RIGHT
+for file in *; do ...
+</code></pre>
+<p><strong>Modifying a list while iterating over it:</strong>
+Don&#39;t delete files from a directory while looping over that directory&#39;s contents with a glob. Collect the filenames first, then delete.</p>
+<p><strong>Infinite loops without an exit:</strong>
+Always make sure your <code>while</code> condition will eventually become false, or include a <code>break</code>.</p>
+<p><strong>Using <code>for</code> to read lines from a file:</strong></p>
+<pre><code class="language-bash"># WRONG — splits on all whitespace, not just newlines
+for line in $(cat file.txt); do ...
+
+# RIGHT
+while IFS= read -r line; do ... done &lt; file.txt
+</code></pre>
+<hr>
+<h2 id="try-it-yourself">Try It Yourself</h2>
+<ol>
+<li><p>Write a loop that creates files <code>day01.txt</code> through <code>day31.txt</code>.</p>
+</li>
+<li><p>Write a script that takes a directory as an argument and counts how many files vs directories are inside it (one level only, not recursive).</p>
+</li>
+<li><p>Write a script that reads a file of names (one per line) and prints a greeting for each one.</p>
+</li>
+<li><p>Write a retry loop that tries to create a directory and retries up to 3 times with a 2-second delay between attempts (simulate failure by trying to create a directory in a location that doesn&#39;t exist).</p>
+</li>
+<li><p>Write a script that loops through all <code>.sh</code> files in a directory and reports which ones are executable and which aren&#39;t.</p>
+</li>
+<li><p>Use a <code>select</code> menu to let the user choose between three options and display a different message for each.</p>
+</li>
+</ol>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ul>
+<li><code>for item in list</code> iterates over a list. Use it for files (<code>*.txt</code>), sequences (<code>{1..10}</code>), and explicit lists.</li>
+<li><code>while [ condition ]</code> loops as long as the condition is true. Use it for counters, retries, and reading files.</li>
+<li><code>while IFS= read -r line; do ... done &lt; file</code> is the correct way to read a file line by line.</li>
+<li><code>break</code> exits a loop. <code>continue</code> skips to the next iteration.</li>
+<li>Always quote your variables in loops: <code>&quot;$file&quot;</code> not <code>$file</code>.</li>
+<li>The <code>${variable%pattern}</code> syntax strips text from the end of a variable — essential for renaming.</li>
+<li>Don&#39;t use <code>for line in $(cat file)</code> — it breaks on spaces. Use <code>while read</code> instead.</li>
+</ul>
+<hr>
+<p><em>Next up: <a href="09-functions-and-script-organisation.md">Lesson 09 — Functions and Script Organisation</a></em></p>
+<div class="lesson-complete-wrap">
+  <button type="button" class="lesson-complete-btn" onclick="window.bashLessons.markComplete()">Mark lesson complete</button>
+</div>
+</div>
+      <div id="lesson-09" class="content-panel"><h1 id="lesson-09-functions-and-script-organisation">Lesson 09: Functions and Script Organisation</h1>
+<p><strong>Time: ~30 minutes</strong></p>
+<hr>
+<h2 id="why-functions">Why Functions?</h2>
+<p>As your scripts grow, they get harder to read, harder to debug, and harder to maintain. Functions solve this by letting you name a block of code and reuse it. Instead of a 200-line script that does everything in sequence, you get small, named pieces that each do one thing.</p>
+<p>Functions also make your scripts self-documenting. When the main body of your script reads <code>validate_input</code>, <code>create_backup</code>, <code>deploy_files</code>, you can understand what it does without reading every line.</p>
+<hr>
+<h2 id="defining-and-calling-functions">Defining and Calling Functions</h2>
+<p>The basic syntax:</p>
+<pre><code class="language-bash">greet() {
+    echo &quot;Hello, World!&quot;
+}
+
+# Call it
+greet
+</code></pre>
+<p>That&#39;s it. Define the function (name, parentheses, curly braces), then call it by name. The parentheses in the definition are always empty — they&#39;re just syntax, not a parameter list.</p>
+<p>You can also write it with the <code>function</code> keyword:</p>
+<pre><code class="language-bash">function greet {
+    echo &quot;Hello, World!&quot;
+}
+</code></pre>
+<p>Both forms work. The first (without <code>function</code>) is more portable and more common. Pick one and be consistent.</p>
+<p><strong>Important:</strong> Functions must be defined before they&#39;re called. Bash reads scripts top to bottom, so define your functions at the top.</p>
+<hr>
+<h2 id="function-arguments">Function Arguments</h2>
+<p>Functions receive arguments the same way scripts do — through positional parameters <code>$1</code>, <code>$2</code>, etc.:</p>
+<pre><code class="language-bash">greet() {
+    local name=&quot;$1&quot;
+    echo &quot;Hello, $name!&quot;
+}
+
+greet &quot;Kevin&quot;
+greet &quot;Alice&quot;
+</code></pre>
+<p>Inside the function, <code>$1</code> refers to the first argument passed to <em>the function</em>, not to the script. <code>$@</code> is all arguments, <code>$#</code> is the count.</p>
+<pre><code class="language-bash">log_message() {
+    local level=&quot;$1&quot;
+    shift                  # remove the first argument
+    local message=&quot;$@&quot;     # everything remaining
+    echo &quot;[$(date &#39;+%H:%M:%S&#39;)] [$level] $message&quot;
+}
+
+log_message &quot;INFO&quot; &quot;Server started successfully&quot;
+log_message &quot;ERROR&quot; &quot;Connection to database failed&quot;
+</code></pre>
+<p>The <code>shift</code> command removes the first positional parameter and shifts the rest down — <code>$2</code> becomes <code>$1</code>, <code>$3</code> becomes <code>$2</code>, and so on. It&#39;s useful when the first argument is a flag or category and the rest is variable-length data.</p>
+<hr>
+<h2 id="local-variables">Local Variables</h2>
+<p>By default, variables in bash are <strong>global</strong> — they&#39;re visible everywhere in the script. Inside functions, this causes problems:</p>
+<pre><code class="language-bash">set_name() {
+    name=&quot;Alice&quot;       # this modifies the global &quot;name&quot;
+}
+
+name=&quot;Kevin&quot;
+set_name
+echo &quot;$name&quot;           # prints &quot;Alice&quot; — the function changed it!
+</code></pre>
+<p>The <code>local</code> keyword restricts a variable to the function:</p>
+<pre><code class="language-bash">set_name() {
+    local name=&quot;Alice&quot;   # only exists inside this function
+    echo &quot;Inside: $name&quot;
+}
+
+name=&quot;Kevin&quot;
+set_name
+echo &quot;Outside: $name&quot;   # prints &quot;Kevin&quot; — unchanged
+</code></pre>
+<p><strong>Rule of thumb:</strong> Always use <code>local</code> for variables inside functions. The only exception is when you <em>intentionally</em> want to modify a global variable.</p>
+<hr>
+<h2 id="return-values">Return Values</h2>
+<p>Functions can return an exit code (a number from 0 to 255):</p>
+<pre><code class="language-bash">is_even() {
+    local num=&quot;$1&quot;
+    if (( num % 2 == 0 )); then
+        return 0     # success = true
+    else
+        return 1     # failure = false
+    fi
+}
+
+if is_even 4; then
+    echo &quot;4 is even&quot;
+fi
+
+if ! is_even 7; then
+    echo &quot;7 is odd&quot;
+fi
+</code></pre>
+<p><code>return 0</code> means success (true). <code>return 1</code> means failure (false). This mirrors how all Unix commands work — 0 is success, non-zero is failure.</p>
+<h3 id="returning-data-not-just-status">Returning Data (Not Just Status)</h3>
+<p>Since <code>return</code> only handles numbers 0-255, you can&#39;t use it to return strings or large numbers. Instead, use <code>echo</code> and capture the output:</p>
+<pre><code class="language-bash">get_extension() {
+    local filename=&quot;$1&quot;
+    echo &quot;${filename##*.}&quot;
+}
+
+ext=$(get_extension &quot;report.pdf&quot;)
+echo &quot;Extension is: $ext&quot;    # pdf
+</code></pre>
+<p>The function&#39;s <code>echo</code> output gets captured by <code>$(...)</code>. This is the standard pattern for functions that produce data.</p>
+<p>You can also use a global variable, though it&#39;s less clean:</p>
+<pre><code class="language-bash">get_extension() {
+    RESULT=&quot;${1##*.}&quot;
+}
+
+get_extension &quot;report.pdf&quot;
+echo &quot;Extension is: $RESULT&quot;
+</code></pre>
+<p>Prefer the <code>echo</code>-and-capture pattern. It&#39;s more explicit and doesn&#39;t rely on side effects.</p>
+<hr>
+<h2 id="parameter-validation">Parameter Validation</h2>
+<p>Good functions check their inputs:</p>
+<pre><code class="language-bash">create_backup() {
+    local source=&quot;$1&quot;
+    local dest_dir=&quot;$2&quot;
+    
+    if [[ -z &quot;$source&quot; || -z &quot;$dest_dir&quot; ]]; then
+        echo &quot;Error: create_backup requires source and destination&quot; &gt;&amp;2
+        return 1
+    fi
+    
+    if [[ ! -f &quot;$source&quot; ]]; then
+        echo &quot;Error: Source file &#39;$source&#39; not found&quot; &gt;&amp;2
+        return 1
+    fi
+    
+    if [[ ! -d &quot;$dest_dir&quot; ]]; then
+        mkdir -p &quot;$dest_dir&quot;
+    fi
+    
+    local timestamp=$(date &#39;+%Y%m%d_%H%M%S&#39;)
+    local basename=$(basename &quot;$source&quot;)
+    cp &quot;$source&quot; &quot;$dest_dir/${basename}.${timestamp}.bak&quot;
+    echo &quot;Backed up: $source → $dest_dir/${basename}.${timestamp}.bak&quot;
+}
+</code></pre>
+<p>Notice the <code>&gt;&amp;2</code> on error messages — this sends them to stderr instead of stdout, so they don&#39;t interfere with output that might be captured.</p>
+<hr>
+<h2 id="organising-a-script">Organising a Script</h2>
+<p>Here&#39;s a structure that works well for scripts of any size:</p>
+<pre><code class="language-bash">#!/bin/bash
+#
+# deploy.sh — Deploy the application to a target environment
+# Usage: ./deploy.sh &lt;environment&gt; [version]
+#
+
+# --- Configuration ---
+readonly APP_NAME=&quot;myapp&quot;
+readonly LOG_DIR=&quot;/var/log/$APP_NAME&quot;
+readonly DEFAULT_VERSION=&quot;latest&quot;
+
+# --- Functions ---
+
+usage() {
+    echo &quot;Usage: $0 &lt;environment&gt; [version]&quot;
+    echo &quot;&quot;
+    echo &quot;Environments: development, staging, production&quot;
+    echo &quot;Version defaults to &#39;$DEFAULT_VERSION&#39; if not specified.&quot;
+    exit 1
+}
+
+log() {
+    local level=&quot;$1&quot;
+    shift
+    echo &quot;[$(date &#39;+%Y-%m-%d %H:%M:%S&#39;)] [$level] $*&quot;
+}
+
+validate_environment() {
+    local env=&quot;$1&quot;
+    case &quot;$env&quot; in
+        development|staging|production) return 0 ;;
+        *) return 1 ;;
+    esac
+}
+
+check_prerequisites() {
+    local missing=0
+    
+    for cmd in git docker curl; do
+        if ! command -v &quot;$cmd&quot; &gt; /dev/null 2&gt;&amp;1; then
+            log &quot;ERROR&quot; &quot;Required command not found: $cmd&quot;
+            (( missing++ ))
+        fi
+    done
+    
+    return &quot;$missing&quot;
+}
+
+deploy() {
+    local env=&quot;$1&quot;
+    local version=&quot;$2&quot;
+    
+    log &quot;INFO&quot; &quot;Deploying $APP_NAME version $version to $env&quot;
+    log &quot;INFO&quot; &quot;Deployment complete.&quot;
+}
+
+# --- Main ---
+
+main() {
+    local environment=&quot;${1:-}&quot;
+    local version=&quot;${2:-$DEFAULT_VERSION}&quot;
+    
+    if [[ -z &quot;$environment&quot; ]]; then
+        usage
+    fi
+    
+    if ! validate_environment &quot;$environment&quot;; then
+        log &quot;ERROR&quot; &quot;Invalid environment: $environment&quot;
+        usage
+    fi
+    
+    if ! check_prerequisites; then
+        log &quot;ERROR&quot; &quot;Missing prerequisites. Aborting.&quot;
+        exit 1
+    fi
+    
+    deploy &quot;$environment&quot; &quot;$version&quot;
+}
+
+main &quot;$@&quot;
+</code></pre>
+<h3 id="the-pattern-explained">The Pattern Explained</h3>
+<ol>
+<li><strong>Header comment</strong> — script name, purpose, and usage</li>
+<li><strong>Configuration</strong> — constants at the top, using <code>readonly</code></li>
+<li><strong>Functions</strong> — each one does one thing, defined before use</li>
+<li><strong><code>main</code> function</strong> — the entry point, contains the script&#39;s logic flow</li>
+<li><strong><code>main &quot;$@&quot;</code></strong> — the only line at the top level, passing all script arguments to <code>main</code></li>
+</ol>
+<p>This pattern is used by professionals for a reason: it&#39;s readable, testable, and maintainable. The <code>main</code> function isn&#39;t strictly necessary for small scripts, but it becomes valuable as scripts grow.</p>
+<hr>
+<h2 id="sourcing-files">Sourcing Files</h2>
+<p>As scripts get larger, you can split functions into separate files and include them:</p>
+<pre><code class="language-bash"># utils.sh
+log() {
+    echo &quot;[$(date &#39;+%H:%M:%S&#39;)] $*&quot;
+}
+
+validate_file() {
+    [[ -f &quot;$1&quot; ]]
+}
+</code></pre>
+<pre><code class="language-bash"># main.sh
+#!/bin/bash
+source ./utils.sh    # or: . ./utils.sh
+
+log &quot;Starting up&quot;
+if validate_file &quot;config.txt&quot;; then
+    log &quot;Config found&quot;
+fi
+</code></pre>
+<p><code>source</code> (or its shorthand <code>.</code>) executes the contents of a file in the current shell. Functions and variables defined in the sourced file become available immediately.</p>
+<p>This is how you build a library of reusable functions across multiple scripts.</p>
+<hr>
+<h2 id="useful-string-manipulations-for-functions">Useful String Manipulations for Functions</h2>
+<p>You&#39;ll use these inside functions constantly:</p>
+<h3 id="extracting-parts-of-strings">Extracting Parts of Strings</h3>
+<pre><code class="language-bash">filepath=&quot;/home/kevin/documents/report.pdf&quot;
+
+echo &quot;${filepath##*/}&quot;       # report.pdf   (basename — everything after last /)
+echo &quot;${filepath%/*}&quot;        # /home/kevin/documents  (dirname — everything before last /)
+echo &quot;${filepath##*.}&quot;       # pdf           (extension — everything after last .)
+echo &quot;${filepath%.pdf}&quot;      # /home/kevin/documents/report  (remove extension)
+</code></pre>
+<p>The <code>##</code> removes the longest match from the front. The <code>%</code> removes the shortest match from the end. <code>%%</code> removes the longest match from the end. <code>#</code> removes the shortest match from the front.</p>
+<h3 id="replacing-text-in-variables">Replacing Text in Variables</h3>
+<pre><code class="language-bash">text=&quot;Hello World&quot;
+echo &quot;${text/World/Bash}&quot;     # Hello Bash  (replace first occurrence)
+echo &quot;${text//l/L}&quot;           # HeLLo WorLd (replace all occurrences)
+</code></pre>
+<h3 id="uppercasing-and-lowercasing">Uppercasing and Lowercasing</h3>
+<pre><code class="language-bash">name=&quot;kevin&quot;
+echo &quot;${name^}&quot;       # Kevin   (capitalise first letter)
+echo &quot;${name^^}&quot;      # KEVIN   (all uppercase)
+
+SHOUT=&quot;HELLO&quot;
+echo &quot;${SHOUT,,}&quot;     # hello   (all lowercase)
+</code></pre>
+<h3 id="default-values">Default Values</h3>
+<pre><code class="language-bash">echo &quot;${name:-Anonymous}&quot;     # use &quot;Anonymous&quot; if name is unset or empty
+echo &quot;${name:=Anonymous}&quot;     # same, but also assigns the default to name
+echo &quot;${name:+Found}&quot;         # prints &quot;Found&quot; if name IS set (otherwise nothing)
+</code></pre>
+<hr>
+<h2 id="try-it-yourself">Try It Yourself</h2>
+<ol>
+<li><p>Write a function <code>file_info</code> that takes a filename and prints its size, line count, and permissions on separate lines. Call it on several files.</p>
+</li>
+<li><p>Write a logging library: create a file called <code>logger.sh</code> with functions <code>log_info</code>, <code>log_warn</code>, and <code>log_error</code> that print timestamped, levelled messages. Source it from another script and use it.</p>
+</li>
+<li><p>Write a function <code>confirm</code> that asks the user a yes/no question and returns 0 for yes, 1 for no. Use it like: <code>if confirm &quot;Deploy to production?&quot;; then ...</code>.</p>
+</li>
+<li><p>Refactor one of your earlier scripts (from any previous lesson) to use functions. Extract repeated logic, add a <code>usage</code> function, and structure it with the pattern shown above.</p>
+</li>
+<li><p>Write a function <code>sanitise_filename</code> that takes a string and replaces spaces with underscores, removes special characters, and converts to lowercase. Test it with various inputs.</p>
+</li>
+</ol>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ul>
+<li>Functions are defined with <code>name() { ... }</code> and called by name. They must be defined before they&#39;re called.</li>
+<li>Functions receive arguments via <code>$1</code>, <code>$2</code>, etc. — the same as scripts.</li>
+<li>Always use <code>local</code> for variables inside functions to avoid polluting the global scope.</li>
+<li><code>return</code> sets an exit status (0-255). To return data, <code>echo</code> it and capture with <code>$(function_name)</code>.</li>
+<li>Send error messages to stderr with <code>&gt;&amp;2</code>.</li>
+<li>The standard script structure is: header, constants, functions, <code>main</code> function, <code>main &quot;$@&quot;</code>.</li>
+<li><code>source</code> includes other files, letting you build reusable function libraries.</li>
+<li>Bash has built-in string manipulation (<code>${var##pattern}</code>, <code>${var%pattern}</code>, <code>${var/old/new}</code>) that&#39;s faster than calling external tools.</li>
+</ul>
+<hr>
+<p><em>Next up: <a href="10-text-processing-power-tools.md">Lesson 10 — Text Processing Power Tools</a></em></p>
+<div class="lesson-complete-wrap">
+  <button type="button" class="lesson-complete-btn" onclick="window.bashLessons.markComplete()">Mark lesson complete</button>
+</div>
+</div>
+      <div id="lesson-10" class="content-panel"><h1 id="lesson-10-text-processing-power-tools">Lesson 10: Text Processing Power Tools</h1>
+<p><strong>Time: ~30 minutes</strong></p>
+<hr>
+<h2>Beyond <code>grep</code></h2>
+<p>You already know <code>grep</code> for finding lines that match a pattern. But bash has an entire toolkit for transforming, extracting, and reshaping text. These tools date back to the 1970s, but they&#39;re still used daily by developers and sysadmins because they work, they&#39;re fast, and they compose beautifully with pipes.</p>
+<p>This lesson covers <code>cut</code>, <code>tr</code>, <code>sort</code>, <code>uniq</code>, <code>sed</code>, and <code>awk</code> — the workhorses of text processing.</p>
+<hr>
+<h2 id="setup">Setup</h2>
+<p>Let&#39;s create some data to practice with:</p>
+<pre><code class="language-bash">cd ~/bash-lessons
+mkdir -p lesson10
+cd lesson10
+
+cat &gt; employees.csv &lt;&lt; &#39;EOF&#39;
+id,name,department,salary,start_date
+1,Alice Johnson,Engineering,95000,2021-03-15
+2,Bob Smith,Marketing,72000,2020-07-01
+3,Charlie Brown,Engineering,88000,2022-01-10
+4,Diana Prince,Sales,78000,2019-11-20
+5,Eve Williams,Engineering,102000,2018-05-01
+6,Frank Castle,Marketing,68000,2023-02-14
+7,Grace Hopper,Engineering,115000,2017-09-01
+8,Henry Ford,Sales,82000,2021-06-15
+9,Iris Chang,Marketing,75000,2022-08-01
+10,Jack Ryan,Sales,91000,2020-01-10
+EOF
+
+cat &gt; access.log &lt;&lt; &#39;EOF&#39;
+192.168.1.10 - - [15/Jan/2025:10:23:45] &quot;GET /index.html&quot; 200 1024
+192.168.1.15 - - [15/Jan/2025:10:23:46] &quot;GET /about.html&quot; 200 2048
+192.168.1.10 - - [15/Jan/2025:10:23:47] &quot;POST /api/login&quot; 401 128
+192.168.1.22 - - [15/Jan/2025:10:23:48] &quot;GET /index.html&quot; 200 1024
+192.168.1.10 - - [15/Jan/2025:10:23:49] &quot;POST /api/login&quot; 200 256
+192.168.1.15 - - [15/Jan/2025:10:23:50] &quot;GET /dashboard&quot; 200 4096
+192.168.1.33 - - [15/Jan/2025:10:23:51] &quot;GET /index.html&quot; 404 512
+192.168.1.22 - - [15/Jan/2025:10:23:52] &quot;GET /style.css&quot; 200 768
+192.168.1.10 - - [15/Jan/2025:10:23:53] &quot;GET /api/data&quot; 200 8192
+192.168.1.33 - - [15/Jan/2025:10:23:54] &quot;GET /missing.html&quot; 404 512
+EOF
+</code></pre>
+<hr>
+<h2><code>cut</code> — Extract Columns</h2>
+<p><code>cut</code> pulls out specific fields from each line.</p>
+<h3 id="by-delimiter-and-field-number">By Delimiter and Field Number</h3>
+<pre><code class="language-bash">cut -d&#39;,&#39; -f2 employees.csv           # names only
+cut -d&#39;,&#39; -f2,4 employees.csv         # names and salaries
+cut -d&#39;,&#39; -f2-4 employees.csv         # names through salaries (range)
+</code></pre>
+<p><code>-d&#39;,&#39;</code> sets the delimiter to comma. <code>-f2</code> selects field 2.</p>
+<h3 id="by-character-position">By Character Position</h3>
+<pre><code class="language-bash">cut -c1-10 access.log                 # first 10 characters of each line
+</code></pre>
+<h3 id="practical-use">Practical Use</h3>
+<p>Pull IP addresses from the access log:</p>
+<pre><code class="language-bash">cut -d&#39; &#39; -f1 access.log
+</code></pre>
+<p>Extract just the department column (skipping the header):</p>
+<pre><code class="language-bash">tail -n +2 employees.csv | cut -d&#39;,&#39; -f3
+</code></pre>
+<p><code>tail -n +2</code> starts from line 2, effectively skipping the header.</p>
+<hr>
+<h2><code>tr</code> — Translate Characters</h2>
+<p><code>tr</code> replaces or deletes characters. It works on individual characters, not words or patterns.</p>
+<h3 id="replace-characters">Replace Characters</h3>
+<pre><code class="language-bash">echo &quot;Hello World&quot; | tr &#39;a-z&#39; &#39;A-Z&#39;      # HELLO WORLD
+echo &quot;Hello World&quot; | tr &#39;A-Z&#39; &#39;a-z&#39;      # hello world
+echo &quot;hello-world&quot; | tr &#39;-&#39; &#39;_&#39;           # hello_world
+</code></pre>
+<h3 id="squeeze-repeated-characters">Squeeze Repeated Characters</h3>
+<pre><code class="language-bash">echo &quot;too    many    spaces&quot; | tr -s &#39; &#39;  # too many spaces
+</code></pre>
+<p><code>-s</code> squeezes consecutive identical characters into one.</p>
+<h3 id="delete-characters">Delete Characters</h3>
+<pre><code class="language-bash">echo &quot;Price: $42.50&quot; | tr -d &#39;$&#39;          # Price: 42.50
+echo &quot;Hello123World&quot; | tr -d &#39;0-9&#39;        # HelloWorld
+</code></pre>
+<h3 id="converting-line-endings">Converting Line Endings</h3>
+<p>A common use — converting Windows line endings to Unix:</p>
+<pre><code class="language-bash">tr -d &#39;\r&#39; &lt; windows_file.txt &gt; unix_file.txt
+</code></pre>
+<hr>
+<h2><code>sort</code> and <code>uniq</code> — Ordering and Deduplication</h2>
+<p>You&#39;ve seen these before, but they have more depth than basic usage suggests.</p>
+<h3><code>sort</code> Options</h3>
+<pre><code class="language-bash">sort employees.csv                         # alphabetical (default)
+sort -t&#39;,&#39; -k4 -n employees.csv           # sort by salary (field 4, numeric)
+sort -t&#39;,&#39; -k4 -rn employees.csv          # sort by salary, highest first
+sort -t&#39;,&#39; -k3,3 -k4,4rn employees.csv   # sort by department, then salary descending
+</code></pre>
+<p><code>-t&#39;,&#39;</code> sets the field separator. <code>-k4</code> sorts by field 4. <code>-n</code> sorts numerically. <code>-r</code> reverses. You can chain <code>-k</code> options for multi-level sorting.</p>
+<h3><code>uniq</code> Requires Sorted Input</h3>
+<p><code>uniq</code> only removes <em>adjacent</em> duplicates. Always sort first:</p>
+<pre><code class="language-bash"># Unique departments
+tail -n +2 employees.csv | cut -d&#39;,&#39; -f3 | sort | uniq
+
+# Count employees per department
+tail -n +2 employees.csv | cut -d&#39;,&#39; -f3 | sort | uniq -c | sort -rn
+</code></pre>
+<p><code>uniq -c</code> prefixes each line with a count. <code>uniq -d</code> shows only duplicates. <code>uniq -u</code> shows only unique lines.</p>
+<p>Alternatively, <code>sort -u</code> combines sorting and deduplication in one step:</p>
+<pre><code class="language-bash">tail -n +2 employees.csv | cut -d&#39;,&#39; -f3 | sort -u
+</code></pre>
+<hr>
+<h2><code>sed</code> — Stream Editor</h2>
+<p><code>sed</code> processes text line by line, applying transformations. It&#39;s a deep tool — we&#39;ll cover the essentials.</p>
+<h3 id="find-and-replace">Find and Replace</h3>
+<pre><code class="language-bash">sed &#39;s/Engineering/Eng/&#39; employees.csv          # replace first occurrence per line
+sed &#39;s/Engineering/Eng/g&#39; employees.csv         # replace ALL occurrences per line
+</code></pre>
+<p>The <code>s/old/new/</code> command is sed&#39;s bread and butter. The <code>g</code> flag means &quot;global&quot; — replace all matches on the line, not just the first.</p>
+<h3 id="case-insensitive-replace">Case-Insensitive Replace</h3>
+<pre><code class="language-bash">sed &#39;s/alice/ALICE/Ig&#39; employees.csv            # I flag for case-insensitive
+</code></pre>
+<p>(The <code>I</code> flag is a GNU sed extension — it works on Linux but not on default macOS sed.)</p>
+<h3 id="delete-lines">Delete Lines</h3>
+<pre><code class="language-bash">sed &#39;1d&#39; employees.csv                          # delete line 1 (the header)
+sed &#39;/^$/d&#39; file.txt                            # delete empty lines
+sed &#39;/^#/d&#39; config.txt                          # delete comment lines
+</code></pre>
+<h3 id="print-specific-lines">Print Specific Lines</h3>
+<pre><code class="language-bash">sed -n &#39;3p&#39; employees.csv                       # print only line 3
+sed -n &#39;2,5p&#39; employees.csv                     # print lines 2-5
+sed -n &#39;/Engineering/p&#39; employees.csv           # print lines matching a pattern
+</code></pre>
+<p><code>-n</code> suppresses default output. <code>p</code> explicitly prints matching lines. Without <code>-n</code>, sed prints every line <em>plus</em> the matched lines again.</p>
+<h3 id="multiple-operations">Multiple Operations</h3>
+<pre><code class="language-bash">sed -e &#39;s/Engineering/ENG/&#39; -e &#39;s/Marketing/MKT/&#39; -e &#39;s/Sales/SLS/&#39; employees.csv
+</code></pre>
+<p>Or use a semicolon:</p>
+<pre><code class="language-bash">sed &#39;s/Engineering/ENG/; s/Marketing/MKT/; s/Sales/SLS/&#39; employees.csv
+</code></pre>
+<h3 id="in-place-editing">In-Place Editing</h3>
+<pre><code class="language-bash">sed -i &#39;s/old/new/g&#39; file.txt             # Linux: edits the file directly
+sed -i &#39;&#39; &#39;s/old/new/g&#39; file.txt          # macOS: requires empty string after -i
+</code></pre>
+<p>Always back up before using <code>-i</code>, or use <code>-i.bak</code> to create an automatic backup:</p>
+<pre><code class="language-bash">sed -i.bak &#39;s/old/new/g&#39; file.txt        # edits file.txt, saves original as file.txt.bak
+</code></pre>
+<h3 id="capture-groups">Capture Groups</h3>
+<pre><code class="language-bash"># Swap first and last names
+echo &quot;Johnson, Alice&quot; | sed &#39;s/\(.*\), \(.*\)/\2 \1/&#39;
+# Output: Alice Johnson
+</code></pre>
+<p><code>\(...\)</code> captures a group. <code>\1</code>, <code>\2</code> reference captured groups.</p>
+<hr>
+<h2><code>awk</code> — Pattern Scanning and Processing</h2>
+<p><code>awk</code> is the most powerful text processing tool in the standard toolkit. It&#39;s essentially a small programming language. We&#39;ll cover the most useful parts.</p>
+<h3 id="basic-structure">Basic Structure</h3>
+<pre><code class="language-bash">awk &#39;pattern { action }&#39; file
+</code></pre>
+<p>For each line in the file: if it matches the pattern, execute the action. If no pattern is given, the action runs on every line.</p>
+<h3 id="fields">Fields</h3>
+<p><code>awk</code> automatically splits each line into fields. By default, it splits on whitespace:</p>
+<pre><code class="language-bash">echo &quot;Alice 95000 Engineering&quot; | awk &#39;{ print $1 }&#39;          # Alice
+echo &quot;Alice 95000 Engineering&quot; | awk &#39;{ print $3, $1 }&#39;      # Engineering Alice
+</code></pre>
+<p><code>$1</code> is the first field, <code>$2</code> the second, etc. <code>$0</code> is the entire line. <code>$NF</code> is the last field.</p>
+<h3 id="setting-the-field-separator">Setting the Field Separator</h3>
+<p>For CSV data:</p>
+<pre><code class="language-bash">awk -F&#39;,&#39; &#39;{ print $2 }&#39; employees.csv                       # print names
+awk -F&#39;,&#39; &#39;{ print $2, $4 }&#39; employees.csv                   # names and salaries
+</code></pre>
+<h3 id="filtering-rows">Filtering Rows</h3>
+<pre><code class="language-bash">awk -F&#39;,&#39; &#39;$3 == &quot;Engineering&quot;&#39; employees.csv                 # engineering only
+awk -F&#39;,&#39; &#39;$4 &gt; 90000&#39; employees.csv                          # salary &gt; 90000
+awk -F&#39;,&#39; &#39;$4 &gt; 90000 { print $2, $4 }&#39; employees.csv        # names and salaries &gt; 90k
+</code></pre>
+<h3 id="built-in-variables">Built-in Variables</h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>NR</code></td>
+<td>Current line number (row count)</td>
+</tr>
+<tr>
+<td><code>NF</code></td>
+<td>Number of fields in current line</td>
+</tr>
+<tr>
+<td><code>FS</code></td>
+<td>Field separator (same as -F)</td>
+</tr>
+<tr>
+<td><code>$0</code></td>
+<td>Entire current line</td>
+</tr>
+</tbody></table>
+<pre><code class="language-bash">awk -F&#39;,&#39; &#39;NR &gt; 1 { print NR-1, $2 }&#39; employees.csv         # skip header, number rows
+awk &#39;{ print NF, $0 }&#39; access.log                             # show field count per line
+</code></pre>
+<h3 id="calculations">Calculations</h3>
+<pre><code class="language-bash"># Average salary
+awk -F&#39;,&#39; &#39;NR &gt; 1 { sum += $4; count++ } END { print &quot;Average:&quot;, sum/count }&#39; employees.csv
+
+# Total salary by department
+awk -F&#39;,&#39; &#39;NR &gt; 1 { dept[$3] += $4 } END { for (d in dept) print d, dept[d] }&#39; employees.csv
+</code></pre>
+<p>The <code>END</code> block runs after all lines have been processed. Arrays in <code>awk</code> are associative (like dictionaries/hash maps).</p>
+<h3 id="formatted-output">Formatted Output</h3>
+<pre><code class="language-bash">awk -F&#39;,&#39; &#39;NR &gt; 1 { printf &quot;%-20s %s %10s\n&quot;, $2, $3, &quot;$&quot;$4 }&#39; employees.csv
+</code></pre>
+<p><code>printf</code> gives you control over column widths and alignment — same syntax as C&#39;s <code>printf</code>.</p>
+<hr>
+<h2 id="combining-the-tools">Combining the Tools</h2>
+<p>The real power comes from combining these tools in pipelines.</p>
+<h3 id="top-3-most-active-ips-in-the-access-log">Top 3 Most Active IPs in the Access Log</h3>
+<pre><code class="language-bash">cut -d&#39; &#39; -f1 access.log | sort | uniq -c | sort -rn | head -3
+</code></pre>
+<h3 id="list-engineering-employees-sorted-by-salary">List Engineering Employees Sorted by Salary</h3>
+<pre><code class="language-bash">awk -F&#39;,&#39; &#39;$3 == &quot;Engineering&quot; { print $4, $2 }&#39; employees.csv | sort -rn
+</code></pre>
+<h3 id="find-all-404-errors-and-the-requested-urls">Find All 404 Errors and the Requested URLs</h3>
+<pre><code class="language-bash">awk &#39;$9 == &quot;404&quot; { print $7 }&#39; access.log | sort -u
+</code></pre>
+<p>(Field numbers differ here because the access log uses spaces as separators.)</p>
+<h3 id="replace-department-names-and-create-a-new-file">Replace Department Names and Create a New File</h3>
+<pre><code class="language-bash">sed &#39;1d&#39; employees.csv | awk -F&#39;,&#39; &#39;{ gsub(/Engineering/, &quot;ENG&quot;, $3); print }&#39; OFS=&#39;,&#39;
+</code></pre>
+<hr>
+<h2 id="try-it-yourself">Try It Yourself</h2>
+<ol>
+<li><p>Extract all unique IP addresses from <code>access.log</code> and count how many requests each made. Sort by count, highest first.</p>
+</li>
+<li><p>Calculate the average salary per department from <code>employees.csv</code> using <code>awk</code>.</p>
+</li>
+<li><p>Use <code>sed</code> to remove the header from <code>employees.csv</code> and replace all commas with tabs. Save to <code>employees.tsv</code>.</p>
+</li>
+<li><p>Find employees who started in 2021 or later (compare the start_date field) using <code>awk</code>.</p>
+</li>
+<li><p>From <code>access.log</code>, extract just the HTTP status codes (200, 401, 404) and count how many of each occurred.</p>
+</li>
+<li><p>Create a pipeline that produces a formatted report showing each department, the number of employees, and the total salary spend, sorted by total salary.</p>
+</li>
+</ol>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ul>
+<li><code>cut</code> extracts columns by delimiter (<code>-d</code>) and field number (<code>-f</code>). Quick and simple.</li>
+<li><code>tr</code> transforms individual characters — case conversion, character deletion, squeeze repeats.</li>
+<li><code>sort</code> + <code>uniq</code> is the standard pattern for counting and deduplication. Always sort before uniq.</li>
+<li><code>sed</code> does find-and-replace (<code>s/old/new/g</code>), line deletion, and line extraction. Use <code>-i</code> for in-place editing.</li>
+<li><code>awk</code> is a mini-language for field-based processing. It handles filtering, calculations, and formatted output in one tool.</li>
+<li>These tools combine through pipes to form powerful data processing pipelines with zero setup.</li>
+</ul>
+<hr>
+<p><em>Next up: <a href="11-process-management-and-job-control.md">Lesson 11 — Process Management and Job Control</a></em></p>
+<div class="lesson-complete-wrap">
+  <button type="button" class="lesson-complete-btn" onclick="window.bashLessons.markComplete()">Mark lesson complete</button>
+</div>
+</div>
+      <div id="lesson-11" class="content-panel"><h1 id="lesson-11-process-management-and-job-control">Lesson 11: Process Management and Job Control</h1>
+<p><strong>Time: ~30 minutes</strong></p>
+<hr>
+<h2 id="everything-is-a-process">Everything Is a Process</h2>
+<p>Every time you run a command, your system creates a process — a running instance of a program. When you type <code>ls</code>, a process starts, does its work, and exits. When you start a web server, that process stays running until you stop it. Your terminal itself is a process. Your shell is a process running inside it.</p>
+<p>Understanding processes lets you see what&#39;s running, stop things that are stuck, run tasks in the background, and schedule scripts to run automatically.</p>
+<hr>
+<h2 id="viewing-processes">Viewing Processes</h2>
+<h3><code>ps</code> — Process Status</h3>
+<pre><code class="language-bash">ps                   # your processes in this terminal session
+ps aux               # all processes on the system (detailed)
+</code></pre>
+<p>The <code>aux</code> flags mean: <code>a</code> = all users, <code>u</code> = user-oriented format, <code>x</code> = include processes without a terminal.</p>
+<p>The output looks like:</p>
+<pre><code>USER       PID  %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+kevin     1234  0.0  0.1  12345  6789 pts/0    Ss   10:30   0:00 bash
+kevin     5678  2.5  1.2  98765 43210 pts/0    Sl   10:31   0:15 node server.js
+root         1  0.0  0.1   1234   567 ?        Ss   09:00   0:02 /sbin/init
+</code></pre>
+<p>Key columns:</p>
+<ul>
+<li><strong>PID</strong> — Process ID. Every process has a unique number.</li>
+<li><strong>%CPU / %MEM</strong> — resource usage</li>
+<li><strong>STAT</strong> — state (S = sleeping, R = running, Z = zombie, T = stopped)</li>
+<li><strong>COMMAND</strong> — what&#39;s running</li>
+</ul>
+<h3 id="finding-specific-processes">Finding Specific Processes</h3>
+<pre><code class="language-bash">ps aux | grep node              # find Node.js processes
+ps aux | grep -v grep | grep node   # same, but exclude the grep itself
+</code></pre>
+<p>The second version is a common pattern — <code>grep</code> matches its own process too, and <code>-v grep</code> filters that out.</p>
+<p>A cleaner alternative:</p>
+<pre><code class="language-bash">pgrep -la node                  # find processes by name
+</code></pre>
+<h3><code>top</code> and <code>htop</code> — Live Process Monitor</h3>
+<pre><code class="language-bash">top                             # built-in, always available
+htop                            # better interface (install with: sudo apt install htop)
+</code></pre>
+<p><code>top</code> shows processes sorted by CPU usage, updating in real time. Press <code>q</code> to quit, <code>M</code> to sort by memory, <code>P</code> to sort by CPU.</p>
+<p><code>htop</code> is the same idea with a nicer interface, colour coding, and mouse support. If it&#39;s not installed, it&#39;s worth installing.</p>
+<hr>
+<h2 id="stopping-processes">Stopping Processes</h2>
+<h3><code>kill</code> — Send Signals to Processes</h3>
+<pre><code class="language-bash">kill 5678                       # send SIGTERM (polite &quot;please stop&quot;) to PID 5678
+kill -9 5678                    # send SIGKILL (forced stop, no cleanup)
+</code></pre>
+<p><code>SIGTERM</code> (the default) asks the process to shut down gracefully — it can save state, close connections, and clean up. <code>SIGKILL</code> (-9) forces immediate termination with no cleanup. Always try <code>SIGTERM</code> first.</p>
+<h3 id="common-signals">Common Signals</h3>
+<table>
+<thead>
+<tr>
+<th>Signal</th>
+<th>Number</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SIGTERM</td>
+<td>15</td>
+<td>Terminate gracefully (default)</td>
+</tr>
+<tr>
+<td>SIGKILL</td>
+<td>9</td>
+<td>Force kill immediately</td>
+</tr>
+<tr>
+<td>SIGHUP</td>
+<td>1</td>
+<td>Hang up (often used to reload config)</td>
+</tr>
+<tr>
+<td>SIGINT</td>
+<td>2</td>
+<td>Interrupt (same as Ctrl+C)</td>
+</tr>
+<tr>
+<td>SIGSTOP</td>
+<td>19</td>
+<td>Pause the process</td>
+</tr>
+<tr>
+<td>SIGCONT</td>
+<td>18</td>
+<td>Resume a paused process</td>
+</tr>
+</tbody></table>
+<h3 id="killing-by-name">Killing by Name</h3>
+<pre><code class="language-bash">pkill node                      # kill all processes named &quot;node&quot;
+pkill -f &quot;python server.py&quot;     # kill processes matching the full command line
+killall node                    # similar to pkill (slightly different on macOS vs Linux)
+</code></pre>
+<p>Be careful with <code>pkill</code> and <code>killall</code> — they match broadly. Make sure you&#39;re not killing something you need.</p>
+<hr>
+<h2 id="background-jobs-and-job-control">Background Jobs and Job Control</h2>
+<h3 id="running-commands-in-the-background">Running Commands in the Background</h3>
+<p>Normally, when you run a command, your terminal waits until it finishes. For long-running tasks, you can send them to the background:</p>
+<pre><code class="language-bash">sleep 60 &amp;                      # the &amp; runs it in the background
+</code></pre>
+<p>The shell immediately gives you back the prompt. The <code>&amp;</code> at the end is the key.</p>
+<p>You&#39;ll see output like:</p>
+<pre><code>[1] 12345
+</code></pre>
+<p>This means job number 1, process ID 12345.</p>
+<h3 id="viewing-background-jobs">Viewing Background Jobs</h3>
+<pre><code class="language-bash">jobs                            # list background jobs in this shell
+</code></pre>
+<pre><code>[1]+  Running                 sleep 60 &amp;
+</code></pre>
+<h3 id="moving-jobs-between-foreground-and-background">Moving Jobs Between Foreground and Background</h3>
+<p><strong>Suspend a running command:</strong> Press <code>Ctrl + Z</code>. This pauses the process and puts it in the background (stopped).</p>
+<pre><code>^Z
+[1]+  Stopped                 vim notes.txt
+</code></pre>
+<p><strong>Resume in the background:</strong></p>
+<pre><code class="language-bash">bg                              # resume the most recent stopped job in the background
+bg %1                           # resume job number 1 specifically
+</code></pre>
+<p><strong>Bring back to the foreground:</strong></p>
+<pre><code class="language-bash">fg                              # bring the most recent background job to the foreground
+fg %1                           # bring job 1 to the foreground
+</code></pre>
+<h3 id="a-typical-workflow">A Typical Workflow</h3>
+<ol>
+<li>Start a long task: <code>./build.sh</code></li>
+<li>Realise it&#39;s going to take a while: press <code>Ctrl + Z</code></li>
+<li>Send it to the background: <code>bg</code></li>
+<li>Do other work in the terminal</li>
+<li>Check on it: <code>jobs</code></li>
+<li>Bring it back if needed: <code>fg</code></li>
+</ol>
+<hr>
+<h2 id="running-tasks-after-disconnect">Running Tasks After Disconnect</h2>
+<p>When you close your terminal, all its child processes receive <code>SIGHUP</code> and typically die. For long-running tasks on remote servers, you need a way to keep them alive.</p>
+<h3><code>nohup</code> — No Hangup</h3>
+<pre><code class="language-bash">nohup ./long-task.sh &amp;
+</code></pre>
+<p><code>nohup</code> prevents the process from receiving <code>SIGHUP</code> when the terminal closes. Output goes to <code>nohup.out</code> by default.</p>
+<pre><code class="language-bash">nohup ./long-task.sh &gt; output.log 2&gt;&amp;1 &amp;
+</code></pre>
+<p>This redirects both stdout and stderr to a specific log file.</p>
+<h3><code>screen</code> and <code>tmux</code> — Terminal Multiplexers</h3>
+<p>For serious work on remote servers, <code>screen</code> or <code>tmux</code> is better than <code>nohup</code>. They create persistent terminal sessions that survive disconnects.</p>
+<p>Quick <code>tmux</code> overview:</p>
+<pre><code class="language-bash">tmux                            # start a new session
+tmux new -s mysession           # start a named session
+</code></pre>
+<p>Inside tmux:</p>
+<ul>
+<li><code>Ctrl+B, D</code> — detach (leave session running, return to normal terminal)</li>
+<li><code>tmux ls</code> — list sessions</li>
+<li><code>tmux attach -t mysession</code> — reattach</li>
+</ul>
+<p>This is how professionals run long tasks on remote servers — start a tmux session, launch the task, detach, disconnect from the server, and reattach later to check on it.</p>
+<hr>
+<h2>Scheduling Tasks with <code>cron</code></h2>
+<p><code>cron</code> runs scripts on a schedule — every hour, every day, every Monday at 3am. It&#39;s the Unix way to automate recurring tasks.</p>
+<h3 id="editing-your-crontab">Editing Your Crontab</h3>
+<pre><code class="language-bash">crontab -e                      # open your cron schedule in an editor
+crontab -l                      # list your current cron jobs
+</code></pre>
+<h3 id="cron-schedule-format">Cron Schedule Format</h3>
+<pre><code>┌───────────── minute (0-59)
+│ ┌───────────── hour (0-23)
+│ │ ┌───────────── day of month (1-31)
+│ │ │ ┌───────────── month (1-12)
+│ │ │ │ ┌───────────── day of week (0-7, 0 and 7 are Sunday)
+│ │ │ │ │
+* * * * * command to run
+</code></pre>
+<h3 id="examples">Examples</h3>
+<pre><code class="language-bash"># Run a backup every day at 2:30 AM
+30 2 * * * /home/kevin/scripts/backup.sh
+
+# Run a cleanup every Sunday at midnight
+0 0 * * 0 /home/kevin/scripts/cleanup.sh
+
+# Run a health check every 15 minutes
+*/15 * * * * /home/kevin/scripts/healthcheck.sh
+
+# Run a report on the 1st of every month at 9 AM
+0 9 1 * * /home/kevin/scripts/monthly-report.sh
+
+# Run every weekday at 8 AM
+0 8 * * 1-5 /home/kevin/scripts/morning-tasks.sh
+</code></pre>
+<h3 id="cron-tips">Cron Tips</h3>
+<p><strong>Always use absolute paths in cron jobs.</strong> Cron doesn&#39;t load your shell profile, so it doesn&#39;t know about your PATH or any aliases.</p>
+<pre><code class="language-bash"># WRONG
+backup.sh
+
+# RIGHT
+/home/kevin/scripts/backup.sh
+</code></pre>
+<p><strong>Redirect output to a log:</strong></p>
+<pre><code class="language-bash">0 2 * * * /home/kevin/scripts/backup.sh &gt;&gt; /home/kevin/logs/backup.log 2&gt;&amp;1
+</code></pre>
+<p>Without redirection, cron tries to email the output to you (which usually goes nowhere on modern systems). Redirect to a log file so you can check for errors.</p>
+<p><strong>Test your script manually first.</strong> Run it by hand before putting it in cron. Then check the log after the first scheduled run.</p>
+<hr>
+<h2 id="monitoring-resources">Monitoring Resources</h2>
+<h3><code>df</code> — Disk Free Space</h3>
+<pre><code class="language-bash">df -h                           # human-readable disk usage for all filesystems
+df -h /home                     # specific filesystem
+</code></pre>
+<h3><code>free</code> — Memory Usage</h3>
+<pre><code class="language-bash">free -h                         # human-readable memory usage (Linux only)
+</code></pre>
+<p>On macOS, use <code>vm_stat</code> or <code>top</code> instead.</p>
+<h3><code>uptime</code> — System Load</h3>
+<pre><code class="language-bash">uptime                          # how long the system has been running, load averages
+</code></pre>
+<p>The load averages (three numbers) represent the average number of processes waiting for CPU time over the last 1, 5, and 15 minutes. On a single-core system, a load of 1.0 means the CPU is fully utilised. On a 4-core system, 4.0 means full utilisation.</p>
+<hr>
+<h2>The <code>xargs</code> Command</h2>
+<p><code>xargs</code> takes input from a pipe and converts it into arguments for another command. It bridges the gap between commands that produce output and commands that expect arguments.</p>
+<pre><code class="language-bash"># Delete all .tmp files found by find
+find . -name &quot;*.tmp&quot; | xargs rm
+
+# With filenames that might contain spaces
+find . -name &quot;*.tmp&quot; -print0 | xargs -0 rm
+
+# Run a command for each input line
+cat servers.txt | xargs -I {} ping -c 1 {}
+</code></pre>
+<p><code>-I {}</code> defines a placeholder. Each line from stdin replaces <code>{}</code> in the command.</p>
+<pre><code class="language-bash"># Create directories from a list
+echo -e &quot;logs\ncache\ntmp&quot; | xargs mkdir -p
+
+# Compress each file individually
+ls *.log | xargs -I {} gzip {}
+</code></pre>
+<hr>
+<h2 id="try-it-yourself">Try It Yourself</h2>
+<ol>
+<li><p>Run <code>ps aux</code> and pipe it through <code>grep</code> to find your shell process. Note its PID.</p>
+</li>
+<li><p>Start a <code>sleep 300</code> command, then immediately press <code>Ctrl + Z</code> to suspend it. Use <code>jobs</code> to verify it&#39;s stopped. Resume it in the background with <code>bg</code>. Use <code>jobs</code> again to confirm it&#39;s running.</p>
+</li>
+<li><p>Start a background task with <code>sleep 120 &amp;</code>. Find its PID with <code>jobs -l</code> or <code>ps</code>. Kill it with <code>kill</code>.</p>
+</li>
+<li><p>Write a simple script that prints the current date and time to a log file. Set up a cron job to run it every minute. After a few minutes, check the log to confirm it&#39;s working. Then remove the cron job.</p>
+</li>
+<li><p>Use <code>find</code> and <code>xargs</code> to find all <code>.txt</code> files in your <code>bash-lessons</code> directory and count the total number of lines across all of them.</p>
+</li>
+<li><p>Use <code>df -h</code> to check your disk space. Use <code>du -sh ~/bash-lessons</code> to see how much space your lesson files are using.</p>
+</li>
+</ol>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ul>
+<li>Every running program is a process with a unique PID. <code>ps aux</code> shows them all, <code>top</code>/<code>htop</code> monitors them live.</li>
+<li><code>kill PID</code> sends SIGTERM (graceful). <code>kill -9 PID</code> forces termination. Always try graceful first.</li>
+<li><code>&amp;</code> runs a command in the background. <code>Ctrl + Z</code> suspends. <code>bg</code> resumes in background. <code>fg</code> brings to foreground.</li>
+<li><code>nohup</code> keeps processes alive after terminal disconnect. <code>tmux</code> is the professional solution for persistent sessions.</li>
+<li><code>cron</code> schedules recurring tasks. Use <code>crontab -e</code> to edit, always use absolute paths, and redirect output to log files.</li>
+<li><code>xargs</code> converts piped input into command arguments — essential for connecting <code>find</code> output to other commands.</li>
+</ul>
+<hr>
+<p><em>Next up: <a href="12-real-world-scripting.md">Lesson 12 — Real-World Scripting</a></em></p>
+<div class="lesson-complete-wrap">
+  <button type="button" class="lesson-complete-btn" onclick="window.bashLessons.markComplete()">Mark lesson complete</button>
+</div>
+</div>
+      <div id="lesson-12" class="content-panel"><h1 id="lesson-12-real-world-scripting">Lesson 12: Real-World Scripting</h1>
+<p><strong>Time: ~30 minutes</strong></p>
+<hr>
+<h2 id="putting-it-all-together">Putting It All Together</h2>
+<p>You&#39;ve learned the individual tools. Now it&#39;s time to use them together the way professionals do — with error handling, debugging, good practices, and real-world patterns.</p>
+<p>This final lesson covers the things that separate a quick hack from a reliable script: handling failure, making scripts debuggable, writing defensively, and building something complete.</p>
+<hr>
+<h2 id="error-handling">Error Handling</h2>
+<h3 id="the-problem-with-ignoring-errors">The Problem with Ignoring Errors</h3>
+<p>By default, bash keeps running even when a command fails:</p>
+<pre><code class="language-bash">cd /nonexistent/directory       # fails silently
+rm important_file.txt           # this still runs — in whatever directory you&#39;re actually in
+</code></pre>
+<p>This is dangerous. A failed <code>cd</code> means subsequent commands run in the wrong place. This has caused real-world data loss.</p>
+<h3><code>set -e</code> — Exit on Error</h3>
+<pre><code class="language-bash">#!/bin/bash
+set -e
+
+cd /nonexistent/directory       # script stops here
+echo &quot;This never runs&quot;
+</code></pre>
+<p>With <code>set -e</code>, the script exits immediately when any command returns a non-zero exit code. This is the single most important line you can add to a script.</p>
+<h3><code>set -u</code> — Error on Undefined Variables</h3>
+<pre><code class="language-bash">#!/bin/bash
+set -u
+
+echo &quot;$UNDEFINED_VARIABLE&quot;     # script stops here with an error
+</code></pre>
+<p>Without <code>set -u</code>, undefined variables silently expand to empty strings. With it, you catch typos and missing configuration immediately.</p>
+<h3><code>set -o pipefail</code> — Catch Pipe Failures</h3>
+<p>Normally, a pipeline&#39;s exit code is the exit code of the <em>last</em> command. This hides failures:</p>
+<pre><code class="language-bash">false | true                    # exit code is 0 (true succeeded)
+</code></pre>
+<p>With <code>pipefail</code>:</p>
+<pre><code class="language-bash">set -o pipefail
+false | true                    # exit code is 1 (false failed)
+</code></pre>
+<h3 id="the-standard-safety-header">The Standard Safety Header</h3>
+<p>Put this at the top of every serious script:</p>
+<pre><code class="language-bash">#!/bin/bash
+set -euo pipefail
+</code></pre>
+<p>This single line catches the three most common classes of silent failures. Some people add <code>set -x</code> during development for debugging (covered next).</p>
+<h3 id="handling-expected-failures">Handling Expected Failures</h3>
+<p><code>set -e</code> is aggressive — sometimes commands <em>should</em> be allowed to fail:</p>
+<pre><code class="language-bash"># Method 1: Use || true to explicitly allow failure
+grep &quot;PATTERN&quot; file.txt || true
+
+# Method 2: Use an if statement
+if ! grep -q &quot;PATTERN&quot; file.txt; then
+    echo &quot;Pattern not found, continuing anyway.&quot;
+fi
+
+# Method 3: Temporarily disable set -e
+set +e
+risky_command
+result=$?
+set -e
+if [ $result -ne 0 ]; then
+    echo &quot;Command failed with code $result&quot;
+fi
+</code></pre>
+<hr>
+<h2 id="debugging">Debugging</h2>
+<h3><code>set -x</code> — Trace Execution</h3>
+<pre><code class="language-bash">#!/bin/bash
+set -x
+
+name=&quot;Kevin&quot;
+echo &quot;Hello, $name&quot;
+</code></pre>
+<p>Output:</p>
+<pre><code>+ name=Kevin
++ echo &#39;Hello, Kevin&#39;
+Hello, Kevin
+</code></pre>
+<p>Lines prefixed with <code>+</code> show exactly what bash is executing, with all variables expanded. This is invaluable for understanding why a script isn&#39;t doing what you expect.</p>
+<p>You can turn tracing on and off within a script:</p>
+<pre><code class="language-bash">set -x          # start tracing
+problematic_section
+set +x          # stop tracing
+</code></pre>
+<h3 id="debug-a-script-without-editing-it">Debug a Script Without Editing It</h3>
+<pre><code class="language-bash">bash -x myscript.sh            # run with tracing without modifying the file
+</code></pre>
+<h3 id="logging-for-debugging">Logging for Debugging</h3>
+<p>Build a simple logging function into your scripts:</p>
+<pre><code class="language-bash">readonly LOG_FILE=&quot;/tmp/myscript.log&quot;
+
+log() {
+    local level=&quot;$1&quot;
+    shift
+    echo &quot;[$(date &#39;+%Y-%m-%d %H:%M:%S&#39;)] [$level] $*&quot; | tee -a &quot;$LOG_FILE&quot;
+}
+
+log &quot;INFO&quot; &quot;Script started&quot;
+log &quot;DEBUG&quot; &quot;Processing file: $filename&quot;
+log &quot;ERROR&quot; &quot;Failed to connect to database&quot;
+</code></pre>
+<p><code>tee -a</code> prints to the screen and appends to the log file simultaneously.</p>
+<hr>
+<h2 id="defensive-scripting-patterns">Defensive Scripting Patterns</h2>
+<h3 id="trap-cleanup-on-exit">Trap — Cleanup on Exit</h3>
+<p><code>trap</code> lets you run code when your script exits, whether normally or due to an error:</p>
+<pre><code class="language-bash">#!/bin/bash
+set -euo pipefail
+
+TEMP_DIR=$(mktemp -d)
+trap &#39;rm -rf &quot;$TEMP_DIR&quot;&#39; EXIT
+
+# Use TEMP_DIR freely — it gets cleaned up no matter what
+cp important_file.txt &quot;$TEMP_DIR/&quot;
+cd &quot;$TEMP_DIR&quot;
+# ... do work ...
+</code></pre>
+<p>The <code>trap &#39;...&#39; EXIT</code> ensures the cleanup command runs when the script exits for any reason — success, failure, or <code>Ctrl + C</code>. This prevents temp files from accumulating.</p>
+<p>Other signals you can trap:</p>
+<pre><code class="language-bash">trap &#39;echo &quot;Interrupted!&quot;; exit 1&#39; INT          # Ctrl+C
+trap &#39;echo &quot;Terminated!&quot;; exit 1&#39; TERM           # kill signal
+trap &#39;cleanup_function&#39; EXIT                      # any exit
+</code></pre>
+<h3 id="checking-dependencies">Checking Dependencies</h3>
+<pre><code class="language-bash">require_command() {
+    if ! command -v &quot;$1&quot; &gt; /dev/null 2&gt;&amp;1; then
+        echo &quot;Error: Required command &#39;$1&#39; not found.&quot; &gt;&amp;2
+        exit 1
+    fi
+}
+
+require_command git
+require_command docker
+require_command jq
+</code></pre>
+<p>Put this near the top of scripts that depend on external tools.</p>
+<h3 id="safe-temporary-files">Safe Temporary Files</h3>
+<pre><code class="language-bash">TEMP_FILE=$(mktemp)            # creates /tmp/tmp.XXXXXXXXXX
+TEMP_DIR=$(mktemp -d)          # creates a temporary directory
+
+trap &#39;rm -rf &quot;$TEMP_FILE&quot; &quot;$TEMP_DIR&quot;&#39; EXIT
+</code></pre>
+<p>Never hardcode temp file paths like <code>/tmp/myscript.tmp</code> — if two instances run simultaneously, they&#39;ll conflict. <code>mktemp</code> generates unique names.</p>
+<h3 id="confirming-dangerous-operations">Confirming Dangerous Operations</h3>
+<pre><code class="language-bash">confirm() {
+    local message=&quot;${1:-Are you sure?}&quot;
+    read -p &quot;$message [y/N]: &quot; response
+    [[ &quot;$response&quot; =~ ^[Yy]$ ]]
+}
+
+if confirm &quot;Delete all log files?&quot;; then
+    rm -f *.log
+    echo &quot;Deleted.&quot;
+else
+    echo &quot;Cancelled.&quot;
+fi
+</code></pre>
+<p>The <code>[y/N]</code> convention means the default (if you just press Enter) is No. Capital letter indicates the default.</p>
+<hr>
+<h2 id="best-practices-checklist">Best Practices Checklist</h2>
+<p>These are habits that will serve you well in every script you write.</p>
+<p><strong>Always include the safety header:</strong></p>
+<pre><code class="language-bash">#!/bin/bash
+set -euo pipefail
+</code></pre>
+<p><strong>Quote all variable expansions:</strong></p>
+<pre><code class="language-bash">cp &quot;$source&quot; &quot;$destination&quot;    # always quote
+</code></pre>
+<p><strong>Use <code>readonly</code> for constants:</strong></p>
+<pre><code class="language-bash">readonly CONFIG_DIR=&quot;/etc/myapp&quot;
+readonly MAX_RETRIES=5
+</code></pre>
+<p><strong>Use <code>local</code> in functions:</strong></p>
+<pre><code class="language-bash">process_file() {
+    local filename=&quot;$1&quot;
+    local output
+    # ...
+}
+</code></pre>
+<p><strong>Provide usage information:</strong></p>
+<pre><code class="language-bash">usage() {
+    cat &lt;&lt; EOF
+Usage: $(basename &quot;$0&quot;) [OPTIONS] &lt;filename&gt;
+
+Options:
+    -v, --verbose    Enable verbose output
+    -d, --dry-run    Show what would be done without doing it
+    -h, --help       Show this help message
+
+Examples:
+    $(basename &quot;$0&quot;) data.csv
+    $(basename &quot;$0&quot;) -v --dry-run report.txt
+EOF
+    exit &quot;${1:-0}&quot;
+}
+</code></pre>
+<p><strong>Parse options properly:</strong></p>
+<pre><code class="language-bash">VERBOSE=false
+DRY_RUN=false
+
+while [[ $# -gt 0 ]]; do
+    case &quot;$1&quot; in
+        -v|--verbose) VERBOSE=true; shift ;;
+        -d|--dry-run) DRY_RUN=true; shift ;;
+        -h|--help) usage 0 ;;
+        -*) echo &quot;Unknown option: $1&quot; &gt;&amp;2; usage 1 ;;
+        *) break ;;
+    esac
+done
+
+if [[ $# -eq 0 ]]; then
+    echo &quot;Error: filename required.&quot; &gt;&amp;2
+    usage 1
+fi
+
+filename=&quot;$1&quot;
+</code></pre>
+<hr>
+<h2 id="a-complete-project-log-analyser">A Complete Project: Log Analyser</h2>
+<p>Let&#39;s build a real script that incorporates everything from this course. This script analyses a web server access log and produces a summary report.</p>
+<pre><code class="language-bash">#!/bin/bash
+set -euo pipefail
+
+#
+# log-analyser.sh — Analyse web server access logs
+# Usage: ./log-analyser.sh [-n TOP_N] [-o OUTPUT] &lt;logfile&gt;
+#
+
+# --- Configuration ---
+readonly DEFAULT_TOP_N=10
+readonly SCRIPT_NAME=$(basename &quot;$0&quot;)
+
+# --- Functions ---
+
+usage() {
+    cat &lt;&lt; EOF
+Usage: $SCRIPT_NAME [-n TOP_N] [-o OUTPUT] &lt;logfile&gt;
+
+Analyse a web server access log and produce a summary report.
+
+Options:
+    -n NUM      Number of top results to show (default: $DEFAULT_TOP_N)
+    -o FILE     Write report to file instead of stdout
+    -h          Show this help message
+
+Examples:
+    $SCRIPT_NAME access.log
+    $SCRIPT_NAME -n 5 -o report.txt access.log
+EOF
+    exit &quot;${1:-0}&quot;
+}
+
+log_info() {
+    echo &quot;[INFO] $*&quot; &gt;&amp;2
+}
+
+check_file() {
+    local file=&quot;$1&quot;
+    if [[ ! -f &quot;$file&quot; ]]; then
+        echo &quot;Error: File &#39;$file&#39; not found.&quot; &gt;&amp;2
+        exit 1
+    fi
+    if [[ ! -r &quot;$file&quot; ]]; then
+        echo &quot;Error: File &#39;$file&#39; is not readable.&quot; &gt;&amp;2
+        exit 1
+    fi
+}
+
+generate_report() {
+    local logfile=&quot;$1&quot;
+    local top_n=&quot;$2&quot;
+    local total_requests
+    local unique_ips
+
+    total_requests=$(wc -l &lt; &quot;$logfile&quot;)
+    unique_ips=$(awk &#39;{print $1}&#39; &quot;$logfile&quot; | sort -u | wc -l)
+
+    cat &lt;&lt; EOF
+============================================
+  ACCESS LOG ANALYSIS REPORT
+  Generated: $(date &#39;+%Y-%m-%d %H:%M:%S&#39;)
+  Log file:  $logfile
+============================================
+
+OVERVIEW
+  Total requests:  $total_requests
+  Unique IPs:      $unique_ips
+
+TOP $top_n IP ADDRESSES BY REQUEST COUNT
+$(awk &#39;{print $1}&#39; &quot;$logfile&quot; | sort | uniq -c | sort -rn | head -&quot;$top_n&quot; | awk &#39;{printf &quot;  %-18s %s requests\n&quot;, $2, $1}&#39;)
+
+HTTP STATUS CODE BREAKDOWN
+$(awk &#39;{print $9}&#39; &quot;$logfile&quot; | sort | uniq -c | sort -rn | awk &#39;{printf &quot;  %-6s %s responses\n&quot;, $2, $1}&#39;)
+
+TOP $top_n REQUESTED PAGES
+$(awk &#39;{print $7}&#39; &quot;$logfile&quot; | sort | uniq -c | sort -rn | head -&quot;$top_n&quot; | awk &#39;{printf &quot;  %-30s %s hits\n&quot;, $2, $1}&#39;)
+
+ERRORS (4xx and 5xx responses)
+$(awk &#39;$9 &gt;= 400 {printf &quot;  %-18s %-8s %s\n&quot;, $1, $9, $7}&#39; &quot;$logfile&quot; | head -20)
+
+============================================
+  End of report
+============================================
+EOF
+}
+
+# --- Main ---
+
+main() {
+    local top_n=$DEFAULT_TOP_N
+    local output_file=&quot;&quot;
+
+    # Parse options
+    while [[ $# -gt 0 ]]; do
+        case &quot;$1&quot; in
+            -n) top_n=&quot;$2&quot;; shift 2 ;;
+            -o) output_file=&quot;$2&quot;; shift 2 ;;
+            -h) usage 0 ;;
+            -*) echo &quot;Unknown option: $1&quot; &gt;&amp;2; usage 1 ;;
+            *)  break ;;
+        esac
+    done
+
+    # Validate arguments
+    if [[ $# -eq 0 ]]; then
+        echo &quot;Error: Log file required.&quot; &gt;&amp;2
+        usage 1
+    fi
+
+    local logfile=&quot;$1&quot;
+    check_file &quot;$logfile&quot;
+
+    log_info &quot;Analysing $logfile (top $top_n results)...&quot;
+
+    # Generate report
+    if [[ -n &quot;$output_file&quot; ]]; then
+        generate_report &quot;$logfile&quot; &quot;$top_n&quot; &gt; &quot;$output_file&quot;
+        log_info &quot;Report written to: $output_file&quot;
+    else
+        generate_report &quot;$logfile&quot; &quot;$top_n&quot;
+    fi
+
+    log_info &quot;Done.&quot;
+}
+
+main &quot;$@&quot;
+</code></pre>
+<p>Test it with the access log from Lesson 10:</p>
+<pre><code class="language-bash">chmod +x log-analyser.sh
+./log-analyser.sh ../lesson10/access.log
+./log-analyser.sh -n 3 -o report.txt ../lesson10/access.log
+</code></pre>
+<hr>
+<h2 id="where-to-go-from-here">Where to Go from Here</h2>
+<p>You now have a solid foundation. Here&#39;s how to keep building:</p>
+<p><strong>Practice daily.</strong> Use the terminal for things you&#39;d normally do with a GUI. The more you use it, the faster you get.</p>
+<p><strong>Read other people&#39;s scripts.</strong> Look at the scripts in <code>/etc/init.d/</code> on a Linux system, or browse shell scripts on GitHub. Reading good code teaches you patterns you won&#39;t learn from tutorials.</p>
+<p><strong>Build tools for yourself.</strong> Automate your own workflows: project setup scripts, deployment helpers, backup routines, data processing pipelines. The best way to learn is to solve your own problems.</p>
+<p><strong>Explore deeper topics when you need them:</strong></p>
+<ul>
+<li><strong>Regular expressions</strong> — more powerful pattern matching</li>
+<li><strong><code>jq</code></strong> — command-line JSON processor (essential for working with APIs)</li>
+<li><strong><code>curl</code> and <code>wget</code></strong> — HTTP requests from the command line</li>
+<li><strong><code>ssh</code> and <code>scp</code></strong> — remote server management</li>
+<li><strong><code>make</code></strong> — build automation</li>
+<li><strong><code>docker</code></strong> — containerisation (heavily uses bash)</li>
+</ul>
+<p><strong>Know when bash isn&#39;t the right tool.</strong> Bash is excellent for gluing commands together, automating system tasks, and quick data processing. For complex data structures, serious error handling, or anything over a few hundred lines, consider Python. The best developers know when to use each tool.</p>
+<hr>
+<h2 id="try-it-yourself-final-exercises">Try It Yourself — Final Exercises</h2>
+<ol>
+<li><p>Take the log analyser script above, save it, and run it. Read through the code and make sure you understand every line. Modify it to add a new section — perhaps showing requests by hour of day.</p>
+</li>
+<li><p>Write a project initialisation script that creates a directory structure, initialises a git repo, creates a <code>.gitignore</code>, and generates a <code>README.md</code> with the project name and current date. Accept the project name as an argument.</p>
+</li>
+<li><p>Write a system health check script that reports: disk usage, memory usage, top 5 CPU-consuming processes, and network connectivity (ping a known host). Format the output as a clean report. Add an option to save to a file or send to stdout.</p>
+</li>
+<li><p>Write a file organiser script that takes a directory of mixed files and sorts them into subdirectories by extension (e.g., all <code>.pdf</code> files into <code>pdf/</code>, all <code>.jpg</code> files into <code>images/</code>). Include a <code>--dry-run</code> flag that shows what would happen without actually moving files.</p>
+</li>
+<li><p>Revisit the first script you wrote in Lesson 06. Refactor it using everything you&#39;ve learned: add the safety header, use functions, handle errors, parse arguments, add a usage message. Compare the before and after.</p>
+</li>
+</ol>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ul>
+<li><code>set -euo pipefail</code> should be in every serious script. It catches silent failures.</li>
+<li><code>set -x</code> traces execution — essential for debugging. <code>bash -x script.sh</code> does the same without editing.</li>
+<li><code>trap &#39;...&#39; EXIT</code> ensures cleanup runs no matter how the script exits.</li>
+<li><code>mktemp</code> creates safe temporary files. Never hardcode temp paths.</li>
+<li>Quote everything. Use <code>local</code> in functions. Use <code>readonly</code> for constants.</li>
+<li>Parse options with a <code>while/case</code> loop. Always provide a <code>usage</code> function.</li>
+<li>Build scripts incrementally: get the basic logic working, then add error handling, then add options and polish.</li>
+</ul>
+<hr>
+<h2 id="course-summary">Course Summary</h2>
+<p>Over 12 lessons, you&#39;ve gone from opening a terminal to writing production-quality scripts. Here&#39;s what you&#39;ve covered:</p>
+<table>
+<thead>
+<tr>
+<th>Lesson</th>
+<th>Topic</th>
+<th>Core Skills</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>01</td>
+<td>Welcome to the Terminal</td>
+<td>Navigation, pwd, ls, cd, tab completion</td>
+</tr>
+<tr>
+<td>02</td>
+<td>Files and Directories</td>
+<td>mkdir, touch, cp, mv, rm, wildcards</td>
+</tr>
+<tr>
+<td>03</td>
+<td>Reading and Searching</td>
+<td>cat, less, head, tail, grep</td>
+</tr>
+<tr>
+<td>04</td>
+<td>Pipes and Redirection</td>
+<td>|, &gt;, &gt;&gt;, 2&gt;, /dev/null, tee</td>
+</tr>
+<tr>
+<td>05</td>
+<td>Permissions</td>
+<td>chmod, chown, rwx, sudo</td>
+</tr>
+<tr>
+<td>06</td>
+<td>First Scripts</td>
+<td>Shebang, variables, read, arguments, quoting</td>
+</tr>
+<tr>
+<td>07</td>
+<td>Conditionals</td>
+<td>if/elif/else, [[ ]], case, test expressions</td>
+</tr>
+<tr>
+<td>08</td>
+<td>Loops</td>
+<td>for, while, until, break, continue, while read</td>
+</tr>
+<tr>
+<td>09</td>
+<td>Functions</td>
+<td>local, return, source, script structure</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Text Processing</td>
+<td>cut, tr, sort, uniq, sed, awk</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Process Management</td>
+<td>ps, kill, jobs, bg/fg, cron, xargs</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Real-World Scripting</td>
+<td>Error handling, debugging, best practices</td>
+</tr>
+</tbody></table>
+<p>The terminal is now a tool you can think in. Keep using it.</p>
+<hr>
+<p><em>Congratulations on completing Bashing through Bash.</em></p>
+<div class="lesson-complete-wrap">
+  <button type="button" class="lesson-complete-btn" onclick="window.bashLessons.markComplete()">Mark lesson complete</button>
+</div>
+</div>
+    </main>
+  </div>
+  <div id="chat-widget" class="chat-widget">
+    <button type="button" class="chat-widget__toggle" aria-label="Open chat">Chat</button>
+    <div class="chat-widget__panel" hidden>
+      <div class="chat-widget__header">
+        <span>Ask about this lesson</span>
+        <button type="button" class="chat-widget__close" aria-label="Close chat">×</button>
+      </div>
+      <div class="chat-widget__messages"></div>
+      <div class="chat-widget__settings" hidden>
+        <label>OpenRouter API key (for local dev)</label>
+        <input type="password" id="chat-api-key" placeholder="sk-or-...">
+        <button type="button" class="chat-widget__save-key">Save</button>
+      </div>
+      <div class="chat-widget__footer">
+        <button type="button" class="chat-widget__settings-btn" aria-label="Settings">⚙</button>
+        <textarea class="chat-widget__input" placeholder="Ask a question..." rows="2"></textarea>
+        <button type="button" class="chat-widget__send">Send</button>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+  <script src="chat.js"></script>
+</body>
+</html>

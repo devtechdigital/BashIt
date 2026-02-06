@@ -1,0 +1,13 @@
+{
+  "name": "bash-lessons-site",
+  "private": true,
+  "scripts": {
+    "build": "node build.js",
+    "convex:dev": "convex dev",
+    "convex:deploy": "convex deploy"
+  },
+  "devDependencies": {
+    "convex": "^1.17.0",
+    "marked": "^12.0.0"
+  }
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bashing through Bash — Learn Bash in 12 Lessons</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <nav class="stepper" aria-label="Lesson progress">
+      <a href="#" class="stepper-item" data-page="landing">Home</a>
+      <a href="#lesson-01" class="stepper-item" data-page="lesson-01">Lesson 1</a>
+      <a href="#lesson-02" class="stepper-item" data-page="lesson-02">Lesson 2</a>
+      <a href="#lesson-03" class="stepper-item" data-page="lesson-03">Lesson 3</a>
+      <a href="#lesson-04" class="stepper-item" data-page="lesson-04">Lesson 4</a>
+      <a href="#lesson-05" class="stepper-item" data-page="lesson-05">Lesson 5</a>
+      <a href="#lesson-06" class="stepper-item" data-page="lesson-06">Lesson 6</a>
+      <a href="#lesson-07" class="stepper-item" data-page="lesson-07">Lesson 7</a>
+      <a href="#lesson-08" class="stepper-item" data-page="lesson-08">Lesson 8</a>
+      <a href="#lesson-09" class="stepper-item" data-page="lesson-09">Lesson 9</a>
+      <a href="#lesson-10" class="stepper-item" data-page="lesson-10">Lesson 10</a>
+      <a href="#lesson-11" class="stepper-item" data-page="lesson-11">Lesson 11</a>
+      <a href="#lesson-12" class="stepper-item" data-page="lesson-12">Lesson 12</a>
+    </nav>
+    <main class="content">
+      <div id="landing" class="content-panel">{{LANDING_HTML}}</div>
+      <div id="lesson-01" class="content-panel">{{LESSON_01_HTML}}</div>
+      <div id="lesson-02" class="content-panel">{{LESSON_02_HTML}}</div>
+      <div id="lesson-03" class="content-panel">{{LESSON_03_HTML}}</div>
+      <div id="lesson-04" class="content-panel">{{LESSON_04_HTML}}</div>
+      <div id="lesson-05" class="content-panel">{{LESSON_05_HTML}}</div>
+      <div id="lesson-06" class="content-panel">{{LESSON_06_HTML}}</div>
+      <div id="lesson-07" class="content-panel">{{LESSON_07_HTML}}</div>
+      <div id="lesson-08" class="content-panel">{{LESSON_08_HTML}}</div>
+      <div id="lesson-09" class="content-panel">{{LESSON_09_HTML}}</div>
+      <div id="lesson-10" class="content-panel">{{LESSON_10_HTML}}</div>
+      <div id="lesson-11" class="content-panel">{{LESSON_11_HTML}}</div>
+      <div id="lesson-12" class="content-panel">{{LESSON_12_HTML}}</div>
+    </main>
+  </div>
+  <div id="chat-widget" class="chat-widget">
+    <button type="button" class="chat-widget__toggle" aria-label="Open chat">Chat</button>
+    <div class="chat-widget__panel" hidden>
+      <div class="chat-widget__header">
+        <span>Ask about this lesson</span>
+        <button type="button" class="chat-widget__close" aria-label="Close chat">×</button>
+      </div>
+      <div class="chat-widget__messages"></div>
+      <div class="chat-widget__settings" hidden>
+        <label>OpenRouter API key (for local dev)</label>
+        <input type="password" id="chat-api-key" placeholder="sk-or-...">
+        <button type="button" class="chat-widget__save-key">Save</button>
+      </div>
+      <div class="chat-widget__footer">
+        <button type="button" class="chat-widget__settings-btn" aria-label="Settings">⚙</button>
+        <textarea class="chat-widget__input" placeholder="Ask a question..." rows="2"></textarea>
+        <button type="button" class="chat-widget__send">Send</button>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+  <script src="chat.js"></script>
+</body>
+</html>
