@@ -4,6 +4,21 @@
 
 ---
 
+## Why Learn Bash? AI Loves It.
+
+You don't learn Bash to memorize hundreds of commands — you learn it to unlock leverage.
+
+Modern AI assistants are incredibly strong at generating and using Bash commands to automate tasks, inspect systems, move data, transform files, run builds, and glue tools together. But they're only as effective as the person directing them. When you understand how Bash works, even at a practical level, you gain the ability to aim AI precisely at real-world outcomes.
+
+Bash is the universal control layer across servers, containers, CI pipelines, developer machines, and cloud systems. It's the fastest path between an idea and an automated action. With a working knowledge of Bash, you can confidently tell your AI assistant to chain commands, process outputs, fix environments, and build repeatable workflows — instead of treating the terminal like a black box.
+
+You don't need to remember everything. AI can handle syntax.
+What matters is that you understand the model of how commands, pipes, files, and processes fit together.
+
+Learn Bash, and you turn AI from a helpful tool into a high-power operator working under your direction.
+
+---
+
 ## Who This Is For
 
 You use a computer every day. You've probably opened a terminal before. Maybe you've copied and pasted a few commands from Stack Overflow. But you've never really *learned* bash — not properly, not from the ground up.
