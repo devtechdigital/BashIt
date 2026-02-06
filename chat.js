@@ -257,6 +257,36 @@
       ro.observe(panel);
     }
 
+    var resizeHandle = document.createElement('div');
+    resizeHandle.className = 'chat-widget__resize-handle';
+    resizeHandle.setAttribute('aria-label', 'Resize chat');
+    panel.insertBefore(resizeHandle, panel.firstChild);
+
+    (function () {
+      var minW = 288;
+      var minH = 320;
+      function getMaxW() { return Math.min(672, window.innerWidth * 0.95); }
+      function getMaxH() { return Math.min(576, window.innerHeight * 0.85); }
+      resizeHandle.addEventListener('mousedown', function (e) {
+        e.preventDefault();
+        var onMove = function (e2) {
+          var rect = panel.getBoundingClientRect();
+          var w = rect.right - e2.clientX;
+          var h = rect.bottom - e2.clientY;
+          w = Math.max(minW, Math.min(getMaxW(), w));
+          h = Math.max(minH, Math.min(getMaxH(), h));
+          panel.style.width = w + 'px';
+          panel.style.height = h + 'px';
+        };
+        var onUp = function () {
+          document.removeEventListener('mousemove', onMove);
+          document.removeEventListener('mouseup', onUp);
+        };
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup', onUp);
+      });
+    })();
+
     toggle.addEventListener('click', function () {
       panel.hidden = false;
       input.focus();
@@ -272,9 +302,16 @@
       }
     });
     if (settingsBtn && settingsWrap) {
-      settingsBtn.addEventListener('click', function () {
-        settingsWrap.hidden = !settingsWrap.hidden;
-        if (keyInput && !settingsWrap.hidden) keyInput.value = getApiKey();
+      settingsBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var isHidden = settingsWrap.getAttribute('hidden') !== null;
+        if (isHidden) {
+          settingsWrap.removeAttribute('hidden');
+          if (keyInput) keyInput.value = getApiKey();
+        } else {
+          settingsWrap.setAttribute('hidden', '');
+        }
       });
     }
     if (saveKeyBtn && keyInput) {

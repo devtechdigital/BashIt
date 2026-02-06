@@ -297,8 +297,34 @@ body {
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
   display: flex;
   flex-direction: column;
-  resize: both;
   overflow: hidden;
+}
+
+.chat-widget__resize-handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: nwse-resize;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 0.65rem;
+  user-select: none;
+}
+
+.chat-widget__resize-handle::before {
+  content: '';
+  position: absolute;
+  top: 0.35rem;
+  left: 0.35rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-left: 2px solid currentColor;
+  border-top: 2px solid currentColor;
 }
 
 .chat-widget__panel[hidden] {
@@ -415,6 +441,10 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+.chat-widget__settings[hidden] {
+  display: none !important;
 }
 
 .chat-widget__settings label { font-size: 0.9rem; color: #555; }
