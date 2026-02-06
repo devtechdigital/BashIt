@@ -36,7 +36,7 @@ The chat calls OpenRouter (`arcee-ai/trinity-large-preview:free`) via a Convex H
 3. **Local dev without Convex**  
    - Leave `CHAT_PROXY_URL` empty. Open the chat, click the gear icon, and paste your OpenRouter API key (stored in localStorage). The chat will call OpenRouter directly from the browser.
 
-**Important:** Use the **.convex.site** URL for the chat proxy (e.g. `https://abundant-perch-26.convex.site`), not `.convex.cloud`. HTTP actions are served from `.convex.site` ([Convex docs](https://docs.convex.dev/functions/http-actions)).
+**Important:** Use the **.convex.site** URL for the chat proxy (e.g. `https://brainy-setter-166.convex.site` for prod), not `.convex.cloud`. HTTP actions are served from `.convex.site` ([Convex docs](https://docs.convex.dev/functions/http-actions)).
 
 ## Deploy to Cloudflare Pages
 

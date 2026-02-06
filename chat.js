@@ -2,7 +2,8 @@
   'use strict';
 
   // Convex HTTP actions are at .convex.site (not .convex.cloud). Chat proxy: POST /api/chat
-  var CHAT_PROXY_URL = 'https://abundant-perch-26.convex.site';
+  // Prod deployment (updated by convex deploy): brainy-setter-166
+  var CHAT_PROXY_URL = 'https://brainy-setter-166.convex.site';
   var OPENROUTER_MODEL = 'arcee-ai/trinity-large-preview:free';
   var OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
   var STORAGE_KEY_API = 'bash-lessons-openrouter-key';
