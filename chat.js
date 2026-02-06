@@ -2,11 +2,12 @@
   'use strict';
 
   // Convex HTTP actions are at .convex.site (not .convex.cloud). Chat proxy: POST /api/chat
-  // Prod deployment (updated by convex deploy): brainy-setter-166
+  // Production deployment
   var CHAT_PROXY_URL = 'https://brainy-setter-166.convex.site';
   var OPENROUTER_MODEL = 'arcee-ai/trinity-large-preview:free';
   var OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
   var STORAGE_KEY_API = 'bash-lessons-openrouter-key';
+  var STORAGE_KEY_SIZE = 'bash-lessons-chat-size';
 
   var LESSON_INDEX = [
     { id: 'lesson-01', title: 'Welcome to the Terminal' },
@@ -211,6 +212,25 @@
       });
   }
 
+  function getStoredSize() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY_SIZE);
+      if (raw) {
+        var parsed = JSON.parse(raw);
+        if (parsed && typeof parsed.w === 'number' && typeof parsed.h === 'number') {
+          return { w: parsed.w, h: parsed.h };
+        }
+      }
+    } catch (e) {}
+    return null;
+  }
+
+  function storeSize(w, h) {
+    try {
+      localStorage.setItem(STORAGE_KEY_SIZE, JSON.stringify({ w: w, h: h }));
+    } catch (e) {}
+  }
+
   function initChat() {
     var widget = document.getElementById('chat-widget');
     var toggle = widget && widget.querySelector('.chat-widget__toggle');
@@ -224,6 +244,18 @@
     var keyInput = document.getElementById('chat-api-key');
     var saveKeyBtn = widget && widget.querySelector('.chat-widget__save-key');
     if (!widget || !toggle || !panel) return;
+
+    var stored = getStoredSize();
+    if (stored) {
+      panel.style.width = stored.w + 'px';
+      panel.style.height = stored.h + 'px';
+    }
+    if (typeof ResizeObserver !== 'undefined') {
+      var ro = new ResizeObserver(function () {
+        storeSize(panel.offsetWidth, panel.offsetHeight);
+      });
+      ro.observe(panel);
+    }
 
     toggle.addEventListener('click', function () {
       panel.hidden = false;
